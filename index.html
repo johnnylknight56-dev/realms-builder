@@ -407,7 +407,7 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     h += '<button type="button" class="btn" id="copytext">Copy as plain text</button><p class="toast" id="toast" role="status" aria-live="polite"></p></div>';
     h += '<div class="panel todo"><div class="eyebrow">Then, in Kanka</div>';
     if (sp) h += '<label><input type="checkbox"><span>Set <strong>Playable Species</strong> to ' + esc(sp.s.name) + '</span></label>';
-    var feats = [c && c.name, s2 && s2.name, b && b.name].filter(Boolean);
+    var feats = [sp && sp.s.stats, c && c.name, s2 && s2.name, b && b.name].filter(Boolean);
     if (feats.length) h += '<label><input type="checkbox"><span>Under <strong>In-Game Features</strong>, add ' + esc(feats.join(', ').replace(/, ([^,]*)$/, ' and $1')) + '</span></label>';
     h += '<label><input type="checkbox"><span>Paste the profile into a new article</span></label></div>';
     h += '<div style="display:flex;flex-wrap:wrap;gap:16px"><button type="button" class="linkbtn" id="edit">Keep editing</button><button type="button" class="linkbtn" id="reset">Start a new character</button></div></aside></div>';
