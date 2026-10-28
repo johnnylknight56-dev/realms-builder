@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Character Builder · The Remembered Realms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#15112a; --panel:#221a3d; --field:#1a1433; --line:#3b3166; --hover:#2a2150;
+  --top:#1e0033; --top-line:#3a1163; --top-muted:#c9b0e8;
+  --gold:#dec54a; --gold-ink:#1a1300; --rule:#c9a227; --blue:#8aadf4;
+  --text:#f0ecea; --soft:#dcd5f0; --muted:#b7b0d6; --label:#e4def6;
+  --warn-bg:#3a1420; --warn-line:#e0697a; --warn-text:#ffd9de;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--text);font-family:Roboto,Arial,sans-serif}
+a{color:var(--gold)} a:hover{color:#f3e39a}
+button,input,select,textarea{font:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(16px,4vw,48px);background:var(--top);border-bottom:1px solid var(--top-line)}
+.brand{display:flex;flex-direction:column;gap:2px}
+.brand small{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--top-muted)}
+.brand b{font-family:Cinzel,serif;font-size:22px;color:#fff}
+.steps{display:flex;gap:8px;list-style:none;margin:0;padding:0;font-size:14px}
+.steps li{padding:8px 14px;border-radius:999px;border:1px solid #5b3d86;color:#d8c4f0}
+.steps li.done{border-color:var(--gold);color:var(--gold)}
+.steps li.now{background:var(--gold);border-color:var(--gold);color:var(--gold-ink);font-weight:700}
+
+.wrap{display:flex;flex-wrap:wrap;gap:32px;max-width:1240px;margin:0 auto;padding:36px clamp(16px,4vw,48px) 64px}
+.main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.side{flex:1 1 300px;max-width:360px;align-self:flex-start;display:flex;flex-direction:column;gap:18px}
+@media (max-width:900px){.side{max-width:none}}
+.panel{padding:22px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
+h1.q{margin:0;font-family:Cinzel,serif;font-size:clamp(26px,3.2vw,34px);line-height:1.25;color:#fff}
+.lead{margin:0;font-size:17px;line-height:1.55;color:#cfc8e8;max-width:640px}
+.head{display:flex;align-items:center;gap:14px}
+.head h2{margin:0;font-family:Cinzel,serif;font-size:20px;letter-spacing:.04em;color:#fff}
+.head i{flex:1;height:1px;background:var(--rule)}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;text-decoration:none;border:1px solid var(--line);background:transparent;color:#fff}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.btn.gold:hover{background:#ecd76a;color:var(--gold-ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+.linkbtn{background:none;border:0;padding:0;color:var(--gold);text-decoration:underline;cursor:pointer;font-size:15px;align-self:flex-start;min-height:44px}
+
+/* choose */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:#1c1636;color:#d8d2ee;border-radius:999px;padding:0 14px;min-height:40px;font-weight:500;font-size:14px;cursor:pointer}
+.chip:hover{border-color:var(--gold);color:#fff}
+.chip[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
+.sp{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;border-radius:8px;border:1px solid var(--line);background:var(--panel);cursor:pointer;padding:0;transition:border-color .25s,box-shadow .25s,transform .25s}
+.sp img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.7);transition:transform .4s,filter .4s}
+.sp:hover{border-color:var(--gold);transform:translateY(-2px)}
+.sp:hover img{filter:brightness(1);transform:scale(1.06)}
+.sp .nm{position:absolute;left:0;right:0;bottom:0;padding:9px 8px;background:rgba(18,12,38,.86);color:var(--gold);font-weight:700;font-size:15px;text-align:center}
+.sp[aria-pressed="true"]{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold),0 0 22px rgba(138,173,244,.45)}
+.sp[aria-pressed="true"] img{filter:brightness(1)}
+.sp .tick{display:none;position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:var(--gold);align-items:center;justify-content:center}
+.sp[aria-pressed="true"] .tick{display:flex}
+.fam{margin:6px 0 0;font-size:14px;color:var(--muted)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.f{display:flex;flex-direction:column;gap:10px}
+.f label,.lbl{font-size:17px;font-weight:500;color:var(--label);line-height:1.4}
+.sel,.fld{width:100%;min-height:48px;padding:0 14px;border-radius:8px;border:1px solid var(--line);background:var(--field);color:#fff;font-size:16px}
+.sel{appearance:none;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23dec54a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.sel:disabled{opacity:.4;cursor:not-allowed}
+textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
+.fld::placeholder{color:#8f87b5}
+.hint{margin:0;font-size:14px;color:var(--muted)}
+
+/* summary */
+.who{display:flex;gap:14px;align-items:center}
+.who img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.who .ph{width:64px;height:64px;border-radius:50%;border:2px dashed var(--line);flex:none}
+.who b{font-family:Cinzel,serif;font-size:20px;color:#fff;display:block}
+.who span{font-size:14px;color:var(--muted)}
+.blurb{margin:0;font-size:15px;line-height:1.55;color:var(--soft)}
+.hr{height:1px;background:var(--line)}
+.pick{display:flex;gap:12px;align-items:center}
+.pick img,.pick .ph{width:40px;height:40px;border-radius:8px;object-fit:cover;flex:none}
+.pick .ph{background:#2e2458;display:flex;align-items:center;justify-content:center;color:var(--muted);font-family:Cinzel,serif;font-weight:700}
+.pick small{display:block;font-size:12px;color:var(--muted)}
+.pick strong{font-size:16px;font-weight:500;color:#fff}
+
+/* write */
+.nav{flex:1 1 240px;max-width:280px;align-self:flex-start;display:flex;flex-direction:column;gap:4px}
+@media (max-width:900px){.nav{max-width:none}}
+.navme{display:flex;gap:12px;align-items:center;padding:0 12px 16px}
+.navme img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.navme b{display:block;color:#fff}
+.navme span{font-size:13px;color:var(--muted)}
+.step{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:8px 12px;border:0;border-radius:8px;background:transparent;color:#cfc8e8;font-weight:500;font-size:15px;text-align:left;cursor:pointer}
+.step:hover{background:var(--hover);color:#fff}
+.step[aria-current="step"]{background:var(--hover);color:#fff}
+.dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex:none;border:1px solid #5b5280;color:var(--muted)}
+.step.done .dot{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.step[aria-current="step"] .dot{border:2px solid var(--gold);color:var(--gold);background:none}
+.bar{height:6px;border-radius:3px;background:var(--hover);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--gold);transition:width .3s}
+.card{padding:28px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column;gap:24px}
+.deity{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:8px;background:var(--field);border:1px solid var(--line)}
+.deity span{font-size:13px;color:var(--muted)}
+.check{display:flex;align-items:center;gap:10px;min-height:44px;font-size:16px;color:var(--label);cursor:pointer}
+.check input{width:20px;height:20px;margin:0;accent-color:var(--gold)}
+.warn{margin:0;padding:14px 16px;border-radius:8px;background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-text);font-size:15px;line-height:1.55;box-shadow:0 0 18px rgba(224,105,122,.35)}
+.saved{font-size:14px;color:var(--muted);margin:0}
+
+/* finished profile */
+.profile{flex:999 1 560px;min-width:0;border-radius:14px;overflow:hidden;background:var(--panel);border:1px solid var(--line)}
+.p-head{display:flex;flex-wrap:wrap;gap:22px;align-items:center;padding:28px;background:#1c1436;border-bottom:1px solid var(--rule)}
+.p-head img{width:96px;height:96px;border-radius:50%;object-fit:cover;border:3px solid var(--gold)}
+.p-head h1{margin:0;font-family:Cinzel,serif;font-size:34px;color:#fff;overflow-wrap:anywhere}
+.p-sub{font-size:16px;color:var(--gold)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tags a{padding:6px 12px;border-radius:999px;background:#2e2458;color:#fff;font-size:14px;text-decoration:none}
+.tags a:hover{background:#3b2f70}
+.p-blurb{display:flex;gap:12px;align-items:flex-start;padding:18px 28px;background:var(--field);border-bottom:1px solid var(--line)}
+.p-blurb img{width:32px;height:32px;border-radius:6px;object-fit:cover;flex:none}
+.p-blurb p{margin:0;font-size:15px;line-height:1.55;color:#cfc8e8}
+.p-sec{padding:24px 28px;border-bottom:1px solid var(--line)}
+.p-sec:last-child{border-bottom:0}
+.p-sec h2{margin:0 0 12px;font-family:Cinzel,serif;font-size:18px;color:var(--gold)}
+.p-sec p{margin:0 0 10px;font-size:16px;line-height:1.6;white-space:pre-line;overflow-wrap:anywhere}
+.p-sec p:last-child{margin-bottom:0}
+.facts{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.facts div{display:flex;flex-direction:column;gap:2px}
+.facts dt{font-size:13px;color:var(--muted)}
+.facts dd{margin:0;font-size:16px;overflow-wrap:anywhere}
+.empty{color:#8f87b5;font-style:italic}
+.todo label{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.5;color:var(--soft);cursor:pointer}
+.todo input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--gold);flex:none}
+.todo strong{color:#fff}
+.toast{min-height:22px;margin:0;font-size:14px;color:#b9cdf7}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><small>The Remembered Realms</small><b>Character Builder</b></div>
+  <ol class="steps" aria-label="Steps">
+    <li id="st0">1 Choose</li><li id="st1">2 Write</li><li id="st2">3 Finish</li>
+  </ol>
+</header>
+<div id="app"></div>
+<noscript><p style="padding:24px">The builder needs JavaScript turned on.</p></noscript>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  'use strict';
+  var D = window.REALMS;
+  var WIKI = D.wiki;
+  var KEY = 'realms-builder-v1';
+  var app = document.getElementById('app');
+
+  // ---------- state ----------
+  var blank = {
+    screen: 0, section: 0, family: 'All',
+    species: null, cls: null, sub: null, bg: null,
+    name: '', deity: '', faithless: false, align: '', ideals: '',
+    age: '', hair: '', eyes: '', height: '', weight: '', fashion: '', extra: '',
+    bond: '', story: ''
+  };
+  var S = load();
+
+  function load() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      if (raw) { var o = JSON.parse(raw); var s = {}; for (var k in blank) s[k] = (k in o) ? o[k] : blank[k]; return s; }
+    } catch (e) {}
+    return JSON.parse(JSON.stringify(blank));
+  }
+  var saveTimer = null;
+  function save() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      try { window.localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {}
+    }, 200);
+  }
+
+  // ---------- lookups ----------
+  var allSpecies = [];
+  D.families.forEach(function (f) { f.species.forEach(function (s) { allSpecies.push({ s: s, fam: f }); }); });
+  allSpecies.sort(function (a, b) { return a.s.name.localeCompare(b.s.name); });
+  function findSpecies(id) { for (var i = 0; i < allSpecies.length; i++) if (allSpecies[i].s.id === id) return allSpecies[i]; return null; }
+  function byId(list, id) { for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i]; return null; }
+  function cls() { return byId(D.classes, S.cls); }
+  function sub() { var c = cls(); return c ? byId(c.subclasses, S.sub) : null; }
+  function bg() { return byId(D.backgrounds, S.bg); }
+  function deity() { for (var i = 0; i < D.deities.length; i++) if (D.deities[i].name === S.deity) return D.deities[i]; return null; }
+
+  // ---------- helpers ----------
+  function esc(t) {
+    return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function wiki(id) { return WIKI + id; }
+  function initial(name) { return esc((name || '?').charAt(0)); }
+  function picked(img, name, label) {
+    var pic = img ? '<img src="' + esc(img) + '" alt="">' : '<span class="ph" aria-hidden="true">' + initial(name) + '</span>';
+    return '<div class="pick">' + pic + '<div><small>' + label + '</small><strong>' + (name ? esc(name) : '<span class="empty">Not chosen</span>') + '</strong></div></div>';
+  }
+  function setSteps() {
+    for (var i = 0; i < 3; i++) {
+      var li = document.getElementById('st' + i);
+      li.className = i < S.screen ? 'done' : (i === S.screen ? 'now' : '');
+      if (i === S.screen) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
+    }
+  }
+  function go(screen) { S.screen = screen; save(); render(); window.scrollTo(0, 0); }
+
+  // ---------- screen 1: choose ----------
+  function renderChoose() {
+    var fams = ['All'].concat(D.families.map(function (f) { return f.name; }));
+    var shown = allSpecies.filter(function (x) { return S.family === 'All' || x.fam.name === S.family; });
+    var sel = S.species ? findSpecies(S.species) : null;
+    var c = cls();
+
+    var h = '<div class="wrap"><main class="main">';
+    h += '<div style="display:flex;flex-direction:column;gap:8px"><h1 class="q">Where are you from, stranger?</h1>';
+    h += '<p class="lead">Pick a people, then the path you walk. Every choice links to its page in the wiki if you want to read more first.</p></div>';
+
+    h += '<section style="display:flex;flex-direction:column;gap:16px" aria-labelledby="h-sp"><div class="head"><h2 id="h-sp">Species</h2><i></i></div>';
+    h += '<div class="chips" role="group" aria-label="Species family">';
+    fams.forEach(function (f) { h += '<button type="button" class="chip" data-fam="' + esc(f) + '" aria-pressed="' + (S.family === f) + '">' + esc(f) + '</button>'; });
+    h += '</div>';
+    if (S.family !== 'All') {
+      var fam = D.families.filter(function (f) { return f.name === S.family; })[0];
+      h += '<p class="fam"><a href="' + wiki(fam.id) + '" target="_blank" rel="noopener">Read about the ' + esc(fam.name) + ' family</a></p>';
+    }
+    h += '<div class="grid">';
+    shown.forEach(function (x) {
+      h += '<button type="button" class="sp" data-sp="' + x.s.id + '" aria-pressed="' + (S.species === x.s.id) + '" aria-label="' + esc(x.s.name) + ', ' + esc(x.fam.name) + '">';
+      h += x.s.img ? '<img src="' + esc(x.s.img) + '" alt="" loading="lazy">' : '';
+      h += '<span class="nm">' + esc(x.s.name) + '</span>';
+      h += '<span class="tick" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a1300" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>';
+    });
+    h += '</div></section>';
+
+    h += '<section style="display:flex;flex-direction:column;gap:16px" aria-labelledby="h-path"><div class="head"><h2 id="h-path">Path</h2><i></i></div><div class="fields">';
+    h += '<div class="f"><label for="cls">Class</label><select id="cls" class="sel"><option value="">Choose a class…</option>';
+    D.classes.forEach(function (k) { h += '<option value="' + k.id + '"' + (S.cls === k.id ? ' selected' : '') + '>' + esc(k.name) + '</option>'; });
+    h += '</select></div>';
+    var subs = c ? c.subclasses : [];
+    h += '<div class="f"><label for="sub">Subclass</label><select id="sub" class="sel"' + (subs.length ? '' : ' disabled') + '>';
+    if (!c) h += '<option value="">Choose a class first</option>';
+    else if (!subs.length) h += '<option value="">None listed yet for ' + esc(c.name) + '</option>';
+    else {
+      h += '<option value="">Choose a subclass…</option>';
+      subs.forEach(function (k) { h += '<option value="' + k.id + '"' + (S.sub === k.id ? ' selected' : '') + '>' + esc(k.name) + '</option>'; });
+    }
+    h += '</select></div>';
+    h += '<div class="f"><label for="bg">Background</label><select id="bg" class="sel"><option value="">Choose a background…</option>';
+    D.backgrounds.forEach(function (k) { h += '<option value="' + k.id + '"' + (S.bg === k.id ? ' selected' : '') + '>' + esc(k.name) + '</option>'; });
+    h += '</select></div></div>';
+    if (c && !subs.length) h += '<p class="hint">Subclasses for ' + esc(c.name) + ' haven’t been added to the wiki yet. You can still continue.</p>';
+    h += '</section></main>';
+
+    // summary
+    h += '<aside class="side" aria-label="Your character so far"><div class="panel"><div class="eyebrow">Your character so far</div>';
+    if (sel) {
+      h += '<div class="who"><img src="' + esc(sel.s.img) + '" alt=""><div><b>' + esc(sel.s.name) + '</b><span>' + esc(sel.fam.name) + '</span></div></div>';
+      if (sel.s.blurb) h += '<p class="blurb">' + esc(sel.s.blurb) + '</p>';
+      h += '<a href="' + wiki(sel.s.id) + '" target="_blank" rel="noopener" style="font-size:14px">Read about ' + esc(sel.s.name) + ' in the wiki</a>';
+    } else {
+      h += '<div class="who"><span class="ph" aria-hidden="true"></span><div><b>No species yet</b><span>Pick one from the grid</span></div></div>';
+    }
+    h += '<div class="hr"></div>';
+    h += picked(c && c.img, c && c.name, 'Class');
+    var s2 = sub(); h += picked(s2 && s2.img, s2 && s2.name, 'Subclass');
+    var b = bg(); h += picked(b && b.img, b && b.name, 'Background');
+    h += '<button type="button" class="btn gold" id="next0"' + (sel && c ? '' : ' disabled') + '>Continue to writing</button>';
+    if (!(sel && c)) h += '<p class="hint" style="margin-top:-6px">Choose a species and a class to continue.</p>';
+    h += '</div></aside></div>';
+    app.innerHTML = h;
+
+    app.querySelectorAll('[data-fam]').forEach(function (el) { el.onclick = function () { S.family = el.getAttribute('data-fam'); save(); renderChoose(); }; });
+    app.querySelectorAll('[data-sp]').forEach(function (el) {
+      el.onclick = function () { S.species = +el.getAttribute('data-sp'); save(); var y = window.scrollY; renderChoose(); window.scrollTo(0, y); var again = app.querySelector('[data-sp="' + S.species + '"]'); if (again) again.focus({ preventScroll: true }); };
+    });
+    document.getElementById('cls').onchange = function (e) { S.cls = e.target.value ? +e.target.value : null; S.sub = null; save(); renderChoose(); document.getElementById('cls').focus(); };
+    document.getElementById('sub').onchange = function (e) { S.sub = e.target.value ? +e.target.value : null; save(); renderChoose(); document.getElementById('sub').focus(); };
+    document.getElementById('bg').onchange = function (e) { S.bg = e.target.value ? +e.target.value : null; save(); renderChoose(); document.getElementById('bg').focus(); };
+    document.getElementById('next0').onclick = function () { S.section = 0; go(1); };
+  }
+
+  // ---------- screen 2: write ----------
+  var SECTIONS = ['Who are you?', 'What do you believe?', 'What people see', 'Bonds', 'Backstory'];
+  function input(id, label, ph, area) {
+    var v = esc(S[id]);
+    if (area) return '<div class="f"><label for="' + id + '">' + label + '</label><textarea id="' + id + '" class="fld" data-k="' + id + '" placeholder="' + esc(ph) + '"' + (id === 'story' ? ' style="min-height:260px"' : '') + '>' + v + '</textarea></div>';
+    return '<div class="f"><label for="' + id + '">' + label + '</label><input id="' + id + '" class="fld" type="text" data-k="' + id + '" placeholder="' + esc(ph) + '" value="' + v + '"></div>';
+  }
+  function deityBox() {
+    var d = deity();
+    if (S.faithless || !d) return '';
+    return '<div class="deity"><span>' + esc(d.type) + '</span>' + (d.blurb ? '<p class="blurb">' + esc(d.blurb) + '</p>' : '') + '<a href="' + wiki(d.id) + '" target="_blank" rel="noopener" style="font-size:14px;align-self:flex-start">Read about ' + esc(d.name) + ' in the wiki</a></div>';
+  }
+  function warnBox() {
+    return S.faithless ? '<p class="warn" role="alert">Beware: You will join the Wall of the Faithless when you inevitably perish. Consider yourself warned, Faithless.</p>' : '';
+  }
+  function renderWrite() {
+    var sp = findSpecies(S.species), c = cls(), s2 = sub(), b = bg();
+    var i = S.section;
+    var h = '<div class="wrap"><nav class="nav" aria-label="Sections">';
+    h += '<div class="navme">' + (sp ? '<img src="' + esc(sp.s.img) + '" alt="">' : '') + '<div><b>' + esc((sp ? sp.s.name : '') + ' ' + (c ? c.name : '')) + '</b><span>' + esc([s2 && s2.name, b && b.name].filter(Boolean).join(' · ')) + '</span></div></div>';
+    SECTIONS.forEach(function (l, k) {
+      h += '<button type="button" class="step' + (k < i ? ' done' : '') + '" data-sec="' + k + '"' + (k === i ? ' aria-current="step"' : '') + '><span class="dot" aria-hidden="true">' + (k < i ? '✓' : (k + 1)) + '</span><span>' + l + '</span></button>';
+    });
+    h += '<button type="button" class="linkbtn" id="back0" style="padding-left:12px;margin-top:8px">Change species or class</button>';
+    h += '</nav><main class="main" style="gap:22px">';
+    h += '<div style="display:flex;flex-direction:column;gap:10px"><span class="hint">Section ' + (i + 1) + ' of 5</span><div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="1" aria-valuemax="5" aria-valuenow="' + (i + 1) + '"><i style="width:' + ((i + 1) * 20) + '%"></i></div></div>';
+    h += '<section class="card">';
+    if (i === 0) {
+      h += '<h1 class="q">Who are you?</h1>';
+      h += input('name', 'Your character\'s name, nickname, or pseudonym. Include any additional titles.', '"Nott the Brave"');
+    } else if (i === 1) {
+      h += '<h1 class="q">What do you believe?</h1><div class="f"><label for="deity">I worship</label>';
+      h += '<select id="deity" class="sel"' + (S.faithless ? ' disabled' : '') + '><option value="">Choose a deity…</option>';
+      D.deities.forEach(function (d) { h += '<option' + (S.deity === d.name ? ' selected' : '') + '>' + esc(d.name) + '</option>'; });
+      h += '</select><div id="deitybox">' + deityBox() + '</div>';
+      h += '<label class="check"><input type="checkbox" id="faithless"' + (S.faithless ? ' checked' : '') + '>Faithless</label><div id="warnbox">' + warnBox() + '</div></div>';
+      h += input('align', 'I tend to act as though I\'m...', 'Neutral Good, Chaotic Evil, etc.');
+      h += input('ideals', 'My ideals include...', 'Always having patience, looking out for the little guy.');
+    } else if (i === 2) {
+      h += '<h1 class="q">What do people see when they look at you?</h1><div class="fields">';
+      h += input('age', 'Age', '42');
+      h += input('hair', 'Hair/scales/topfeathers', 'Brown, straight, and constantly matted with dirt');
+      h += input('eyes', 'Eyes', 'Dusky grey');
+      h += input('height', 'Height', '5\'10 (on a good day)');
+      h += input('weight', 'Weight', '215 lbs');
+      h += input('fashion', 'Fashion style', 'Think sweat-stained grandpa meets the local librarian.');
+      h += '</div>';
+      h += input('extra', 'Anything else you want others to know.', 'Billy is an eight foot tall Lochness monster with glistening eyes and abated breath.', true);
+    } else if (i === 3) {
+      h += '<h1 class="q">Bonds</h1>';
+      h += input('bond', 'If you had to pick one friend or family member, who is your ride-or-die?', 'My mom, my best friend Ron');
+    } else {
+      h += '<h1 class="q">Backstory</h1>';
+      h += input('story', 'Your story might be a little more complicated than "he was a sk8r boy". What made you, you?', '"Well, it all started when she said \'see you l8r boy\'..."', true);
+    }
+    h += '<div class="row"><button type="button" class="btn" id="prev">Back</button>';
+    h += i === 4 ? '<button type="button" class="btn gold" id="finish">See my profile</button>' : '<button type="button" class="btn gold" id="next">Next</button>';
+    h += '</div></section><p class="saved">Your answers save in this browser as you type. Skip anything you haven’t decided yet.</p></main></div>';
+    app.innerHTML = h;
+
+    app.querySelectorAll('[data-k]').forEach(function (el) { el.oninput = function () { S[el.getAttribute('data-k')] = el.value; save(); }; });
+    app.querySelectorAll('[data-sec]').forEach(function (el) { el.onclick = function () { S.section = +el.getAttribute('data-sec'); save(); renderWrite(); app.querySelector('h1').focus && window.scrollTo(0, 0); }; });
+    document.getElementById('back0').onclick = function () { go(0); };
+    document.getElementById('prev').onclick = function () { if (S.section === 0) go(0); else { S.section--; save(); renderWrite(); window.scrollTo(0, 0); } };
+    var nx = document.getElementById('next'); if (nx) nx.onclick = function () { S.section++; save(); renderWrite(); window.scrollTo(0, 0); };
+    var fin = document.getElementById('finish'); if (fin) fin.onclick = function () { go(2); };
+    var ds = document.getElementById('deity');
+    if (ds) {
+      ds.onchange = function () { S.deity = ds.value; save(); document.getElementById('deitybox').innerHTML = deityBox(); };
+      document.getElementById('faithless').onchange = function (e) {
+        S.faithless = e.target.checked; save(); ds.disabled = S.faithless; document.getElementById('deitybox').innerHTML = deityBox(); document.getElementById('warnbox').innerHTML = warnBox();
+      };
+    }
+  }
+
+  // ---------- screen 3: finish ----------
+  function val(t) { return t && String(t).trim() ? esc(t.trim()) : '<span class="empty">Not written yet</span>'; }
+  function paras(t) {
+    if (!t || !t.trim()) return '<p class="empty">Not written yet</p>';
+    return t.trim().split(/\n\s*\n/).map(function (p) { return '<p>' + esc(p.trim()) + '</p>'; }).join('');
+  }
+  function worshipText() { return S.faithless ? 'No one. Faithless.' : (S.deity || ''); }
+  function renderFinish() {
+    var sp = findSpecies(S.species), c = cls(), s2 = sub(), b = bg(), d = deity();
+    var name = S.name.trim() || 'Unnamed adventurer';
+    var subline = [S.faithless ? 'Faithless' : (S.deity ? 'Worships ' + S.deity : ''), S.align.trim()].filter(Boolean).join(' · ');
+
+    var h = '<div class="wrap"><article class="profile" aria-label="Character profile">';
+    h += '<div class="p-head">' + (sp ? '<img src="' + esc(sp.s.img) + '" alt="' + esc(sp.s.name) + '">' : '') + '<div style="flex:1 1 280px;display:flex;flex-direction:column;gap:6px"><h1>' + esc(name) + '</h1>';
+    if (subline) h += '<span class="p-sub">' + esc(subline) + '</span>';
+    h += '<div class="tags">';
+    if (sp) h += '<a href="' + wiki(sp.s.id) + '" target="_blank" rel="noopener">' + esc(sp.s.name) + ' · ' + esc(sp.fam.name) + '</a>';
+    if (c) h += '<a href="' + wiki((s2 || c).id) + '" target="_blank" rel="noopener">' + esc(c.name) + (s2 ? ' · ' + esc(s2.name) : '') + '</a>';
+    if (b) h += '<a href="' + wiki(b.id) + '" target="_blank" rel="noopener">' + esc(b.name) + '</a>';
+    h += '</div></div></div>';
+    if (sp && sp.s.blurb) h += '<div class="p-blurb"><img src="' + esc(sp.s.img) + '" alt=""><p><strong style="color:#fff">' + esc(sp.s.name) + ':</strong> ' + esc(sp.s.blurb) + '</p></div>';
+    h += '<section class="p-sec"><h2>What I believe</h2><dl class="facts">';
+    h += '<div><dt>I worship</dt><dd>' + (S.faithless ? 'No one. <strong style="color:#ffd9de">Faithless.</strong>' : (d ? '<a href="' + wiki(d.id) + '" target="_blank" rel="noopener">' + esc(d.name) + '</a>' : val(''))) + '</dd></div>';
+    h += '<div><dt>I tend to act as though I\'m...</dt><dd>' + val(S.align) + '</dd></div>';
+    h += '<div><dt>My ideals include...</dt><dd>' + val(S.ideals) + '</dd></div></dl></section>';
+    h += '<section class="p-sec"><h2>What people see</h2><dl class="facts" style="margin-bottom:16px">';
+    [['Age', 'age'], ['Hair/scales/topfeathers', 'hair'], ['Eyes', 'eyes'], ['Height', 'height'], ['Weight', 'weight'], ['Fashion style', 'fashion']].forEach(function (p) {
+      h += '<div><dt>' + p[0] + '</dt><dd>' + val(S[p[1]]) + '</dd></div>';
+    });
+    h += '</dl>' + (S.extra.trim() ? paras(S.extra) : '') + '</section>';
+    h += '<section class="p-sec"><h2>Bonds</h2><p>' + val(S.bond) + '</p></section>';
+    h += '<section class="p-sec"><h2>Backstory</h2>' + paras(S.story) + '</section>';
+    h += '</article>';
+
+    h += '<aside class="side" aria-label="Bring it into Kanka"><div class="panel"><h2 style="margin:0;font-family:Cinzel,serif;font-size:20px;color:#fff">Bring ' + esc(name) + ' into the wiki</h2>';
+    h += '<p class="blurb">Copy the profile, then paste it into a new article on your Kanka character using the editor’s code view (the &lt;/&gt; button).</p>';
+    h += '<button type="button" class="btn gold" id="copy">Copy for Kanka</button>';
+    h += '<button type="button" class="btn" id="copytext">Copy as plain text</button><p class="toast" id="toast" role="status" aria-live="polite"></p></div>';
+    h += '<div class="panel todo"><div class="eyebrow">Then, in Kanka</div>';
+    if (sp) h += '<label><input type="checkbox"><span>Set <strong>Playable Species</strong> to ' + esc(sp.s.name) + '</span></label>';
+    var feats = [c && c.name, s2 && s2.name, b && b.name].filter(Boolean);
+    if (feats.length) h += '<label><input type="checkbox"><span>Under <strong>In-Game Features</strong>, add ' + esc(feats.join(', ').replace(/, ([^,]*)$/, ' and $1')) + '</span></label>';
+    h += '<label><input type="checkbox"><span>Paste the profile into a new article</span></label></div>';
+    h += '<div style="display:flex;flex-wrap:wrap;gap:16px"><button type="button" class="linkbtn" id="edit">Keep editing</button><button type="button" class="linkbtn" id="reset">Start a new character</button></div></aside></div>';
+    app.innerHTML = h;
+
+    document.getElementById('edit').onclick = function () { S.section = 0; go(1); };
+    document.getElementById('reset').onclick = function () {
+      if (window.confirm('Start over? This clears the character saved in this browser.')) { S = JSON.parse(JSON.stringify(blank)); save(); render(); window.scrollTo(0, 0); }
+    };
+    document.getElementById('copy').onclick = function () { copy(kankaHTML(), 'Copied. Paste it into Kanka’s code view.'); };
+    document.getElementById('copytext').onclick = function () { copy(plainText(), 'Copied as plain text.'); };
+  }
+
+  // ---------- output for Kanka ----------
+  function kq(t) { return esc(String(t || '').trim()); }
+  function kp(label, t) { return t && String(t).trim() ? '<p><strong>' + label + '</strong> ' + kq(t) + '</p>' : ''; }
+  function kparas(t) { return t && t.trim() ? t.trim().split(/\n\s*\n/).map(function (p) { return '<p>' + kq(p).replace(/\n/g, '<br>') + '</p>'; }).join('\n') : ''; }
+  function kankaHTML() {
+    var sp = findSpecies(S.species), c = cls(), s2 = sub(), b = bg(), d = deity();
+    var out = ['<div class="rr-profile">'];
+    out.push('<div class="rr-profile-head">' + (sp && sp.s.kanka_img ? '<img class="rr-profile-icon" src="' + esc(sp.s.kanka_img) + '" alt="' + kq(sp.s.name) + '">' : '') + '<div>');
+    out.push('<h2 class="rr-profile-name">' + kq(S.name || 'Unnamed adventurer') + '</h2>');
+    var tags = [];
+    if (sp) tags.push('<a href="' + wiki(sp.s.id) + '">' + kq(sp.s.name) + '</a>');
+    if (c) tags.push('<a href="' + wiki(c.id) + '">' + kq(c.name) + '</a>');
+    if (s2) tags.push('<a href="' + wiki(s2.id) + '">' + kq(s2.name) + '</a>');
+    if (b) tags.push('<a href="' + wiki(b.id) + '">' + kq(b.name) + '</a>');
+    out.push('<p class="rr-profile-tags">' + tags.join(' · ') + '</p></div></div>');
+    if (sp && sp.s.blurb) out.push('<p class="rr-profile-blurb"><strong>' + kq(sp.s.name) + ':</strong> ' + kq(sp.s.blurb) + '</p>');
+    out.push('<h3 class="rr-profile-h">What I believe</h3><div class="rr-profile-facts">');
+    out.push('<p><strong>I worship</strong> ' + (S.faithless ? 'No one. Faithless.' : (d ? '<a href="' + wiki(d.id) + '">' + kq(d.name) + '</a>' : '')) + '</p>');
+    out.push(kp('I tend to act as though I\'m...', S.align) + kp('My ideals include...', S.ideals) + '</div>');
+    out.push('<h3 class="rr-profile-h">What people see</h3><div class="rr-profile-facts">');
+    out.push(kp('Age', S.age) + kp('Hair/scales/topfeathers', S.hair) + kp('Eyes', S.eyes) + kp('Height', S.height) + kp('Weight', S.weight) + kp('Fashion style', S.fashion) + '</div>');
+    if (S.extra.trim()) out.push(kparas(S.extra));
+    if (S.bond.trim()) out.push('<h3 class="rr-profile-h">Bonds</h3><p>' + kq(S.bond) + '</p>');
+    if (S.story.trim()) out.push('<h3 class="rr-profile-h">Backstory</h3>' + kparas(S.story));
+    out.push('</div>');
+    return out.join('\n');
+  }
+  function plainText() {
+    var sp = findSpecies(S.species), c = cls(), s2 = sub(), b = bg();
+    var L = [];
+    L.push(S.name.trim() || 'Unnamed adventurer');
+    L.push([sp && sp.s.name, c && c.name, s2 && s2.name, b && b.name].filter(Boolean).join(' · '));
+    L.push('');
+    L.push('WHAT I BELIEVE');
+    L.push('I worship: ' + worshipText());
+    if (S.align.trim()) L.push('I tend to act as though I\'m... ' + S.align.trim());
+    if (S.ideals.trim()) L.push('My ideals include... ' + S.ideals.trim());
+    L.push('');
+    L.push('WHAT PEOPLE SEE');
+    [['Age', 'age'], ['Hair/scales/topfeathers', 'hair'], ['Eyes', 'eyes'], ['Height', 'height'], ['Weight', 'weight'], ['Fashion style', 'fashion']].forEach(function (p) { if (S[p[1]].trim()) L.push(p[0] + ': ' + S[p[1]].trim()); });
+    if (S.extra.trim()) L.push(S.extra.trim());
+    if (S.bond.trim()) { L.push(''); L.push('BONDS'); L.push(S.bond.trim()); }
+    if (S.story.trim()) { L.push(''); L.push('BACKSTORY'); L.push(S.story.trim()); }
+    return L.join('\n');
+  }
+  function copy(text, msg) {
+    var toast = document.getElementById('toast');
+    function done() { toast.textContent = msg; }
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) { toast.textContent = 'Copy didn’t work here. Try another browser.'; }
+      document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+  }
+
+  // ---------- router ----------
+  function render() {
+    if (S.screen > 0 && !(S.species && S.cls)) S.screen = 0;
+    setSteps();
+    if (S.screen === 0) renderChoose(); else if (S.screen === 1) renderWrite(); else renderFinish();
+  }
+  window.__realms = { state: function () { return S; }, kankaHTML: kankaHTML, plainText: plainText };
+  render();
+})();
+</script>
+</body>
+</html>
