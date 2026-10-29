@@ -239,6 +239,18 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
   function bg() { return byId(D.backgrounds, S.bg); }
   function deity() { for (var i = 0; i < D.deities.length; i++) if (D.deities[i].name === S.deity) return D.deities[i]; return null; }
 
+  // A saved character may point at a family, species, class, subclass or background
+  // that has since been renamed or removed in data.js. Drop anything that no longer exists.
+  (function tidySaved() {
+    if (S.family !== 'All' && !D.families.some(function (f) { return f.name === S.family; })) S.family = 'All';
+    if (S.species != null && !findSpecies(S.species)) S.species = null;
+    if (S.cls != null && !cls()) S.cls = null;
+    if (S.sub != null && !sub()) S.sub = null;
+    if (S.bg != null && !bg()) S.bg = null;
+    if (S.deity && !deity()) S.deity = '';
+    if (S.screen > 0 && (S.species == null || S.cls == null)) S.screen = 0;
+  })();
+
   // ---------- helpers ----------
   function esc(t) {
     return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');

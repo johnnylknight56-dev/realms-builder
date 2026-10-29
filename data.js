@@ -443,6 +443,24 @@ window.REALMS = {
    "id": 9810465,
    "species": [
     {
+     "name": "Deep Imaskari",
+     "id": 9875231,
+     "img": "img/sp-deep-imaskari.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0eb44-a0c3-71b3-bdb8-be5760c6d9b7/1.jpg",
+     "blurb": "Humans changed by the depths of the Underdark. Unlike Skulks, they carried their own artificial light into the dark rather than blending with it.",
+     "stats": "Deep Imaskari Stats",
+     "stats_entity": 10104402
+    },
+    {
+     "name": "Dwarves",
+     "id": 9461066,
+     "img": "img/sp-dwarves.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0eb48-c121-703c-bf3b-138e8b58e00f/1.jpg",
+     "blurb": "Stocky, typically bearded Homo who prefer life underground or in the mountains, with each subspecies attuned to the land it calls home.",
+     "stats": "Dwarf Stats",
+     "stats_entity": 10104403
+    },
+    {
      "name": "Giffs",
      "id": 9839931,
      "img": "img/sp-giffs.jpg",
@@ -450,6 +468,15 @@ window.REALMS = {
      "blurb": "Hippo-like mammals alien to Toril. Absolute units covered in tribal tattoos who absolutely adore firearms.",
      "stats": "Giff Stats",
      "stats_entity": 10104400
+    },
+    {
+     "name": "Goliaths",
+     "id": 9505161,
+     "img": "img/sp-goliaths.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a050e7-3d02-7087-a457-bccaf156e073/1.jpg",
+     "blurb": "Towering hominids of the Thesk mountains carrying a sliver of giant blood from the Giants who once took them as mates.",
+     "stats": "Goliath Stats",
+     "stats_entity": 10104446
     },
     {
      "name": "Hadozee",
@@ -461,13 +488,31 @@ window.REALMS = {
      "stats_entity": 10104401
     },
     {
-     "name": "Homo",
-     "id": 9505009,
-     "img": "img/sp-homo.jpg",
-     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a05400-9660-7116-b81c-4862a03a4931/1.jpg",
-     "blurb": "The hominid family, one of Toril's original Creator Races, who evolved naturally and now dominate nearly every continent.",
+     "name": "Halflings",
+     "id": 9466365,
+     "img": "img/sp-halflings.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a050e9-3159-7179-acce-e728e659531f/1.jpg",
+     "blurb": "Small, cheerful humanoids who split from Humans 1.2 million years ago in the jungles near Halruaa. Known for close-knit communities and a love of a good meal.",
      "stats": null,
      "stats_entity": null
+    },
+    {
+     "name": "Humans",
+     "id": 9461514,
+     "img": "img/sp-humans.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a15bdc-8692-7155-9003-fd909e83f40a/1.jpg",
+     "blurb": "Bipedal Homo native to Toril and most other material planes. Widespread, tenacious, and short-lived, with no two quite alike.",
+     "stats": "Human Stats",
+     "stats_entity": 10104407
+    },
+    {
+     "name": "Merfolk",
+     "id": 9494884,
+     "img": "img/sp-merfolk.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e607-1c41-70e6-bb98-d5586c84d50a/1.jpg",
+     "blurb": "Homo who took to the water around 2.6 million years ago and now live within the Sea of Fallen Stars. Also called Merpeople, Mermen and Mermaids.",
+     "stats": "Merfolk Stats",
+     "stats_entity": 10101297
     },
     {
      "name": "Minotaur",
@@ -477,6 +522,15 @@ window.REALMS = {
      "blurb": "Large bull-headed monsters created by the demon lord Baphomet. Love mazes and goring with their horns.",
      "stats": "Minotaur Stats",
      "stats_entity": 10104428
+    },
+    {
+     "name": "Skulks",
+     "id": 9693594,
+     "img": "img/sp-skulks.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a050ea-8631-727c-b739-23bc5075d87a/1.jpg",
+     "blurb": "Humans forced to evolve in the Underdark after Drow enslaved them 18,000 years ago. Hairless and slate-skinned, with a faint blue glow in their eyes.",
+     "stats": "Skulk Stats",
+     "stats_entity": 10104412
     },
     {
      "name": "Tabaxi",
