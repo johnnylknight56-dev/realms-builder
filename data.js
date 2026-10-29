@@ -364,7 +364,7 @@ window.REALMS = {
    ]
   },
   {
-   "name": "Oozes",
+   "name": "Oozefolk",
    "id": 9478523,
    "species": [
     {
@@ -439,18 +439,9 @@ window.REALMS = {
    ]
   },
   {
-   "name": "Mammalia",
+   "name": "Natural Humanoids and Hominids",
    "id": 9810465,
    "species": [
-    {
-     "name": "Deep Imaskari",
-     "id": 9875231,
-     "img": "img/sp-deep-imaskari.jpg",
-     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0eb44-a0c3-71b3-bdb8-be5760c6d9b7/1.jpg",
-     "blurb": "Humans changed by the depths of the Underdark. Unlike Skulks, they carried their own artificial light into the dark rather than blending with it.",
-     "stats": "Deep Imaskari Stats",
-     "stats_entity": 10104402
-    },
     {
      "name": "Dwarves",
      "id": 9461066,
@@ -515,24 +506,6 @@ window.REALMS = {
      "stats_entity": 10101297
     },
     {
-     "name": "Minotaur",
-     "id": 9838042,
-     "img": "img/sp-minotaur.jpg",
-     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a06ee7-4be8-721a-99d7-bffc0920eb87/1.png",
-     "blurb": "Large bull-headed monsters created by the demon lord Baphomet. Love mazes and goring with their horns.",
-     "stats": "Minotaur Stats",
-     "stats_entity": 10104428
-    },
-    {
-     "name": "Skulks",
-     "id": 9693594,
-     "img": "img/sp-skulks.jpg",
-     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a050ea-8631-727c-b739-23bc5075d87a/1.jpg",
-     "blurb": "Humans forced to evolve in the Underdark after Drow enslaved them 18,000 years ago. Hairless and slate-skinned, with a faint blue glow in their eyes.",
-     "stats": "Skulk Stats",
-     "stats_entity": 10104412
-    },
-    {
      "name": "Tabaxi",
      "id": 9573593,
      "img": "img/sp-tabaxi.jpg",
@@ -577,7 +550,7 @@ window.REALMS = {
    ]
   },
   {
-   "name": "Pisces",
+   "name": "Fishfolk",
    "id": 9810495,
    "species": [
     {
@@ -623,6 +596,15 @@ window.REALMS = {
      "stats_entity": 10104421
     },
     {
+     "name": "Deep Imaskari",
+     "id": 9875231,
+     "img": "img/sp-deep-imaskari.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0eb44-a0c3-71b3-bdb8-be5760c6d9b7/1.jpg",
+     "blurb": "Humans changed by the depths of the Underdark. Unlike Skulks, they carried their own artificial light into the dark rather than blending with it.",
+     "stats": "Deep Imaskari Stats",
+     "stats_entity": 10104402
+    },
+    {
      "name": "Genasi",
      "id": 9571169,
      "img": "img/sp-genasi.jpg",
@@ -657,6 +639,24 @@ window.REALMS = {
      "blurb": "Serpent-tailed, snake-haired monstrosities of fiendish origin. Innate magic that turns flesh to stone.",
      "stats": "Medusa Stats",
      "stats_entity": 10104426
+    },
+    {
+     "name": "Minotaur",
+     "id": 9838042,
+     "img": "img/sp-minotaur.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a06ee7-4be8-721a-99d7-bffc0920eb87/1.png",
+     "blurb": "Large bull-headed monsters created by the demon lord Baphomet. Love mazes and goring with their horns.",
+     "stats": "Minotaur Stats",
+     "stats_entity": 10104428
+    },
+    {
+     "name": "Skulks",
+     "id": 9693594,
+     "img": "img/sp-skulks.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a050ea-8631-727c-b739-23bc5075d87a/1.jpg",
+     "blurb": "Humans forced to evolve in the Underdark after Drow enslaved them 18,000 years ago. Hairless and slate-skinned, with a faint blue glow in their eyes.",
+     "stats": "Skulk Stats",
+     "stats_entity": 10104412
     },
     {
      "name": "Spirit Folk",
