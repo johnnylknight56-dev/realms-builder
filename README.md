@@ -8,10 +8,11 @@ Players choose a species, class, subclass and background, answer five sections o
 
 - `index.html`: the whole builder.
 - `data.js`: a snapshot of the campaign's species, classes, subclasses, backgrounds and deities, with blurbs and wiki links.
+- `sheets.js`: each species' statblock from its "[Species] Stats" ability, sanitized to plain formatting.
 - `img/`: square copies of the species, class and background art.
 
 ## Updating
 
-When species, classes, subclasses, backgrounds or deities change in Kanka, take a new snapshot and replace `data.js` and `img/`. Nothing else needs to change.
+When species, classes, subclasses, backgrounds or deities change in Kanka, take a new snapshot and replace `data.js`, `sheets.js` and `img/`. Nothing else needs to change.
 
 Answers are saved in each player's own browser. Nothing is sent anywhere.

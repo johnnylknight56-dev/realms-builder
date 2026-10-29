@@ -6,7 +6,7 @@
 <title>Character Builder · The Remembered Realms</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Roboto:wght@400;500;700&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
 :root{
   --ground:#15112a; --panel:#221a3d; --field:#1a1433; --line:#3b3166; --hover:#2a2150;
@@ -36,6 +36,46 @@ button,input,select,textarea{font:inherit}
 .main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:28px}
 .side{flex:1 1 300px;max-width:360px;align-self:flex-start;display:flex;flex-direction:column;gap:18px}
 @media (max-width:900px){.side{max-width:none}}
+
+/* statblock column (choose screen) */
+.wrap.wide{max-width:1720px;display:grid;align-items:start;gap:32px;
+  grid-template-columns:minmax(0,1fr) minmax(360px,460px) minmax(280px,320px);grid-template-areas:"main sheet side"}
+.wrap.wide > .main{grid-area:main}
+.wrap.wide > .side{grid-area:side;max-width:none}
+.wrap.wide > .sheetcol{grid-area:sheet}
+@media (max-width:1400px){.wrap.wide{grid-template-columns:minmax(0,1fr) minmax(320px,400px);grid-template-areas:"main side" "main sheet"}}
+@media (max-width:900px){.wrap.wide{grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "side" "sheet"}}
+.sheetcol{position:sticky;top:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.sheetcol .bar2{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.sheetcol .bar2 a{font-size:14px}
+.sheet{
+  --pitch:28px;--baseline:27px;--rule:#d3dfec;--paper:#fdfdf6;--margin-line:#eec9c9;--ink:#2c2c2c;--link:#5f52c8;
+  max-height:calc(100vh - 80px);overflow:auto;border-radius:10px;border:1px solid #d8d8cc;
+  padding:28px 22px 0 56px;color:var(--ink);font:16px/var(--pitch) "Roboto Condensed","Arial Narrow",Helvetica,sans-serif;
+  background-color:var(--paper);
+  background-image:linear-gradient(to right,transparent 40px,var(--margin-line) 40px,var(--margin-line) 41px,transparent 41px),
+    repeating-linear-gradient(to bottom,transparent 0,transparent var(--baseline),var(--rule) var(--baseline),var(--rule) calc(var(--baseline) + 1px),transparent calc(var(--baseline) + 1px),transparent var(--pitch));
+  background-attachment:local;
+}
+.sheet :is(div,p,li){margin:0 0 var(--pitch);line-height:var(--pitch)}
+.sheet div:has(> :is(div,p,h1,h2,h3,h4,ul,table)){margin:0}
+.sheet :is(h1,h2,h3){font-size:23px;font-weight:700;line-height:calc(var(--pitch) - 1px);margin:0 0 var(--pitch);border-bottom:1px solid #c9a227;color:var(--ink);font-family:inherit}
+.sheet :is(h4,h5,h6){font-size:18px;font-weight:700;line-height:var(--pitch);margin:0;font-family:inherit}
+.sheet :is(ul,ol){margin:0 0 var(--pitch);padding-left:22px}
+.sheet li{margin:0}
+.sheet a{color:var(--link);text-decoration:none}
+.sheet a:hover{text-decoration:underline}
+.sheet .indent{margin-left:25px}
+.sheet table{width:100%;border-collapse:collapse;margin:0 0 var(--pitch);background:var(--paper);border:1px solid var(--rule);font-size:14px;line-height:20px}
+.sheet :is(td,th){border:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top;background:var(--paper)}
+.sheet tr > :is(td,th):first-child{text-align:center}
+.sheet :is(td,th) :is(div,p){margin:0;line-height:20px}
+.sheet tr:first-child :is(td,th){background:#9e1b32;border-color:#9e1b32;color:#fdfdf6;font-weight:700;vertical-align:bottom}
+.sheet tr:first-child :is(td,th) *{color:#fdfdf6}
+.sheet .none{color:#6b6b62;font-style:italic}
+.sheet:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media (max-width:1400px){.sheetcol{position:static}.sheet{max-height:70vh}}
+@media (max-width:900px){.sheet{max-height:none;padding-left:48px}}
 .panel{padding:22px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
 h1.q{margin:0;font-family:Cinzel,serif;font-size:clamp(26px,3.2vw,34px);line-height:1.25;color:#fff}
 .lead{margin:0;font-size:17px;line-height:1.55;color:#cfc8e8;max-width:640px}
@@ -154,6 +194,7 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
 <noscript><p style="padding:24px">The builder needs JavaScript turned on.</p></noscript>
 
 <script src="data.js"></script>
+<script src="sheets.js"></script>
 <script>
 (function () {
   'use strict';
@@ -224,7 +265,7 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     var sel = S.species ? findSpecies(S.species) : null;
     var c = cls();
 
-    var h = '<div class="wrap"><main class="main">';
+    var h = '<div class="wrap wide"><main class="main">';
     h += '<div style="display:flex;flex-direction:column;gap:8px"><h1 class="q">Where are you from, stranger?</h1>';
     h += '<p class="lead">Pick a people, then the path you walk. Every choice links to its page in the wiki if you want to read more first.</p></div>';
 
@@ -264,6 +305,16 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     if (c && !subs.length) h += '<p class="hint">Subclasses for ' + esc(c.name) + ' haven’t been added to the wiki yet. You can still continue.</p>';
     h += '</section></main>';
 
+    // statblock
+    var SHEETS = window.REALMS_SHEETS || {};
+    var sheet = sel ? SHEETS[sel.s.id] : null;
+    h += '<section class="sheetcol" aria-labelledby="h-sheet"><div class="bar2"><div class="head" style="flex:1"><h2 id="h-sheet">' + (sel ? esc(sel.s.name) + ' statblock' : 'Statblock') + '</h2><i></i></div>';
+    if (sel && sel.s.stats_entity) h += '<a href="' + wiki(sel.s.stats_entity) + '" target="_blank" rel="noopener">Open in wiki</a>';
+    h += '</div><div class="sheet" id="sheet" tabindex="0" aria-label="Statblock">';
+    if (!sel) h += '<div class="none">Pick a species to see its traits here.</div>';
+    else if (!sheet) h += '<div class="none">' + esc(sel.s.name) + ' doesn’t have a statblock in the wiki yet.</div>';
+    h += '</div></section>';
+
     // summary
     h += '<aside class="side" aria-label="Your character so far"><div class="panel"><div class="eyebrow">Your character so far</div>';
     if (sel) {
@@ -281,6 +332,12 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     if (!(sel && c)) h += '<p class="hint" style="margin-top:-6px">Choose a species and a class to continue.</p>';
     h += '</div></aside></div>';
     app.innerHTML = h;
+    if (sheet) {
+      // sheets.js is sanitized at build time to formatting tags and plain links only
+      var box = document.getElementById('sheet');
+      box.innerHTML = sheet;
+      box.querySelectorAll('a').forEach(function (a) { a.target = '_blank'; a.rel = 'noopener'; });
+    }
 
     app.querySelectorAll('[data-fam]').forEach(function (el) { el.onclick = function () { S.family = el.getAttribute('data-fam'); save(); renderChoose(); }; });
     app.querySelectorAll('[data-sp]').forEach(function (el) {
