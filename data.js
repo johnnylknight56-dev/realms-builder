@@ -4,7 +4,7 @@ window.REALMS = {
  "wiki": "https://app.kanka.io/w/the-remembered-realms/entities/",
  "families": [
   {
-   "name": "Amphibia",
+   "name": "Frogfolk",
    "id": 9810435,
    "species": [
     {
@@ -12,7 +12,7 @@ window.REALMS = {
      "id": 9817574,
      "img": "img/sp-bullywugs.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e855-4ca5-72a2-b29c-162b5b5801c5/1.jpg",
-     "blurb": "Toad-like amphibians of Toril, first bred as experiments by the Batrachi, with webbed digits and color-shifting camouflage skin.",
+     "blurb": "Medium toadfolk with a penchant for cronyism and arcane spellcasting.",
      "stats": "Bullywug Stats",
      "stats_entity": 10101231
     },
@@ -21,7 +21,7 @@ window.REALMS = {
      "id": 9823039,
      "img": "img/sp-grippli.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e85d-9ebc-70d9-95be-3a65d2ce75bf/1.jpg",
-     "blurb": "Small, good-natured frogfolk of Kara-Tur's southern marshes who live druidic lives in harmony with the land.",
+     "blurb": "Small druidic frogfolk of Kara-Tur's southern marshes.",
      "stats": "Grippli Stats",
      "stats_entity": 10101232
     },
@@ -30,14 +30,14 @@ window.REALMS = {
      "id": 9504618,
      "img": "img/sp-grung.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e858-e006-7273-8aa3-471fc129931e/1.jpg",
-     "blurb": "Poison-dart frogfolk of the Chultan treetops, whose ambitious, self-serving society still practices slavery.",
+     "blurb": "Small poison-dart frogfolk of the Chultan treetops, whose ambitious, self-serving society still practices slavery.",
      "stats": "Grung Stats",
      "stats_entity": 10101241
     }
    ]
   },
   {
-   "name": "Arboreum",
+   "name": "Plantfolk",
    "id": 9461775,
    "species": [
     {
@@ -45,7 +45,7 @@ window.REALMS = {
      "id": 9840616,
      "img": "img/sp-mandrakes.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e619-0b10-7385-9985-58278d6d147a/1.jpg",
-     "blurb": "Short, root-bodied plantfolk awakened from the common mandrake, with corky skin and leafy \"hair\" that drinks in sunlight.",
+     "blurb": "Short, root-bodied plantfolk - originally awakened mandrake plants. Stubborn, quick to anger, and a shrill voice that can literally kill.",
      "stats": "Mandrake Stats",
      "stats_entity": 10101233
     },
@@ -54,7 +54,7 @@ window.REALMS = {
      "id": 9840646,
      "img": "img/sp-myconids.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e61c-4e41-7274-a99c-2ca2462543be/1.jpg",
-     "blurb": "Mushroom folk of the Underdark, each one an intelligent mycelial network grown through a host, usually a corpse.",
+     "blurb": "Mushroomfolk from small Underdark clans. Each individual an intelligent mycelial network grown through a host - usually a corpse.",
      "stats": "Myconids Stats",
      "stats_entity": 10100979
     },
@@ -63,14 +63,14 @@ window.REALMS = {
      "id": 9840613,
      "img": "img/sp-treants.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e61d-e741-70d7-97ec-a3ba26bec4eb/1.jpg",
-     "blurb": "Towering awakened trees, 7 to 10 feet tall, found in forests across Toril and especially in old Elven lands.",
+     "blurb": "Towering awakened trees found in old-growth forests and areas of Fey influence. Patient and practically immovable.",
      "stats": "Treant Stats",
      "stats_entity": 10100928
     }
    ]
   },
   {
-   "name": "Arthropodae",
+   "name": "Insectfolk",
    "id": 9839589,
    "species": [
     {
@@ -78,7 +78,7 @@ window.REALMS = {
      "id": 9880379,
      "img": "img/sp-aranea.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a1572a-3f53-71e0-9806-4039dac77938/1.png",
-     "blurb": "Six-foot spiders with a pair of hands and spell-capable mandibles, nesting in the deserts and plains of northern Calimshan.",
+     "blurb": "Arachnidfolk shapeshifters from Calimshan. Resemeble feminine humans in one form and massive spiders in the other.",
      "stats": "Aranea Stats",
      "stats_entity": 10101242
     },
@@ -87,7 +87,7 @@ window.REALMS = {
      "id": 9916485,
      "img": "img/sp-chitine.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e86c-04b9-70cf-9ea1-c6b74a1ff515/1.jpg",
-     "blurb": "Monstrous insectfolk whose blood was magically blended with the Drow's, with three pairs of compound eyes and a pincer mouth.",
+     "blurb": "Horrific Arachnidfolk whose blood was created by blending that of the Drow and common Wolf Spider. Humanoid torsos with arachnid heads, an extra pair of upper limbs, and body-wide urticating hairs. Live in the Underdark in clans.",
      "stats": "Chitine Stats",
      "stats_entity": 10101246
     },
@@ -96,7 +96,7 @@ window.REALMS = {
      "id": 9875256,
      "img": "img/sp-driders.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0da44-2e6a-737a-af58-4877356cf91d/1.jpg",
-     "blurb": "Drow above the waist and spider below, god-cursed; none have been made since Lolth was torn from reality in 1938 DR.",
+     "blurb": "Drow cursed by the goddess Lolth. Twisted humanoid upper halves with arachnid thoraxes and lower limbs. Loners from the Underdark.",
      "stats": "Drider Stats",
      "stats_entity": 10101253
     },
@@ -105,7 +105,7 @@ window.REALMS = {
      "id": 9916393,
      "img": "img/sp-rastipede.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e938-5bb5-70c7-b0b1-441cc08f066d/1.jpg",
-     "blurb": "Ant-torsoed, centipede-bodied travelers from an unknown star system deep in Wildspace.",
+     "blurb": "Antfolk with centipede lower halves. Spacefarers from somewhere far beyond Realmspace. Chatty yet efficient merchants on Spelljamming waystations.",
      "stats": "Rastipede Stats",
      "stats_entity": 10101234
     },
@@ -114,14 +114,14 @@ window.REALMS = {
      "id": 9839590,
      "img": "img/sp-thri-kreen.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a07276-222e-7078-8340-ed80d5c38a0a/1.png",
-     "blurb": "Six-limbed mantisfolk who click in their own tongue and speak to others by telepathy; some grow into powerful Psions.",
+     "blurb": "Six-limbed mantisfolk from colonies in Southern Faerun. Adept psions and warriors.",
      "stats": "Thri-Kreen Stats",
      "stats_entity": 10101265
     }
    ]
   },
   {
-   "name": "Automata",
+   "name": "Constructs",
    "id": 9697838,
    "species": [
     {
@@ -129,7 +129,7 @@ window.REALMS = {
      "id": 9839601,
      "img": "img/sp-autognome.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e851-6cc5-73dd-abe9-afbc0e841853/1.jpg",
-     "blurb": "Constructs built by Rock Gnomes as coworkers and confidants, often aboard Spelljammers, and tireless until a job is perfect.",
+     "blurb": "Constructs near-identical to their Rock Gnome inventors. Tireless and enthusiastically work-driven. Constant tinkerers.",
      "stats": "Autognome Stats",
      "stats_entity": 10101258
     },
@@ -138,25 +138,25 @@ window.REALMS = {
      "id": 9854203,
      "img": "img/sp-flesh-golem.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0eb18-ef24-72ed-a662-265edfdd8626/1.jpg",
-     "blurb": "Part undead, part magical construct, and a force to be reckoned with.",
-     "stats": null,
-     "stats_entity": null
+     "blurb": "Flesh-stitched frankensteins containing the spirits of elementals.",
+     "stats": "Flesh Golem Stats",
+     "stats_entity": 10103513
     },
     {
      "name": "Gargoyle",
      "id": 9848481,
      "img": "img/sp-gargoyle.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e623-23a9-730a-90d5-82baf6cf09a9/1.jpg",
-     "blurb": "",
-     "stats": null,
-     "stats_entity": null
+     "blurb": "Stoney earth elementals who serve evil mortals on Toril or Devils in the outer planes.",
+     "stats": "Gargoyle Stats,
+     "stats_entity": 10103576
     },
     {
      "name": "Nimblewright",
      "id": 9821465,
      "img": "img/sp-nimblewright.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a06254-ef35-7396-9f64-765a9c4ad8cb/1.jpg",
-     "blurb": "Arcane-mechanical servants abandoned when Netheril fell, still turning up from the sands of Anauroch.",
+     "blurb": "Arcane-mechanical servants abandoned when Netheril fell over two thousand years ago. Still occasionally uncovered from the sands of Anauroch.",
      "stats": "Nimblewright Stats",
      "stats_entity": 10101261
     },
@@ -172,7 +172,7 @@ window.REALMS = {
    ]
   },
   {
-   "name": "Aviane",
+   "name": "Birdfolk",
    "id": 9771722,
    "species": [
     {
@@ -189,7 +189,7 @@ window.REALMS = {
      "id": 9840625,
      "img": "img/sp-harpies.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e93e-c000-7341-9708-42008648a64a/1.jpg",
-     "blurb": "Winged Aviane with a human woman's torso, taloned feathered legs, and catlike yellow eyes.",
+     "blurb": "Winged Aviane with a feminine human torso, taloned feathered legs, and catlike yellow eyes. Alluring voice and a proclivity for enchantment spells.",
      "stats": "Harpy Stats",
      "stats_entity": 10101248
     },
@@ -198,7 +198,7 @@ window.REALMS = {
      "id": 9504616,
      "img": "img/sp-kenku.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0503f-2746-739c-a7c4-222c9990ba89/1.png",
-     "blurb": "Flightless, raven-like cousins of the Aarakocra and gifted mimics of sound, art, and more.",
+     "blurb": "Flightless crowfolk who live in mixed population cities, especially southern Faerun and the Isle of Aearee. Capable of exceptional mimickry.",
      "stats": "Kenku Stats",
      "stats_entity": 10101244
     }
@@ -213,7 +213,7 @@ window.REALMS = {
      "id": 9461770,
      "img": "img/sp-centaur.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a05335-ed46-7243-ac4c-fbd4e1f3eba5/1.jpg",
-     "blurb": "Fey of Cormanthor, the High Forest and the Chondalwood, half Elf-like and half horse, with tribal ways over 4,000 years old.",
+     "blurb": "Fey with Elven upper halves and equine lower halves. Live in small warbands in the forests of Central Faerun.",
      "stats": "Centaur Stats",
      "stats_entity": 10101260
     },
@@ -231,7 +231,7 @@ window.REALMS = {
      "id": 9461768,
      "img": "img/sp-darklings.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a05340-b069-72c6-8892-26e2b0f336a7/1.jpg",
-     "blurb": "Grey-skinned Fey of the ruined Feywild whose skin ages within seconds in sunlight, so most wrap themselves head to toe.",
+     "blurb": "Grey-skinned Fey with Elven torsos and crow-like feet. Severe sunlight sensivitiy. Mummy-like wrappings part of everyday fashion.",
      "stats": "Darkling Stats",
      "stats_entity": 10101279
     },
@@ -240,7 +240,7 @@ window.REALMS = {
      "id": 9461774,
      "img": "img/sp-dryads.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a05344-f753-72a7-9d27-e04c6cc317dd/1.jpg",
-     "blurb": "Bark-skinned Fey deeply bound to nature and its landmarks, with leaves or bare branches where their hair would be.",
+     "blurb": "A variety of Fey with special ties to natural landmarks. Resemble the natural topography of their lineage.",
      "stats": "Dryad Stats",
      "stats_entity": 10104312
     },
@@ -249,7 +249,7 @@ window.REALMS = {
      "id": 9461058,
      "img": "img/sp-eladrin.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0534f-ac91-7383-bc3f-ed8af5e55e84/1.jpg",
-     "blurb": "Elf-descended Fey of the Feywild, now a species of their own and an exaggeration of that plane's chaotic magic.",
+     "blurb": "Elves who mutated over thousands of years in the Feywild. Mercurial creatures whose emotions change their literal form.",
      "stats": "Eladrin Stats",
      "stats_entity": 10101254
     },
@@ -258,7 +258,7 @@ window.REALMS = {
      "id": 9461765,
      "img": "img/sp-elves.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a05355-3457-7215-9c12-8edfa5cf290b/1.jpg",
-     "blurb": "Pointed-eared Fey descendants, now largely diasporic, keeping old rites alive in the shadow of other peoples' cities.",
+     "blurb": "Pointed-eared creations of the god Corellon. Wide variety of subspecies with different cultures. Paved the way for other mortals in Faerun, a fact they can be haughty about.",
      "stats": "Elf Stats",
      "stats_entity": 10101266
     },
@@ -267,7 +267,7 @@ window.REALMS = {
      "id": 9461766,
      "img": "img/sp-faeries.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0535c-04ae-71a6-b7f1-561f8d523a44/1.jpg",
-     "blurb": "Small and tiny Fey such as Pixies, Sprites, Korreds and Brownies, whose \"pranks\" can be deadly.",
+     "blurb": "Small and tiny Fey such as Pixies, Sprites, Korreds and Brownies. Embrace the chaotic 'laws' of the Feywild.",
      "stats": "Faerie Stats",
      "stats_entity": 10101280
     },
@@ -276,7 +276,7 @@ window.REALMS = {
      "id": 9926466,
      "img": "img/sp-gloura.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0cc1d-f4de-70cf-84b9-ed35ea16632d/1.png",
-     "blurb": "Silver-skinned Unseelie Fey with black insect eyes and moth wings, living in the Underdark and the lost Feydark.",
+     "blurb": "Silver-skinned Unseelie Fey with black insect eyes and moth wings. Live in solitude in the Underdark.",
      "stats": "Gloura Stats",
      "stats_entity": 10101267
     },
@@ -285,25 +285,43 @@ window.REALMS = {
      "id": 9461771,
      "img": "img/sp-gnomes.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a05364-9ac9-72f8-8610-fcb041b06334/1.jpg",
-     "blurb": "Small, inventive Fey descendants and Gond's favored people, behind some of Toril's most-used modern inventions.",
+     "blurb": "Small, inventive humanoids descended from Fey. Gond's favored species, came up with some of Toril's most-used modern inventions.",
      "stats": "Gnome Stats",
      "stats_entity": 10101287
     },
     {
-     "name": "Goblinkin",
-     "id": 9461273,
-     "img": "img/sp-goblinkin.jpg",
-     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0536e-c7cb-7228-9375-0525e92f3baa/1.jpg",
-     "blurb": "Lanky, sharp-toothed Fey descendants, once called goblinoids, most of whom worship the conqueror-god Maglubiyet.",
-     "stats": null,
-     "stats_entity": null
+     "name": "Goblins",
+     "id": 9606600,
+     "img": "img/sp-goblins.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0f28f-34a7-71a9-bfba-bcfb98085cb7/1.jpg",
+     "blurb": "Diminuitive Fey with green skin and sharp ears. Small, vicious, and cunning folk who roam the Underdark in clans.",
+     "stats": "Goblin Stats",
+     "stats_entity": 10101293
+    },
+    {
+     "name": "Hobgoblins",
+     "id": 9531279,
+     "img": "img/sp-hobgoblins.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0f292-f07f-705a-83a1-16bddf317d2e/1.jpg",
+     "blurb": "Medium Fey who march under their god Maglubiyet's iron banner. Warlike, efficient, and disciplined folk who dominate other goblinkin.",
+     "stats": "Hobgoblin Stats",
+     "stats_entity": 10101277
+    },
+    {
+     "name": "Bugbears",
+     "id": 9706299,
+     "img": "img/sp-bugbears.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0f28d-bf29-72e1-907a-0bac32553021/1.jpg",
+     "blurb": "Hulking furry Fey with lanky, cat-like grace. Expert hiders and kidnappers. Love good naps and easy loot.",
+     "stats": "Bugbear Stats",
+     "stats_entity": 10101276
     },
     {
      "name": "Hagkin",
      "id": 9461769,
      "img": "img/sp-hagkin.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a05371-9c07-707d-a421-d12ec2d496c9/1.jpg",
-     "blurb": "Children of Hags and humanoids or other Fey, keeping a few hag-like powers and perhaps one telltale blemish.",
+     "blurb": "Fey Descendents of Hags. Minor hag-like powers. Love elaborate rituals and esoterica",
      "stats": "Hagkin Stats",
      "stats_entity": 10101289
     },
@@ -321,7 +339,7 @@ window.REALMS = {
      "id": 9461772,
      "img": "img/sp-hengeyokai.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0537a-856d-73c9-ac18-4d5fec2a361d/1.jpg",
-     "blurb": "Animal-featured Fey of Kara-Tur with dozens of subspecies, long told of in legend as tricksters who prank humans.",
+     "blurb": "Fey beastfolk from Kara-Tur with dozens of subspecies. Held in legend as tricksters who stalk and prank humans.",
      "stats": "Hengeyokai Stats",
      "stats_entity": 10101275
     },
@@ -330,7 +348,7 @@ window.REALMS = {
      "id": 9478533,
      "img": "img/sp-orcs.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0f2cb-5167-72b3-a6fe-bed80b391a54/1.jpg",
-     "blurb": "Humanoids who share their bloodline with the Elves, most following Gruumsh's creed of raiding rather than building.",
+     "blurb": "Warlike humanoid cousins to the Elves. Stooped, muscular frames, with green or gray skin. Internal bloodlust for revenge fuel by their ancestor-god Gruumsh.",
      "stats": "Orc Stats",
      "stats_entity": 10101294
     },
@@ -339,14 +357,14 @@ window.REALMS = {
      "id": 9461767,
      "img": "img/sp-satyr.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a05394-c708-7304-9a5b-b79e2c05726a/1.jpg",
-     "blurb": "Goat-legged Fey of the Feywild, all born male, most living on Feywild Reservations since Corellon's Comet.",
+     "blurb": "Masculine Fey with Elvish torsoes and goat-like legs. Live in integrated cities or on Feywild reservations.",
      "stats": "Satyr Stats",
      "stats_entity": 10104351
     }
    ]
   },
   {
-   "name": "Gelatina",
+   "name": "Oozes",
    "id": 9478523,
    "species": [
     {
@@ -354,7 +372,7 @@ window.REALMS = {
      "id": 9820404,
      "img": "img/sp-geleton.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a06294-90d1-72fa-89f7-eee32b0ef433/1.jpg",
-     "blurb": "An ooze fused with a necromantically raised skeleton, born when careless necromancy happens too close to something hungry.",
+     "blurb": "The lifeforce of an ooze fused to a skeleton, effectively creating a humanoid. Result of necromantic magic gone awry.",
      "stats": "Geleton Stats",
      "stats_entity": 10104361
     },
@@ -363,7 +381,7 @@ window.REALMS = {
      "id": 9821579,
      "img": "img/sp-oozekin.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a062a5-0ab0-73cc-a485-8fb4f7f591a5/1.jpg",
-     "blurb": "Sapient supercolonies of Toril-native bacteria, first transmuted into thinking beings by Dark Elves some 20,000 years ago.",
+     "blurb": "Sapient supercolonies of bacteria with innate curiosity for the world.",
      "stats": "Oozekin Stats",
      "stats_entity": 10104362
     },
@@ -372,14 +390,14 @@ window.REALMS = {
      "id": 9820395,
      "img": "img/sp-plasmoids.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a06377-b2ce-725d-b680-c0432b50854c/1.jpg",
-     "blurb": "Translucent, spacefaring Gelatina with no inner frame and a visible brain, not native to Toril.",
+     "blurb": "Translucent spacefaring Oozes who do well aboard spelljammers. Have a visible 'brain' near the top of their membrane apparatus. Not native to Toril.",
      "stats": "Plasmoid Stats",
      "stats_entity": 10104375
     }
    ]
   },
   {
-   "name": "Gigantas",
+   "name": "Giants",
    "id": 9508929,
    "species": [
     {
@@ -387,7 +405,7 @@ window.REALMS = {
      "id": 9605363,
      "img": "img/sp-firbolgs.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0eb27-b8d9-7266-bfe9-ada695226a9f/1.jpg",
-     "blurb": "Reclusive, fur-covered giantkin about 10 feet tall, children of Othea and Ulutiu who keep to the old ways of the forest.",
+     "blurb": "Reclusive, fur-covered giants about 10 feet tall. Live in secluded druidic societies and keep ancient giant traditions.",
      "stats": "Firbolg Stats",
      "stats_entity": 10104394
     },
@@ -396,7 +414,7 @@ window.REALMS = {
      "id": 9692738,
      "img": "img/sp-fomorians.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0eb2f-b862-7319-822d-8c0e3f9c2fb6/1.jpg",
-     "blurb": "Hunched, warty giantkin of the Underdark and Feydark, unsettling to behold but exceptional in a fight.",
+     "blurb": "Disfigured, hunched giants of the Underdark and Feydark. Unsettling to behold but exceptional in a fight.",
      "stats": "Fomorian Stats",
      "stats_entity": 10104395
     },
@@ -405,7 +423,7 @@ window.REALMS = {
      "id": 9718008,
      "img": "img/sp-trolls.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0eb36-8753-731f-9c15-fc9f7aae6378/1.jpg",
-     "blurb": "Regenerating giant humanoids of the North; only two subspecies have proven able to form tribes and chiefdoms.",
+     "blurb": "Regenerative giants from North Faerun. Live in scattered herds that prey on humans and dwarves.",
      "stats": "Troll Stats",
      "stats_entity": 10104396
     },
@@ -414,7 +432,7 @@ window.REALMS = {
      "id": 9690523,
      "img": "img/sp-verbeeg.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0eb3a-9cac-72fe-aa89-3013ed1784f8/1.jpg",
-     "blurb": "Eight-foot giantkin with exaggerated human-like features, cursed by Annam yet more cunning than the lesser giants.",
+     "blurb": "Brutish giants with exaggerated facial features. Lacking in empathy but make excellent pit bosses and bodyguards.",
      "stats": "Verbeeg Stats",
      "stats_entity": 10104445
     }
@@ -429,7 +447,7 @@ window.REALMS = {
      "id": 9839931,
      "img": "img/sp-giffs.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a07de3-81dd-7331-9d1a-8d6f7dbdc387/1.jpg",
-     "blurb": "Hippo-like mammals alien to Toril, built like bruisers and covered in astral tattoos of their battles.",
+     "blurb": "Hippo-like mammals alien to Toril. Absolute units covered in tribal tattoos who absolutely adore firearms.",
      "stats": "Giff Stats",
      "stats_entity": 10104400
     },
@@ -438,7 +456,7 @@ window.REALMS = {
      "id": 9838070,
      "img": "img/sp-hadozee.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a07df7-2ef5-7260-ba43-2d1ab69931d4/1.jpg",
-     "blurb": "Winged, chimp-like simians of Realmspace, most often found climbing the decks of Spelljammers.",
+     "blurb": "Chimpfolk spacefarers with winged underarms. Most often found climbing the decks of adventurer or trader spelljammers.",
      "stats": "Hadozee Stats",
      "stats_entity": 10104401
     },
@@ -456,7 +474,7 @@ window.REALMS = {
      "id": 9838042,
      "img": "img/sp-minotaur.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a06ee7-4be8-721a-99d7-bffc0920eb87/1.png",
-     "blurb": "Large bull-headed mammals believed to have been made by the demon lord Baphomet over 12,000 years ago.",
+     "blurb": "Large bull-headed monsters created by the demon lord Baphomet. Love mazes and goring with their horns.",
      "stats": "Minotaur Stats",
      "stats_entity": 10104428
     },
@@ -465,14 +483,14 @@ window.REALMS = {
      "id": 9573593,
      "img": "img/sp-tabaxi.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0631f-9f72-7066-ac92-586a1850c718/1.jpg",
-     "blurb": "Catfolk who evolved in the vast jungles of Katashka, with small immigrant communities in Faerûn and Kara-Tur.",
+     "blurb": "Catfolk from the jungles of Katashka. Agile, quickwitted, and fun-loving. Small immigrant communities in Faerûn and Kara-Tur.",
      "stats": "Tabaxi Stats",
      "stats_entity": 10104413
     }
    ]
   },
   {
-   "name": "Mortua",
+   "name": "Undead and Cursed",
    "id": 9940438,
    "species": [
     {
@@ -480,7 +498,7 @@ window.REALMS = {
      "id": 9465009,
      "img": "img/sp-dayie.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a05b1c-9a6c-70d8-ad54-bcaac72a1a0f/1.png",
-     "blurb": "Sapient undead who kept going after Thay's destruction in the Third Sundering freed them from their necromancer masters.",
+     "blurb": "Sapient undead left by the aftermath of Thay's destruction. Grim, patient, and carrying a somewhat intolerable stench.",
      "stats": "Dayie Stats",
      "stats_entity": 10104414
     },
@@ -489,7 +507,7 @@ window.REALMS = {
      "id": 9697873,
      "img": "img/sp-dhampir.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a06336-482c-723a-88e9-6a4914159622/1.jpg",
-     "blurb": "Born of vampire lineage rather than bitten: pale and fanged, but able to walk in sunlight.",
+     "blurb": "Humanoid descendents of Vampire Spawn. Pale and fanged, but able to walk in sunlight and resist parts of Vampirism's curse.",
      "stats": "Dhampir Stats",
      "stats_entity": 10104415
     },
@@ -498,7 +516,7 @@ window.REALMS = {
      "id": 9697812,
      "img": "img/sp-shifters.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0631b-241b-719f-b4ca-f84d053aa179/1.jpg",
-     "blurb": "Descendants of those who partly resisted lycanthropy, left with permanent, hereditary wolfish features.",
+     "blurb": "Individuals who were bitten by a Werecreature but developed resistance to lycanthropy (or their offspring). Look like humanoids with beast-like features.",
      "stats": "Shifter Stats",
      "stats_entity": 10104416
     }
@@ -513,7 +531,7 @@ window.REALMS = {
      "id": 9782760,
      "img": "img/sp-kuo-toa.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0636c-b4cb-7356-a89c-6b91e38557e7/1.jpg",
-     "blurb": "Bloodthirsty, fish-like Aberrations with the unique ability to project their mortal belief onto a living being.",
+     "blurb": "Abberrant fishfolk with the ability to project their mortal belief into immediate divine powers.",
      "stats": "Kuo-toa Stats",
      "stats_entity": 10104418
     },
@@ -522,7 +540,7 @@ window.REALMS = {
      "id": 9821550,
      "img": "img/sp-locathah.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a06370-1bad-7218-842d-bf081cc414d5/1.jpg",
-     "blurb": "Fishfolk of the Sea of Swords near Saltmarsh, thought to be the Kuo-toa's cousins from before their corruption.",
+     "blurb": "Humanoid fishfolk that evolved in the Sea of Swords. Generally peaceloving, enjoy aquatic horticulture and trade.",
      "stats": "Locathah Stats",
      "stats_entity": 10104419
     },
@@ -531,14 +549,14 @@ window.REALMS = {
      "id": 9489661,
      "img": "img/sp-sahuagin.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a05b22-179c-72d4-8b47-53184712c159/1.jpg",
-     "blurb": "Shark-like planetouched devoted to Sekolah, driven by faith and hunger to kill and eat whatever they meet.",
+     "blurb": "Planetouched sharkfolk who dominate nearly every ocean on Toril. Driven by a relentless hunger to kill, colonize, and devour. Able to detect and frenzy upon creatures who are bleeding.",
      "stats": "Sahuagin Stats",
      "stats_entity": 10104420
     }
    ]
   },
   {
-   "name": "Planarus",
+   "name": "Planetouched",
    "id": 9465242,
    "species": [
     {
@@ -546,7 +564,7 @@ window.REALMS = {
      "id": 9465245,
      "img": "img/sp-aasimar.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e603-0643-7239-b811-0a2985ad2a11/1.jpg",
-     "blurb": "Planetouched mortals with celestial blood, often glowing-skinned and golden-eyed, sometimes called the gods' chosen.",
+     "blurb": "Planetouched humans descended from a celestial ancestor. Tend to have glowing-skin, flame-like eyes, or spectral halos and wings.",
      "stats": "Aasimar Stats",
      "stats_entity": 10104421
     },
@@ -555,7 +573,7 @@ window.REALMS = {
      "id": 9571169,
      "img": "img/sp-genasi.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e610-5947-7151-a18b-17941cecc08d/1.jpg",
-     "blurb": "Humans descended from the genies of the Elemental Planes, carrying their ancestral element in ability and appearance.",
+     "blurb": "Planetouched humans descended from an elemental ancestor, usually a Genie. They appear human but with skin and hair reflecting the element of their heritage.",
      "stats": null,
      "stats_entity": null
     },
@@ -564,7 +582,7 @@ window.REALMS = {
      "id": 9465420,
      "img": "img/sp-gith.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0df99-9840-72b1-8309-e579aafe0b33/1.jpg",
-     "blurb": "Astral-touched humans and former Illithid slaves whose spartan culture entered a new era after Vlaakith's fall.",
+     "blurb": "Planetouched humans descended from hominids enslaved by the Mind Flayers thousands of years ago. Light-green skin, jagged ears, and cat-like eyes.",
      "stats": "Gith Stats",
      "stats_entity": 10104424
     },
@@ -573,7 +591,7 @@ window.REALMS = {
      "id": 9697921,
      "img": "img/sp-gnolls.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a067b9-fc0d-7078-80e5-bad20c40153c/1.png",
-     "blurb": "Hyena-like humanoids spawned by the demon lord Yeenoghu; most are bound to the Blood Hunt, but not all are evil.",
+     "blurb": "Planetouched beasts created by the demon lord Yeenoghu. Tall, hunched builds resembling anthropomorphic hyenas. Easily whipped into a frenzy, unleashing their demonic rage.",
      "stats": "Gnoll Stats",
      "stats_entity": 10104425
     },
@@ -582,7 +600,7 @@ window.REALMS = {
      "id": 9840642,
      "img": "img/sp-medusas.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a07447-a5ab-72c9-8f06-bf55e1190a0c/1.webp",
-     "blurb": "Serpent-tailed, snake-haired monstrosities of fiendish origin, feared for magic that turns flesh to stone.",
+     "blurb": "Serpent-tailed, snake-haired monstrosities of fiendish origin. Innate magic that turns flesh to stone.",
      "stats": "Medusa Stats",
      "stats_entity": 10104426
     },
@@ -591,7 +609,7 @@ window.REALMS = {
      "id": 9926529,
      "img": "img/sp-spirit-folk.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e616-074d-7014-8e8c-3eeaf73811b8/1.jpg",
-     "blurb": "Humans descended from nature-spirit Fey such as Dryads and Naiads, marked by a natural scent and treasured tattoos.",
+     "blurb": "Humans descended from Dryads, marked by their otherworldly beauty and treasured tattoos.",
      "stats": "Spirit Folk Stats",
      "stats_entity": 10104429
     },
@@ -600,14 +618,14 @@ window.REALMS = {
      "id": 9465423,
      "img": "img/sp-tieflings.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0df94-68db-70cb-afaf-225306f1a0f9/1.jpg",
-     "blurb": "Heirs of ancient fiendish pacts, now as common on the Sword Coast as Elves once were, and natural leaders despite the whispers.",
+     "blurb": "Humans descended from fiends. Humanoid appearance with mutations dependent on their exact origin (whether demonic, cthonic, or infernal).",
      "stats": "Tiefling Stats",
      "stats_entity": 10104430
     }
    ]
   },
   {
-   "name": "Reptilia",
+   "name": "Scalekin",
    "id": 9465483,
    "species": [
     {
@@ -615,7 +633,7 @@ window.REALMS = {
      "id": 9465744,
      "img": "img/sp-dragonborn.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0f7af-a880-71bc-a02e-b6627592b10c/1.jpg",
-     "blurb": "Militant draconic humanoids, not truly related to dragons, brought en masse to Toril by the Second Sundering.",
+     "blurb": "Militant draconic humanoids originally from Abeir. Fond of military tradition, camaraderie, with a cautious attitude towards magic.",
      "stats": "Dragonborn Stats",
      "stats_entity": 10104431
     },
@@ -624,7 +642,7 @@ window.REALMS = {
      "id": 9465492,
      "img": "img/sp-kobolds.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0f7b1-2c08-7045-924d-0d601066c7ae/1.jpg",
-     "blurb": "Small, cold-blooded reptilians of draconic heritage, about three feet tall with shrill, barking voices.",
+     "blurb": "Small, cold-blooded reptilians originally created by the Dragons. About three feet tall with shrill, barking voices.",
      "stats": "Kobold Stats",
      "stats_entity": 10104432
     },
@@ -633,7 +651,7 @@ window.REALMS = {
      "id": 9504621,
      "img": "img/sp-lizardfolk.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0f7b6-30f5-725f-b384-da9da31a3aab/1.png",
-     "blurb": "Iguana-like Saurids of marshes and humid lands on nearly every continent, left behind by the Sarrukh.",
+     "blurb": "Reptiles forcibly evolved by the Sarrukh. Reside in small clans withinin bogs, marshes, and savannahs. Not particularly clever, but good martial combatants and survivalists.",
      "stats": "Lizardfolk Stats",
      "stats_entity": 10104433
     },
@@ -642,7 +660,7 @@ window.REALMS = {
      "id": 9505242,
      "img": "img/sp-pterafolk.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0f7bd-5811-7183-ac98-678404e2d36f/1.jpg",
-     "blurb": "The one surviving line of the Dinosaurids, humanoids who evolved directly from dinosaurs.",
+     "blurb": "The last surviving Dinosaurids. Tall creatures with massive wingspans that live in the mountain ranges of Chult.",
      "stats": "Pterafolk Stats",
      "stats_entity": 10104434
     },
@@ -651,7 +669,7 @@ window.REALMS = {
      "id": 9820447,
      "img": "img/sp-tortles.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0f7c1-9a4d-717e-b8d4-0b8876f94e0f/1.jpg",
-     "blurb": "Tortoise-like folk four to five feet tall, bound for life to their shells and not native to Toril.",
+     "blurb": "Tortoisefolk that stand four to five feet tall, bound inside armor-like shells. Small population on Toril that dwell in southern Chult.",
      "stats": "Tortle Stats",
      "stats_entity": 10104435
     },
@@ -660,7 +678,7 @@ window.REALMS = {
      "id": 9504619,
      "img": "img/sp-yuan-ti.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0f7c4-83c3-70ef-94f0-0a6a92e8c910/1.jpg",
-     "blurb": "A cunning hybrid of humans and Chultan vipers, poison-loving and obsessed with genetic manipulation.",
+     "blurb": "Hybridized humans and pitvipers. Poison-loving and obsessed with genetic manipulation.",
      "stats": "Yuan-Ti Stats",
      "stats_entity": 10104436
     }
