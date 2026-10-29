@@ -148,7 +148,7 @@ window.REALMS = {
      "img": "img/sp-gargoyle.jpg",
      "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a0e623-23a9-730a-90d5-82baf6cf09a9/1.jpg",
      "blurb": "Stoney earth elementals who serve evil mortals on Toril or Devils in the outer planes.",
-     "stats": "Gargoyle Stats,
+     "stats": "Gargoyle Stats",
      "stats_entity": 10103576
     },
     {
