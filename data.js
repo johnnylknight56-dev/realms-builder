@@ -957,16 +957,48 @@ window.REALMS = {
   {
    "name": "Fighter",
    "id": 9856302,
-   "img": null,
-   "ready": false,
-   "subclasses": []
+   "img": "img/cls-fighter.jpg",
+   "ready": true,
+   "subclasses": [
+    {
+     "name": "Arcane Archer",
+     "id": 10110538,
+     "img": "img/sub-arcane-archer.jpg",
+     "ready": true
+    },
+    {
+     "name": "Banneret",
+     "id": 10110542,
+     "img": "img/sub-banneret.jpg",
+     "ready": true
+    },
+    {
+     "name": "Battle Master",
+     "id": 10110550,
+     "img": "img/sub-battle-master.jpg",
+     "ready": true
+    }
+   ]
   },
   {
    "name": "Gunslinger",
    "id": 9856301,
-   "img": null,
-   "ready": false,
-   "subclasses": []
+   "img": "img/cls-gunslinger.jpg",
+   "ready": true,
+   "subclasses": [
+    {
+     "name": "Deadeye",
+     "id": 10110815,
+     "img": "img/sub-deadeye.jpg",
+     "ready": true
+    },
+    {
+     "name": "Trick Shot",
+     "id": 10110819,
+     "img": "img/sub-trick-shot.jpg",
+     "ready": true
+    }
+   ]
   },
   {
    "name": "Paladin",
@@ -980,7 +1012,32 @@ window.REALMS = {
    "id": 9841793,
    "img": "img/cls-psion.jpg",
    "ready": false,
-   "subclasses": []
+   "subclasses": [
+    {
+     "name": "Metamorph",
+     "id": 10110558,
+     "img": "img/sub-metamorph.jpg",
+     "ready": true
+    },
+    {
+     "name": "Psi Warper",
+     "id": 10110568,
+     "img": "img/sub-psi-warper.jpg",
+     "ready": true
+    },
+    {
+     "name": "Psykinetic",
+     "id": 10110576,
+     "img": "img/sub-psykinetic.jpg",
+     "ready": false
+    },
+    {
+     "name": "Telepath",
+     "id": 10110651,
+     "img": "img/sub-telepath.jpg",
+     "ready": false
+    }
+   ]
   },
   {
    "name": "Ranger",
@@ -1014,13 +1071,37 @@ window.REALMS = {
    "name": "Wizard",
    "id": 9645477,
    "img": "img/cls-wizard.jpg",
-   "ready": false,
+   "ready": true,
    "subclasses": [
+    {
+     "name": "Abjurer",
+     "id": 10110758,
+     "img": "img/sub-abjurer.jpg",
+     "ready": true
+    },
     {
      "name": "Bladesinger",
      "id": 9498828,
-     "img": null,
-     "ready": false
+     "img": "img/sub-bladesinger.jpg",
+     "ready": true
+    },
+    {
+     "name": "Conjurer",
+     "id": 10110764,
+     "img": "img/sub-conjurer.jpg",
+     "ready": true
+    },
+    {
+     "name": "Diviner",
+     "id": 10110779,
+     "img": "img/sub-diviner.jpg",
+     "ready": true
+    },
+    {
+     "name": "Enchanter",
+     "id": 10110783,
+     "img": "img/sub-enchanter.jpg",
+     "ready": true
     }
    ]
   }
