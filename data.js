@@ -1,6 +1,6 @@
-/* Snapshot of The Remembered Realms on Kanka, taken 2026-10-29. Built automatically by tools/snapshot.py: edit blurbs.json or builder-config.json, not this file. */
+/* Snapshot of The Remembered Realms on Kanka, taken 2026-10-30. Built automatically by tools/snapshot.py: edit blurbs.json or builder-config.json, not this file. */
 window.REALMS = {
- "snapshot": "2026-10-29",
+ "snapshot": "2026-10-30",
  "wiki": "https://app.kanka.io/w/the-remembered-realms/entities/",
  "families": [
   {
@@ -380,7 +380,7 @@ window.REALMS = {
      "name": "Geleton",
      "id": 9820404,
      "img": "img/sp-geleton.jpg",
-     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a06294-90d1-72fa-89f7-eee32b0ef433/1.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a18afa-234f-7300-a21c-713fff3f5977/1.jpg",
      "blurb": "The lifeforce of an ooze fused to a skeleton, effectively creating a humanoid. Result of necromantic magic gone awry.",
      "stats": "Geleton Stats",
      "stats_entity": 10104361
@@ -389,7 +389,7 @@ window.REALMS = {
      "name": "Oozekin",
      "id": 9821579,
      "img": "img/sp-oozekin.jpg",
-     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a062a5-0ab0-73cc-a485-8fb4f7f591a5/1.jpg",
+     "kanka_img": "https://cdn-ugc.kanka.io/campaigns/403796/01a18af9-0508-73ad-999d-2b71bd39ef83/1.jpg",
      "blurb": "Sapient supercolonies of bacteria with innate curiosity for the world.",
      "stats": "Oozekin Stats",
      "stats_entity": 10104362
