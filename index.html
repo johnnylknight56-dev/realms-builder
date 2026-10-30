@@ -823,7 +823,7 @@ table.abil{width:100%;border-collapse:collapse;font-size:15px}
       if (!r.ok) throw new Error('Couldn’t load the blank sheet (' + r.status + ').');
       return r.arrayBuffer();
     })]).then(function (got) {
-      return RS.build(got[0], got[1], S, D, R);
+      return RS.build(got[0], got[1], S, D, R, { profile: kankaHTML() });
     }).then(function (out) {
       var file = (S.name.trim() || 'Character').replace(/[\\/:*?"<>|]+/g, '').slice(0, 60) + ' - Level ' + RS.levelOf(S) + '.pdf';
       var url = URL.createObjectURL(new Blob([out.bytes], { type: 'application/pdf' }));
@@ -841,7 +841,7 @@ table.abil{width:100%;border-collapse:collapse;font-size:15px}
     setSteps();
     if (S.screen === 0) renderChoose(); else if (S.screen === 1) renderStats(); else if (S.screen === 2) renderWrite(); else renderFinish();
   }
-  window.__realms = { state: function () { return S; }, kankaHTML: kankaHTML, plainText: plainText, build: function () { return loadPdfLib().then(function (L) { return fetch('character-sheet-template.pdf').then(function (r) { return r.arrayBuffer(); }).then(function (b) { return RS.build(L, b, S, D, R); }); }); } };
+  window.__realms = { state: function () { return S; }, kankaHTML: kankaHTML, plainText: plainText, build: function () { return loadPdfLib().then(function (L) { return fetch('character-sheet-template.pdf').then(function (r) { return r.arrayBuffer(); }).then(function (b) { return RS.build(L, b, S, D, R, { profile: kankaHTML() }); }); }); } };
   render();
 })();
 </script>

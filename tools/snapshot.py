@@ -344,7 +344,7 @@ def main():
     for f in cfg["families"]:
         out = []
         for _, _, _, r in sorted(members[f["id"]], key=lambda x: x[:3]):
-            sp = {"name": r["name"], "id": r["entity_id"], "img": images.get("sp", r),
+            sp = {"name": r["name"], "id": r["entity_id"], "race_id": r["id"], "img": images.get("sp", r),
                   "kanka_img": r["image_full"] if r.get("has_custom_image") else None,
                   "blurb": blurb("species", r)}
             stats = [ability_by_id[x["ability_id"]] for x in r.get("entity_abilities") or []
@@ -438,7 +438,7 @@ def main():
     deities = [{"name": c["name"], "id": c["entity_id"], "type": c["type"], "blurb": blurb("deities", c)}
                for c in by_name([c for c in characters if is_deity(c.get("type"))])]
 
-    realms = {"snapshot": "", "wiki": cfg["wiki"], "families": families, "classes": classes,
+    realms = {"snapshot": "", "wiki": cfg["wiki"], "campaign_id": cfg["campaign_id"], "families": families, "classes": classes,
               "backgrounds": backgrounds, "deities": deities}
 
     changed = []
