@@ -1,0 +1,113 @@
+{
+  "_readme": "Settings for the automatic Kanka snapshot. See README.md before editing.",
+  "campaign_id": 403796,
+  "wiki": "https://app.kanka.io/w/the-remembered-realms/entities/",
+  "families": [
+    {
+      "id": 9810435,
+      "name": "Frogfolk",
+      "kanka_name": "Amphibia"
+    },
+    {
+      "id": 9461775,
+      "name": "Plantfolk",
+      "kanka_name": "Arboreum"
+    },
+    {
+      "id": 9839589,
+      "name": "Insectfolk",
+      "kanka_name": "Arthropodae"
+    },
+    {
+      "id": 9697838,
+      "name": "Constructs",
+      "kanka_name": "Automata"
+    },
+    {
+      "id": 9771722,
+      "name": "Birdfolk",
+      "kanka_name": "Aviane"
+    },
+    {
+      "id": 9461061,
+      "name": "Fey",
+      "kanka_name": "Fey"
+    },
+    {
+      "id": 9478523,
+      "name": "Oozefolk",
+      "kanka_name": "Gelatina"
+    },
+    {
+      "id": 9508929,
+      "name": "Giants",
+      "kanka_name": "Gigantas"
+    },
+    {
+      "id": 9810465,
+      "name": "Natural Humanoids and Hominids",
+      "kanka_name": "Mammalia"
+    },
+    {
+      "id": 9940438,
+      "name": "Undead and Cursed",
+      "kanka_name": "Mortua"
+    },
+    {
+      "id": 9810495,
+      "name": "Fishfolk",
+      "kanka_name": "Pisces"
+    },
+    {
+      "id": 9465242,
+      "name": "Planetouched",
+      "kanka_name": "Planarus"
+    },
+    {
+      "id": 9465483,
+      "name": "Scalekin",
+      "kanka_name": "Reptilia"
+    }
+  ],
+  "group_through": [
+    {
+      "id": 9505009,
+      "note": "Homo",
+      "keep_together": false
+    },
+    {
+      "id": 9461273,
+      "note": "Goblinkin",
+      "keep_together": true,
+      "order": [
+        9606600,
+        9531279,
+        9706299
+      ],
+      "order_note": "Goblins, Hobgoblins, Bugbears"
+    }
+  ],
+  "move_species": [
+    {
+      "id": 9875231,
+      "note": "Deep Imaskari",
+      "to_family": 9465242
+    },
+    {
+      "id": 9693594,
+      "note": "Skulks",
+      "to_family": 9465242
+    }
+  ],
+  "skip_tag": "Not Playable",
+  "skip_species": [
+    {
+      "id": 9489583,
+      "note": "Triton (extinct)"
+    }
+  ],
+  "deity_types": [
+    "Primordial",
+    "Deity"
+  ]
+}

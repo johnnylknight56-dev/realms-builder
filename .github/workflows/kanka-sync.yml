@@ -1,0 +1,45 @@
+name: Sync from Kanka
+
+# Rebuilds data.js, sheets.js and img/ from the wiki and commits them if anything changed.
+# Runs every night, or on demand from the Actions tab ("Run workflow").
+on:
+  schedule:
+    - cron: "17 8 * * *" # about 3:17 AM Central
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kanka-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow
+        run: pip install pillow
+
+      - name: Take a new snapshot from Kanka
+        env:
+          KANKA_TOKEN: ${{ secrets.KANKA_TOKEN }}
+        run: python tools/snapshot.py
+
+      - name: Commit changes
+        run: |
+          git add -A data.js sheets.js blurbs.json img
+          if git diff --cached --quiet; then
+            echo "Nothing changed in Kanka; no commit needed."
+            exit 0
+          fi
+          git config user.name "kanka-sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Sync from Kanka $(date -u +%Y-%m-%d)"
+          git push

@@ -1,0 +1,617 @@
+{
+  "_readme": "Short blurbs shown in the builder. Edit the text inside the quotes. New Kanka entries get a starter blurb from their first sentence; rewrite it whenever you like. The automation never changes a blurb once it is here.",
+  "species": {
+    "9817574": {
+      "name": "Bullywugs",
+      "blurb": "Medium toadfolk with a penchant for cronyism and arcane spellcasting."
+    },
+    "9823039": {
+      "name": "Grippli",
+      "blurb": "Small druidic frogfolk of Kara-Tur's southern marshes."
+    },
+    "9504618": {
+      "name": "Grung",
+      "blurb": "Small poison-dart frogfolk of the Chultan treetops, whose ambitious, self-serving society still practices slavery."
+    },
+    "9840616": {
+      "name": "Mandrakes",
+      "blurb": "Short, root-bodied plantfolk - originally awakened mandrake plants. Stubborn, quick to anger, and a shrill voice that can literally kill."
+    },
+    "9840646": {
+      "name": "Myconids",
+      "blurb": "Mushroomfolk from small Underdark clans. Each individual an intelligent mycelial network grown through a host - usually a corpse."
+    },
+    "9840613": {
+      "name": "Treants",
+      "blurb": "Towering awakened trees found in old-growth forests and areas of Fey influence. Patient and practically immovable."
+    },
+    "9880379": {
+      "name": "Aranea",
+      "blurb": "Arachnidfolk shapeshifters from Calimshan. Resemeble feminine humans in one form and massive spiders in the other."
+    },
+    "9916485": {
+      "name": "Chitine",
+      "blurb": "Horrific Arachnidfolk whose blood was created by blending that of the Drow and common Wolf Spider. Humanoid torsos with arachnid heads, an extra pair of upper limbs, and body-wide urticating hairs. Live in the Underdark in clans."
+    },
+    "9875256": {
+      "name": "Driders",
+      "blurb": "Drow cursed by the goddess Lolth. Twisted humanoid upper halves with arachnid thoraxes and lower limbs. Loners from the Underdark."
+    },
+    "9916393": {
+      "name": "Rastipede",
+      "blurb": "Antfolk with centipede lower halves. Spacefarers from somewhere far beyond Realmspace. Chatty yet efficient merchants on Spelljamming waystations."
+    },
+    "9839590": {
+      "name": "Thri-Kreen",
+      "blurb": "Six-limbed mantisfolk from colonies in Southern Faerun. Adept psions and warriors."
+    },
+    "9839601": {
+      "name": "Autognome",
+      "blurb": "Constructs near-identical to their Rock Gnome inventors. Tireless and enthusiastically work-driven. Constant tinkerers."
+    },
+    "9854203": {
+      "name": "Flesh Golem",
+      "blurb": "Flesh-stitched frankensteins containing the spirits of elementals."
+    },
+    "9848481": {
+      "name": "Gargoyle",
+      "blurb": "Stoney earth elementals who serve evil mortals on Toril or Devils in the outer planes."
+    },
+    "9821465": {
+      "name": "Nimblewright",
+      "blurb": "Arcane-mechanical servants abandoned when Netheril fell over two thousand years ago. Still occasionally uncovered from the sands of Anauroch."
+    },
+    "9821407": {
+      "name": "Warforged",
+      "blurb": "Living constructs from the world of Eberron, rare on Toril and usually found crewing Spelljammers."
+    },
+    "9460685": {
+      "name": "Aarakocra",
+      "blurb": "Winged birdfolk made by the Aearee, now spread across Toril, with many returning to their ancestral Isle of Aearee."
+    },
+    "9840625": {
+      "name": "Harpies",
+      "blurb": "Winged Aviane with a feminine human torso, taloned feathered legs, and catlike yellow eyes. Alluring voice and a proclivity for enchantment spells."
+    },
+    "9504616": {
+      "name": "Kenku",
+      "blurb": "Flightless crowfolk who live in mixed population cities, especially southern Faerun and the Isle of Aearee. Capable of exceptional mimickry."
+    },
+    "9461770": {
+      "name": "Centaur",
+      "blurb": "Fey with Elven upper halves and equine lower halves. Live in small warbands in the forests of Central Faerun."
+    },
+    "9497316": {
+      "name": "Changeling",
+      "blurb": "Fey who reshape their faces and bodies at will through a true biological change, beneath a pale, white-eyed true face."
+    },
+    "9461768": {
+      "name": "Darklings",
+      "blurb": "Grey-skinned Fey with Elven torsos and crow-like feet. Severe sunlight sensivitiy. Mummy-like wrappings part of everyday fashion."
+    },
+    "9461774": {
+      "name": "Dryads",
+      "blurb": "A variety of Fey with special ties to natural landmarks. Resemble the natural topography of their lineage."
+    },
+    "9461058": {
+      "name": "Eladrin",
+      "blurb": "Elves who mutated over thousands of years in the Feywild. Mercurial creatures whose emotions change their literal form."
+    },
+    "9461765": {
+      "name": "Elves",
+      "blurb": "Pointed-eared creations of the god Corellon. Wide variety of subspecies with different cultures. Paved the way for other mortals in Faerun, a fact they can be haughty about."
+    },
+    "9461766": {
+      "name": "Faeries",
+      "blurb": "Small and tiny Fey such as Pixies, Sprites, Korreds and Brownies. Embrace the chaotic 'laws' of the Feywild."
+    },
+    "9926466": {
+      "name": "Gloura",
+      "blurb": "Silver-skinned Unseelie Fey with black insect eyes and moth wings. Live in solitude in the Underdark."
+    },
+    "9461771": {
+      "name": "Gnomes",
+      "blurb": "Small, inventive humanoids descended from Fey. Gond's favored species, came up with some of Toril's most-used modern inventions."
+    },
+    "9606600": {
+      "name": "Goblins",
+      "blurb": "Diminuitive Fey with green skin and sharp ears. Small, vicious, and cunning folk who roam the Underdark in clans."
+    },
+    "9531279": {
+      "name": "Hobgoblins",
+      "blurb": "Medium Fey who march under their god Maglubiyet's iron banner. Warlike, efficient, and disciplined folk who dominate other goblinkin."
+    },
+    "9706299": {
+      "name": "Bugbears",
+      "blurb": "Hulking furry Fey with lanky, cat-like grace. Expert hiders and kidnappers. Love good naps and easy loot."
+    },
+    "9461769": {
+      "name": "Hagkin",
+      "blurb": "Fey Descendents of Hags. Minor hag-like powers. Love elaborate rituals and esoterica"
+    },
+    "9497467": {
+      "name": "Harengon",
+      "blurb": "Rabbitfolk of the Feywild with powerful legs, keen ears, and a wanderlust that sends them all over Toril."
+    },
+    "9461772": {
+      "name": "Hengeyokai",
+      "blurb": "Fey beastfolk from Kara-Tur with dozens of subspecies. Held in legend as tricksters who stalk and prank humans."
+    },
+    "9478533": {
+      "name": "Orcs",
+      "blurb": "Warlike humanoid cousins to the Elves. Stooped, muscular frames, with green or gray skin. Internal bloodlust for revenge fuel by their ancestor-god Gruumsh."
+    },
+    "9461767": {
+      "name": "Satyr",
+      "blurb": "Masculine Fey with Elvish torsoes and goat-like legs. Live in integrated cities or on Feywild reservations."
+    },
+    "9820404": {
+      "name": "Geleton",
+      "blurb": "The lifeforce of an ooze fused to a skeleton, effectively creating a humanoid. Result of necromantic magic gone awry."
+    },
+    "9821579": {
+      "name": "Oozekin",
+      "blurb": "Sapient supercolonies of bacteria with innate curiosity for the world."
+    },
+    "9820395": {
+      "name": "Plasmoids",
+      "blurb": "Translucent spacefaring Oozes who do well aboard spelljammers. Have a visible 'brain' near the top of their membrane apparatus. Not native to Toril."
+    },
+    "9605363": {
+      "name": "Firbolgs",
+      "blurb": "Reclusive, fur-covered giants about 10 feet tall. Live in secluded druidic societies and keep ancient giant traditions."
+    },
+    "9692738": {
+      "name": "Fomorians",
+      "blurb": "Disfigured, hunched giants of the Underdark and Feydark. Unsettling to behold but exceptional in a fight."
+    },
+    "9718008": {
+      "name": "Trolls",
+      "blurb": "Regenerative giants from North Faerun. Live in scattered herds that prey on humans and dwarves."
+    },
+    "9690523": {
+      "name": "Verbeeg",
+      "blurb": "Brutish giants with exaggerated facial features. Lacking in empathy but make excellent pit bosses and bodyguards."
+    },
+    "9461066": {
+      "name": "Dwarves",
+      "blurb": "Stocky, typically bearded Homo who prefer life underground or in the mountains, with each subspecies attuned to the land it calls home."
+    },
+    "9839931": {
+      "name": "Giffs",
+      "blurb": "Hippo-like mammals alien to Toril. Absolute units covered in tribal tattoos who absolutely adore firearms."
+    },
+    "9505161": {
+      "name": "Goliaths",
+      "blurb": "Towering hominids of the Thesk mountains carrying a sliver of giant blood from the Giants who once took them as mates."
+    },
+    "9838070": {
+      "name": "Hadozee",
+      "blurb": "Chimpfolk spacefarers with winged underarms. Most often found climbing the decks of adventurer or trader spelljammers."
+    },
+    "9466365": {
+      "name": "Halflings",
+      "blurb": "Small, cheerful humanoids who split from Humans 1.2 million years ago in the jungles near Halruaa. Known for close-knit communities and a love of a good meal."
+    },
+    "9461514": {
+      "name": "Humans",
+      "blurb": "Bipedal Homo native to Toril and most other material planes. Widespread, tenacious, and short-lived, with no two quite alike."
+    },
+    "9494884": {
+      "name": "Merfolk",
+      "blurb": "Homo who took to the water around 2.6 million years ago and now live within the Sea of Fallen Stars. Also called Merpeople, Mermen and Mermaids."
+    },
+    "9573593": {
+      "name": "Tabaxi",
+      "blurb": "Catfolk from the jungles of Katashka. Agile, quickwitted, and fun-loving. Small immigrant communities in Faerûn and Kara-Tur."
+    },
+    "9465009": {
+      "name": "Dayie",
+      "blurb": "Sapient undead left by the aftermath of Thay's destruction. Grim, patient, and carrying a somewhat intolerable stench."
+    },
+    "9697873": {
+      "name": "Dhampir",
+      "blurb": "Humanoid descendents of Vampire Spawn. Pale and fanged, but able to walk in sunlight and resist parts of Vampirism's curse."
+    },
+    "9697812": {
+      "name": "Shifters",
+      "blurb": "Individuals who were bitten by a Werecreature but developed resistance to lycanthropy (or their offspring). Look like humanoids with beast-like features."
+    },
+    "9782760": {
+      "name": "Kuo-toa",
+      "blurb": "Abberrant fishfolk with the ability to project their mortal belief into immediate divine powers."
+    },
+    "9821550": {
+      "name": "Locathah",
+      "blurb": "Humanoid fishfolk that evolved in the Sea of Swords. Generally peaceloving, enjoy aquatic horticulture and trade."
+    },
+    "9489661": {
+      "name": "Sahuagin",
+      "blurb": "Planetouched sharkfolk who dominate nearly every ocean on Toril. Driven by a relentless hunger to kill, colonize, and devour. Able to detect and frenzy upon creatures who are bleeding."
+    },
+    "9465245": {
+      "name": "Aasimar",
+      "blurb": "Planetouched humans descended from a celestial ancestor. Tend to have glowing-skin, flame-like eyes, or spectral halos and wings."
+    },
+    "9875231": {
+      "name": "Deep Imaskari",
+      "blurb": "Humans changed by the depths of the Underdark. Unlike Skulks, they carried their own artificial light into the dark rather than blending with it."
+    },
+    "9571169": {
+      "name": "Genasi",
+      "blurb": "Planetouched humans descended from an elemental ancestor, usually a Genie. They appear human but with skin and hair reflecting the element of their heritage."
+    },
+    "9465420": {
+      "name": "Gith",
+      "blurb": "Planetouched humans descended from hominids enslaved by the Mind Flayers thousands of years ago. Light-green skin, jagged ears, and cat-like eyes."
+    },
+    "9697921": {
+      "name": "Gnolls",
+      "blurb": "Planetouched beasts created by the demon lord Yeenoghu. Tall, hunched builds resembling anthropomorphic hyenas. Easily whipped into a frenzy, unleashing their demonic rage."
+    },
+    "9840642": {
+      "name": "Medusas",
+      "blurb": "Serpent-tailed, snake-haired monstrosities of fiendish origin. Innate magic that turns flesh to stone."
+    },
+    "9838042": {
+      "name": "Minotaur",
+      "blurb": "Large bull-headed monsters created by the demon lord Baphomet. Love mazes and goring with their horns."
+    },
+    "9693594": {
+      "name": "Skulks",
+      "blurb": "Humans forced to evolve in the Underdark after Drow enslaved them 18,000 years ago. Hairless and slate-skinned, with a faint blue glow in their eyes."
+    },
+    "9926529": {
+      "name": "Spirit Folk",
+      "blurb": "Humans descended from Dryads, marked by their otherworldly beauty and treasured tattoos."
+    },
+    "9465423": {
+      "name": "Tieflings",
+      "blurb": "Humans descended from fiends. Humanoid appearance with mutations dependent on their exact origin (whether demonic, cthonic, or infernal)."
+    },
+    "9465744": {
+      "name": "Dragonborn",
+      "blurb": "Militant draconic humanoids originally from Abeir. Fond of military tradition, camaraderie, with a cautious attitude towards magic."
+    },
+    "9465492": {
+      "name": "Kobolds",
+      "blurb": "Small, cold-blooded reptilians originally created by the Dragons. About three feet tall with shrill, barking voices."
+    },
+    "9504621": {
+      "name": "Lizardfolk",
+      "blurb": "Reptiles forcibly evolved by the Sarrukh. Reside in small clans withinin bogs, marshes, and savannahs. Not particularly clever, but good martial combatants and survivalists."
+    },
+    "9505242": {
+      "name": "Pterafolk",
+      "blurb": "The last surviving Dinosaurids. Tall creatures with massive wingspans that live in the mountain ranges of Chult."
+    },
+    "9820447": {
+      "name": "Tortles",
+      "blurb": "Tortoisefolk that stand four to five feet tall, bound inside armor-like shells. Small population on Toril that dwell in southern Chult."
+    },
+    "9504619": {
+      "name": "Yuan-Ti",
+      "blurb": "Hybridized humans and pitvipers. Poison-loving and obsessed with genetic manipulation."
+    }
+  },
+  "backgrounds": {
+    "10098764": {
+      "name": "Criminal",
+      "blurb": "You eked out a living in dark alleyways, cutting purses or burgling shops."
+    },
+    "10098785": {
+      "name": "Entertainer",
+      "blurb": "You spent much of your youth following roving fairs and carnivals, performing odd jobs for musicians and acrobats in exchange for lessons."
+    },
+    "10098782": {
+      "name": "Farmer",
+      "blurb": "You grew up close to the land."
+    }
+  },
+  "deities": {
+    "9494831": {
+      "name": "Akadi",
+      "blurb": "Akadi is the Primordial of elemental air and other invisible, breathable gases."
+    },
+    "9901010": {
+      "name": "Amauntor",
+      "blurb": "Amauntor was originally a Netherese god who marked the slow, consistent march of time via the rising and setting of the sun."
+    },
+    "9508823": {
+      "name": "Annam All-Father",
+      "blurb": "Annam All-Father is the progenitor deity for all Giants and Gigantas."
+    },
+    "9491971": {
+      "name": "AO",
+      "blurb": "AO is a mysterious, featureless entity, thought to be responsible for orchestrating the Gods and their aspects."
+    },
+    "9465747": {
+      "name": "Asgorath",
+      "blurb": "Asgorath, known more frequently as IO to the Reptilia, is the Overdeity of Dragons."
+    },
+    "9709630": {
+      "name": "Asmodeus",
+      "blurb": "Asmodeus is the True Spirit deity of ambition."
+    },
+    "9531280": {
+      "name": "Auril",
+      "blurb": "Auril is the neutral evil goddess of cruelty."
+    },
+    "9834621": {
+      "name": "Azuth",
+      "blurb": "Azuth is the god of Arcane Spellcasting, Wizardry, and Sorcery."
+    },
+    "9462516": {
+      "name": "Baba Yaga",
+      "blurb": "The Baba Yaga (\"Grandmother Hag\" in Sylvan) is the patron goddess of hags."
+    },
+    "9771534": {
+      "name": "Bahamut",
+      "blurb": "Bahamut is the lawful good deity of Metallic True Dragons and goodly dragonkin."
+    },
+    "9490192": {
+      "name": "Bane",
+      "blurb": "Bane is the True Spirit of control (or will exerted upon others)."
+    },
+    "9834598": {
+      "name": "Beshaba",
+      "blurb": "Beshaba is the Faerunian goddess and true spirit of bad luck, misfortune, and random mishap."
+    },
+    "9495260": {
+      "name": "Bhaal",
+      "blurb": "Bhaal is the Neutral Evil god of murder and ritual sacrifice."
+    },
+    "9501057": {
+      "name": "Celestian",
+      "blurb": "Celestian is the True Spirit of Departure."
+    },
+    "9573592": {
+      "name": "Chauntea",
+      "blurb": "Chauntea, also referred to as Mother Toril, is the true spirit of organic life, its growth and cultivation, and the enjoyment of its bounty."
+    },
+    "9461349": {
+      "name": "Corellon Larethian",
+      "blurb": "Corellon Larethian was the Elven aspect of Oghma, god of art, music, and beauty, leader of the Seladrine, and patron god to Elves and some Fey."
+    },
+    "9490643": {
+      "name": "Cyric",
+      "blurb": "Cyric is the god of betrayal."
+    },
+    "9494833": {
+      "name": "Deep Sashelas",
+      "blurb": "Deep Sashelas was the Elven god of Oceanic beauty."
+    },
+    "9504932": {
+      "name": "Dendar",
+      "blurb": "Dendar, also called Nidhogg, is an Elder Evil who elicits and consumes hopes and dreams and transforms them into nightmares."
+    },
+    "9508555": {
+      "name": "Dumathoin",
+      "blurb": "Dumathoin is the Dwarven god of hidden (particularly buried) secrets as well as deep earth and death."
+    },
+    "9895730": {
+      "name": "Eilistraee",
+      "blurb": "Eilistraee is the chaotic good Drow goddess of freedom, dance, and zest for life."
+    },
+    "9762465": {
+      "name": "Eldath",
+      "blurb": "Eldath is the true spirit of safety, peace, and pacifism."
+    },
+    "9762467": {
+      "name": "Garagos",
+      "blurb": "Garagos is the god of frenzied rage in the heat of battle."
+    },
+    "9752615": {
+      "name": "Gargauth",
+      "blurb": "Gargauth, also known as The Man in the Shadows, or The Puppet master, is the Archdevil of Avernus and the Lawful Evil deity of corruption through power and organizational morality."
+    },
+    "9465749": {
+      "name": "Garl Glittergold",
+      "blurb": "Garl Glittergold is the Chaotic Good Gnomish aspect of Tymora and god of luck with their pantheon."
+    },
+    "9791805": {
+      "name": "Ghaunadaur",
+      "blurb": "Ghaunadaur is the chaotic evil entity representing that which crawls or lies low to the ground."
+    },
+    "9465428": {
+      "name": "Gilgeam",
+      "blurb": "Gilgeam is the Lawful Evil Human, Untheric son of Bane and Tempus."
+    },
+    "9466323": {
+      "name": "Gond",
+      "blurb": "Gond is a prominent deity in the Faerunian Pantheon."
+    },
+    "9494841": {
+      "name": "Grumbar",
+      "blurb": "Grumbar is the Primordials elemental lord of earth (meaning solid matter such as rocks, dirt, and other inorganic material)."
+    },
+    "9490396": {
+      "name": "Gruumsh",
+      "blurb": "Gruumsh is the True Spirit god of Revenge and patron god to the Orcs."
+    },
+    "9834498": {
+      "name": "Helm",
+      "blurb": "Helm is the true spirit of Vigilance, and he is among the Goodly Gods of the Faerunian Pantheon."
+    },
+    "9500922": {
+      "name": "Hoar",
+      "blurb": "Hoar is the god of poetic justice."
+    },
+    "9701561": {
+      "name": "Ibrandul",
+      "blurb": "Ibrandul is the god of sanctuary within darkness."
+    },
+    "9834533": {
+      "name": "Ilmater",
+      "blurb": "Ilmater is the god of Altruism, self-sacrifice, and perseverance in the face of suffering."
+    },
+    "9495347": {
+      "name": "Istishia",
+      "blurb": "Istishia is the Primordials elemental lord of elemental water."
+    },
+    "9831373": {
+      "name": "Jergal",
+      "blurb": "Jergal, known to Chessentans as Charon, is the God of Remembrance and member of The Dead Three."
+    },
+    "9690475": {
+      "name": "Kavaki",
+      "blurb": "Kavaki is the Goliath god of competition, physical fitness, and boastful tales."
+    },
+    "9614447": {
+      "name": "Kelemvor",
+      "blurb": "Kelemvor is the true deity of death, and he is the leader of The Dead Three."
+    },
+    "9680642": {
+      "name": "Kossuth",
+      "blurb": "Kossuth, the Firelord, is the elemental primordial of fire."
+    },
+    "9465750": {
+      "name": "Kurtulmak",
+      "blurb": "Kurtulmak is the Kobold god of lies, trickery, and trapmaking."
+    },
+    "9714107": {
+      "name": "Labelas Enorath",
+      "blurb": "Labelas was the Seladrine god of longevity, patience, and endurance."
+    },
+    "9831007": {
+      "name": "Lanaxis",
+      "blurb": "Lanaxis is the son of Othea and Annam All-Father."
+    },
+    "9715286": {
+      "name": "Lathander",
+      "blurb": "Lathander \"The Morning Lord\" is the true spirit of mortal potential and development."
+    },
+    "9494842": {
+      "name": "Leira",
+      "blurb": "Leira is the True Spirit God of Lies."
+    },
+    "9777552": {
+      "name": "Lliira",
+      "blurb": "Lliira is the goddess of Joy."
+    },
+    "9495263": {
+      "name": "Lolth",
+      "blurb": "Lolth was the Drow deity of conspiracies, deceit, and betrayal."
+    },
+    "9461274": {
+      "name": "Maglubiyet",
+      "blurb": "Maglubiyet is the ruler of the Goblinkin pantheon."
+    },
+    "9762464": {
+      "name": "Malar",
+      "blurb": "Malar is the chaotic evil true deity of predation."
+    },
+    "9491037": {
+      "name": "Mask",
+      "blurb": "Mask is the chaotic neutral, true spirit of thievery, heists, and illegal thrillseeking."
+    },
+    "9792207": {
+      "name": "Memnor",
+      "blurb": "Memnor is the Giant God of Pride and Control."
+    },
+    "9564992": {
+      "name": "Mielikki",
+      "blurb": "Mielikki is the chaotic good goddess of rangers, serene solitude, and finding oneself within nature."
+    },
+    "9763003": {
+      "name": "Moander",
+      "blurb": "Moander is the true spirit of the mortal fear of decay, rot, and the inevitability of biological destruction or death."
+    },
+    "9495261": {
+      "name": "Myrkul",
+      "blurb": "Myrkul is the god of deathly harvest and reaping."
+    },
+    "9490015": {
+      "name": "Mystra",
+      "blurb": "Mystra is the goddess of and physical manifestation of The Weave."
+    },
+    "9709988": {
+      "name": "Obould",
+      "blurb": "Obould Manyarrows was the founder of the Many Arrows Kingdom in the 15th century DR."
+    },
+    "9901138": {
+      "name": "Obox-Ob",
+      "blurb": "Obox-Ob is a former Demon Lord and the Obyrinth \"Prince of Demons\"."
+    },
+    "9491641": {
+      "name": "Oghma",
+      "blurb": "Oghma is the True Spirit god of art, knowledge, and beauty."
+    },
+    "9508824": {
+      "name": "Othea",
+      "blurb": "Othea was the founder goddess of the Giants."
+    },
+    "9997939": {
+      "name": "Savras",
+      "blurb": "Savras is the god of foresight: particularly magical foresight."
+    },
+    "9503876": {
+      "name": "Sekolah",
+      "blurb": "Sekolah is the Sahuagin god of hunting and blood frenzy."
+    },
+    "9490990": {
+      "name": "Shar",
+      "blurb": "Shar, also the \"Lady of Loss\", is the greater Faerunian deity of loss, forgetfulness, and darkness."
+    },
+    "9726626": {
+      "name": "Sharess",
+      "blurb": "Sharess, known in Mulhorand as Bast, is the goddess of lust."
+    },
+    "9832712": {
+      "name": "Shothotugg",
+      "blurb": "Shothotugg, colloquially known as \"The World Devourer\", is an Eldritch Evil and ancient being of unknowable age, power, and size."
+    },
+    "9494839": {
+      "name": "Silvanus",
+      "blurb": "Silvanus, the Oakfather, is the true spirit of Survival."
+    },
+    "9894600": {
+      "name": "Sseth",
+      "blurb": "Sseth is the Yuan-Ti, Lizardfolk, and other serpentine Scalekin god of death, poison, and cunning."
+    },
+    "9494835": {
+      "name": "Sune",
+      "blurb": "Sune, also called Lady Firehair, is the goddess of connection."
+    },
+    "9762466": {
+      "name": "Talona",
+      "blurb": "Talona is the goddess of the scorn, especially in terms of relationships (but more literally in terms of poisons)."
+    },
+    "9489585": {
+      "name": "Talos",
+      "blurb": "Talos, the Stormlord, is the chaotic evil god of natural destruction."
+    },
+    "9495259": {
+      "name": "Tempus",
+      "blurb": "Tempus is the true spirit god of war, combat, and battle fervor."
+    },
+    "9904153": {
+      "name": "The Red Knight",
+      "blurb": "The Red Knight is the aspect of warfare pertaining to battle tactics, campaign strategy, and war games."
+    },
+    "9465748": {
+      "name": "Tiamat",
+      "blurb": "Tiamat is the Draconic goddess of destruction, slavery, and cruelty."
+    },
+    "9709628": {
+      "name": "Torm",
+      "blurb": "Torm the True is the god of courage, duty, and sacrifice in the face of overwhelming odds."
+    },
+    "9494838": {
+      "name": "Tymora",
+      "blurb": "Tymora is the goddess of good luck and positive fate."
+    },
+    "9489584": {
+      "name": "Umberlee",
+      "blurb": "Umberlee, commonly known as \"The Bitch Queen\", is the chaotic evil god of oceanic destruction."
+    },
+    "9710126": {
+      "name": "Waukeen",
+      "blurb": "Waukeen is the goddess of Prosperity, merchants, salesmen, and the unending flow of goods and services between sapient beings."
+    },
+    "9462587": {
+      "name": "Selune",
+      "blurb": "Selune is the goddess of creation."
+    }
+  }
+}
