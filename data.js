@@ -870,6 +870,12 @@ window.REALMS = {
    "blurb": "You spent much of your youth following roving fairs and carnivals, performing odd jobs for musicians and acrobats in exchange for lessons."
   },
   {
+   "name": "Entrepreneur",
+   "id": 10107385,
+   "img": "img/bg-entrepreneur.jpg",
+   "blurb": "You grew up understanding one thing: money is power, and there's not enough time in the world to make it all."
+  },
+  {
    "name": "Farmer",
    "id": 10098782,
    "img": "img/bg-farmer.jpg",
