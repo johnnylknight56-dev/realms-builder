@@ -37,7 +37,8 @@ LABEL_RE = re.compile(r"^(" + "|".join(sorted(map(re.escape, LABELS), key=len, r
 FEATURE_RE = re.compile(r"^level\s+(\d{1,2})\s*(?:—|–|-|:)+\s*(.+)$", re.I)
 USES_RE = re.compile(r"^uses\s*:\s*(.+?)\s*(?:per|/|,|times per|each)\s*(.*)$", re.I)
 CHOOSE_RE = re.compile(r"^choose\s*:\s*(\d+|one|two|three)\s+skills?(?:\s+(?:from|of)\s+(.*))?$", re.I)
-SKIP_FEATURE = re.compile(r"^(ability score improvements?|feat\s*/\s*asi|asi|epic boon|.*\bsubclass( feature)?)$", re.I)
+SKIP_FEATURE = re.compile(r"^(?:(?:ability score improvements?|asi|feats?|epic boons?)\s*(?:/|,|&|\+|\band\b|\bor\b)?\s*)+$"
+                          r"|^.*\bsubclass( feature)?$", re.I)
 
 
 # ---------------------------------------------------------------- text helpers
@@ -48,7 +49,8 @@ def lines_of(h):
         return []
     h = re.sub(r"(?is)<(script|style)\b.*?</\1>", "", h)
     # a bold "Label:" starts a new line even if the editor didn't break the line
-    h = re.sub(r"(?i)<(b|strong)\b[^>]*>", "\n", h)
+    # (bold words inside a sentence, like glossary terms, stay where they are)
+    h = re.sub(r"(?i)<(b|strong)\b[^>]*>(?=\s*[^<]{1,40}?(?::\s*</(?:b|strong)>|</(?:b|strong)>\s*:))", "\n", h)
     h = re.sub(r"(?i)<br\s*/?>", "\n", h)
     h = re.sub(r"(?i)</?(div|p|h[1-6]|li|ul|ol|dl|dt|dd|tr|table|thead|tbody|section)\b[^>]*>", "\n", h)
     h = re.sub(r"(?i)</t[dh]>", " | ", h)
@@ -70,14 +72,27 @@ def lines_of(h):
     return merged
 
 
-def first_sentence(t, limit=150):
-    t = (t or "").strip()
-    w = re.match(r"^\((.*)\)\.?$", t, re.S)
+OPTION_LINE = re.compile(r"^([A-Z][\w’' -]{1,32}):\s+\S")
+NOT_OPTIONS = {"uses", "costs", "cost", "notes", "note", "known forms", "duration", "range", "choose"}
+
+
+def first_sentence(t, limit=240):
+    lines = [ln.strip() for ln in (t or "").strip().split("\n") if ln.strip()]
+    if not lines:
+        return ""
+    head = lines[0]
+    w = re.match(r"^\((.*)\)\.?$", head, re.S)
     if w:
-        t = w.group(1).strip()
-    if len(t) <= limit and "\n" not in t:
+        head = w.group(1).strip()
+    # "Choose one of the following." + "Magician: …" / "Warden: …" lines -> name the options
+    opts = [m.group(1).strip() for m in (OPTION_LINE.match(ln) for ln in lines[1:])
+            if m and m.group(1).strip().lower() not in NOT_OPTIONS]
+    if opts and re.search(r"choose|following|benefit|improve|option", head, re.I) \
+            and not all(o.lower() in head.lower() for o in opts):
+        head = head.rstrip(". ") + ": " + " / ".join(dict.fromkeys(opts))
+    t = head
+    if len(t) <= limit:
         return t
-    t = t.split("\n")[0]
     m = re.match(r"(.+?[.!?])(\s|$)", t)
     s = m.group(1) if m else t
     if len(s) > limit:
@@ -139,7 +154,7 @@ def parse_post(h):
         m = USES_RE.match(ln)
         if m and cur is not None:
             amt, rec = m.group(1).strip(), m.group(2)
-            u = {"rec": "Short Rest" if re.search(r"short", rec, re.I) else ("Dawn" if re.search(r"dawn", rec, re.I) else "Long Rest")}
+            u = {"rec": "Short Rest" if re.match(r"\W*(a\s+)?short", rec, re.I) else ("Dawn" if re.match(r"\W*(each\s+)?dawn", rec, re.I) else "Long Rest")}
             if amt.isdigit():
                 u["n"] = int(amt)
             elif re.search(r"proficiency", amt, re.I):
