@@ -860,9 +860,16 @@ window.REALMS = {
   {
    "name": "Bard",
    "id": 9663248,
-   "img": null,
-   "ready": false,
-   "subclasses": []
+   "img": "img/cls-bard.jpg",
+   "ready": true,
+   "subclasses": [
+    {
+     "name": "College of Glamour",
+     "id": 10109482,
+     "img": "img/sub-college-of-glamour.jpg",
+     "ready": true
+    }
+   ]
   },
   {
    "name": "Cleric",
