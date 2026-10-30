@@ -181,13 +181,57 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
 .todo input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--gold);flex:none}
 .todo strong{color:#fff}
 .toast{min-height:22px;margin:0;font-size:14px;color:#b9cdf7}
+
+/* menus on the choose screen */
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--line);background:#1c1636;color:#d8d2ee;font-weight:500;font-size:15px;cursor:pointer}
+.tab:hover{border-color:var(--gold);color:#fff}
+.tab[aria-selected="true"]{background:var(--hover);border-color:var(--gold);color:#fff}
+.tab .n{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border:1px solid #5b5280;color:var(--muted)}
+.tab.done .n{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.sp .ph2{display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(160deg,#2e2458,#1a1433);font-family:Cinzel,serif;font-size:44px;color:#5b4f8f}
+.sp.soon{cursor:not-allowed;opacity:.55}
+.sp.soon:hover{transform:none;border-color:var(--line)}
+.sp.soon img{filter:grayscale(1) brightness(.5)}
+.sp .badge{position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:999px;background:#2e2458;color:var(--top-muted);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+
+/* abilities & skills */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{min-height:44px;padding:0 16px;border:0;background:#1c1636;color:#d8d2ee;font-weight:500;font-size:15px;cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--gold-ink);font-weight:700}
+table.abil{width:100%;border-collapse:collapse;font-size:15px}
+.abil th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:center;padding:0 6px 8px}
+.abil th:first-child,.abil td:first-child{text-align:left}
+.abil td{padding:6px;border-top:1px solid var(--line);text-align:center;color:var(--soft)}
+.abil td:first-child{color:#fff;font-weight:500}
+.abil .sel{min-height:40px;width:96px;padding:0 30px 0 12px;background-position:right 8px center}
+.abil .final{font-family:Cinzel,serif;font-size:20px;color:#fff}
+.abil .md{color:var(--gold);font-weight:700}
+.step3{display:inline-flex;align-items:center;gap:6px}
+.step3 button{width:36px;height:36px;border-radius:8px;border:1px solid var(--line);background:#1c1636;color:#fff;font-size:18px;cursor:pointer}
+.step3 button:disabled{opacity:.35;cursor:not-allowed}
+.step3 b{min-width:28px;color:#fff}
+.bonusrow{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end}
+.bonusrow .f{min-width:150px}
+.sk{display:flex;flex-direction:column;gap:10px;padding:14px 0;border-top:1px solid var(--line)}
+.sk:first-of-type{border-top:0;padding-top:0}
+.sk h3{margin:0;font-size:16px;font-weight:700;color:#fff;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sk h3 span{font-size:14px;font-weight:500;color:var(--muted)}
+.chip.locked{background:#2e2458;border-color:#5b4f8f;color:#fff;cursor:default}
+.chip:disabled:not(.locked){opacity:.4;cursor:not-allowed}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{padding:10px 12px;border-radius:8px;background:var(--field);border:1px solid var(--line)}
+.stat small{display:block;font-size:12px;color:var(--muted)}
+.stat b{font-family:Cinzel,serif;font-size:22px;color:#fff}
+.need{margin:0;padding-left:18px;font-size:14px;color:var(--muted);line-height:1.6}
 </style>
 </head>
 <body>
 <header class="top">
   <div class="brand"><small>The Remembered Realms</small><b>Character Builder</b></div>
   <ol class="steps" aria-label="Steps">
-    <li id="st0">1 Choose</li><li id="st1">2 Write</li><li id="st2">3 Finish</li>
+    <li id="st0">1 Choose</li><li id="st1">2 Abilities</li><li id="st2">3 Write</li><li id="st3">4 Finish</li>
   </ol>
 </header>
 <div id="app"></div>
@@ -195,19 +239,28 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
 
 <script src="data.js"></script>
 <script src="sheets.js"></script>
+<script src="rules.js"></script>
+<script src="sheet.js"></script>
 <script>
 (function () {
   'use strict';
   var D = window.REALMS;
+  var R = window.REALMS_RULES || { species: {}, classes: {}, subclasses: {}, backgrounds: {} };
+  var RS = window.RealmsSheet;
   var WIKI = D.wiki;
   var KEY = 'realms-builder-v1';
   var app = document.getElementById('app');
+  var LANGUAGES = ['Common Sign Language', 'Draconic', 'Dwarvish', 'Elvish', 'Giant', 'Gnomish', 'Goblin', 'Halfling', 'Orc',
+    'Abyssal', 'Celestial', 'Deep Speech', 'Druidic', 'Infernal', 'Primordial', 'Sylvan', 'Thieves’ Cant', 'Undercommon'];
+  var MENUS = [['species', 'Species'], ['bg', 'Background'], ['cls', 'Class'], ['sub', 'Subclass']];
 
   // ---------- state ----------
   var blank = {
-    screen: 0, section: 0, family: 'All',
+    screen: 0, section: 0, family: 'All', menu: 'species', level: 20,
     species: null, cls: null, sub: null, bg: null,
-    name: '', deity: '', faithless: false, align: '', ideals: '',
+    method: 'array', arr: {}, buy: { str: 8, dex: 8, con: 8, int: 8, wis: 8, cha: 8 },
+    bgMode: '21', bgPlus2: '', bgPlus1: '', skills: {}, size: '', langs: ['', ''],
+    name: '', player: '', deity: '', faithless: false, align: '', ideals: '',
     age: '', hair: '', eyes: '', height: '', weight: '', fashion: '', extra: '',
     bond: '', story: ''
   };
@@ -248,8 +301,24 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     if (S.sub != null && !sub()) S.sub = null;
     if (S.bg != null && !bg()) S.bg = null;
     if (S.deity && !deity()) S.deity = '';
-    if (S.screen > 0 && (S.species == null || S.cls == null)) S.screen = 0;
+    // older saves (before the level 20 sheet) had 3 screens: Choose, Write, Finish
+    if (S.screen > 3) S.screen = 0;
+    if (MENUS.map(function (m) { return m[0]; }).indexOf(S.menu) < 0) S.menu = 'species';
+    if (!ready()) S.screen = 0;
   })();
+
+  // ---------- readiness ----------
+  function readySubs(c) { return c ? c.subclasses.filter(function (s) { return s.ready; }) : []; }
+  /** What's still missing before the player can leave the choose screen. */
+  function missing() {
+    var out = [], c = cls();
+    if (S.species == null) out.push('a species');
+    if (S.bg == null) out.push('a background');
+    if (!c) out.push('a class');
+    else if (!sub() && readySubs(c).length && RS.levelOf(S) >= RS.resolve(S, D, R).subLevel) out.push('a subclass');
+    return out;
+  }
+  function ready() { return missing().length === 0; }
 
   // ---------- helpers ----------
   function esc(t) {
@@ -262,7 +331,7 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     return '<div class="pick">' + pic + '<div><small>' + label + '</small><strong>' + (name ? esc(name) : '<span class="empty">Not chosen</span>') + '</strong></div></div>';
   }
   function setSteps() {
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 4; i++) {
       var li = document.getElementById('st' + i);
       li.className = i < S.screen ? 'done' : (i === S.screen ? 'now' : '');
       if (i === S.screen) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
@@ -270,61 +339,72 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
   }
   function go(screen) { S.screen = screen; save(); render(); window.scrollTo(0, 0); }
 
-  // ---------- screen 1: choose ----------
-  function renderChoose() {
-    var fams = ['All'].concat(D.families.map(function (f) { return f.name; }));
-    var shown = allSpecies.filter(function (x) { return S.family === 'All' || x.fam.name === S.family; });
-    var sel = S.species ? findSpecies(S.species) : null;
-    var c = cls();
+  // ---------- screen 1: choose (species → background → class → subclass) ----------
+  function card(attr, item, pressed, soon) {
+    var h = '<button type="button" class="sp' + (soon ? ' soon' : '') + '" ' + attr + ' aria-pressed="' + pressed + '"' + (soon ? ' aria-disabled="true"' : '') + ' aria-label="' + esc(item.name) + (soon ? ', coming soon' : '') + '">';
+    h += item.img ? '<img src="' + esc(item.img) + '" alt="" loading="lazy">' : '<span class="ph2" aria-hidden="true">' + initial(item.name) + '</span>';
+    if (soon) h += '<span class="badge">Coming soon</span>';
+    h += '<span class="nm">' + esc(item.name) + '</span>';
+    h += '<span class="tick" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a1300" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>';
+    return h;
+  }
+  function menuDone(m) { return m === 'species' ? S.species != null : (m === 'bg' ? S.bg != null : (m === 'cls' ? S.cls != null : sub() != null)); }
 
+  function renderChoose() {
+    var c = cls(), sel = S.species ? findSpecies(S.species) : null, m = S.menu;
     var h = '<div class="wrap wide"><main class="main">';
     h += '<div style="display:flex;flex-direction:column;gap:8px"><h1 class="q">Coins bright stranger, where are you from?</h1>';
     h += '<p class="lead">Toril is a big place. Figure out who you are and what you stand for.</p></div>';
-
-    h += '<section style="display:flex;flex-direction:column;gap:16px" aria-labelledby="h-sp"><div class="head"><h2 id="h-sp">Species</h2><i></i></div>';
-    h += '<div class="chips" role="group" aria-label="Species family">';
-    fams.forEach(function (f) { h += '<button type="button" class="chip" data-fam="' + esc(f) + '" aria-pressed="' + (S.family === f) + '">' + esc(f) + '</button>'; });
-    h += '</div>';
-    if (S.family !== 'All') {
-      var fam = D.families.filter(function (f) { return f.name === S.family; })[0];
-      h += '<p class="fam"><a href="' + wiki(fam.id) + '" target="_blank" rel="noopener">Read about the ' + esc(fam.name) + ' family</a></p>';
-    }
-    h += '<div class="grid">';
-    shown.forEach(function (x) {
-      h += '<button type="button" class="sp" data-sp="' + x.s.id + '" aria-pressed="' + (S.species === x.s.id) + '" aria-label="' + esc(x.s.name) + ', ' + esc(x.fam.name) + '">';
-      h += x.s.img ? '<img src="' + esc(x.s.img) + '" alt="" loading="lazy">' : '';
-      h += '<span class="nm">' + esc(x.s.name) + '</span>';
-      h += '<span class="tick" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a1300" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span></button>';
+    h += '<div class="tabs" role="tablist" aria-label="Choices">';
+    MENUS.forEach(function (x, k) {
+      h += '<button type="button" role="tab" class="tab' + (menuDone(x[0]) ? ' done' : '') + '" data-menu="' + x[0] + '" aria-selected="' + (m === x[0]) + '"><span class="n" aria-hidden="true">' + (menuDone(x[0]) ? '✓' : k + 1) + '</span>' + x[1] + '</button>';
     });
-    h += '</div></section>';
+    h += '</div>';
 
-    h += '<section style="display:flex;flex-direction:column;gap:16px" aria-labelledby="h-path"><div class="head"><h2 id="h-path">Path</h2><i></i></div><div class="fields">';
-    h += '<div class="f"><label for="cls">Class</label><select id="cls" class="sel"><option value="">Choose a class…</option>';
-    D.classes.forEach(function (k) { h += '<option value="' + k.id + '"' + (S.cls === k.id ? ' selected' : '') + '>' + esc(k.name) + '</option>'; });
-    h += '</select></div>';
-    var subs = c ? c.subclasses : [];
-    h += '<div class="f"><label for="sub">Subclass</label><select id="sub" class="sel"' + (subs.length ? '' : ' disabled') + '>';
-    if (!c) h += '<option value="">Choose a class first</option>';
-    else if (!subs.length) h += '<option value="">None listed yet for ' + esc(c.name) + '</option>';
-    else {
-      h += '<option value="">Choose a subclass…</option>';
-      subs.forEach(function (k) { h += '<option value="' + k.id + '"' + (S.sub === k.id ? ' selected' : '') + '>' + esc(k.name) + '</option>'; });
+    var statId = null, statName = '', statWiki = null;
+    if (m === 'species') {
+      var fams = ['All'].concat(D.families.map(function (f) { return f.name; }));
+      var shown = allSpecies.filter(function (x) { return S.family === 'All' || x.fam.name === S.family; });
+      h += '<section style="display:flex;flex-direction:column;gap:16px" aria-labelledby="h-menu"><div class="head"><h2 id="h-menu">Species</h2><i></i></div>';
+      h += '<div class="chips" role="group" aria-label="Species family">';
+      fams.forEach(function (f) { h += '<button type="button" class="chip" data-fam="' + esc(f) + '" aria-pressed="' + (S.family === f) + '">' + esc(f) + '</button>'; });
+      h += '</div>';
+      if (S.family !== 'All') {
+        var fam = D.families.filter(function (f) { return f.name === S.family; })[0];
+        h += '<p class="fam"><a href="' + wiki(fam.id) + '" target="_blank" rel="noopener">Read about the ' + esc(fam.name) + ' family</a></p>';
+      }
+      h += '<div class="grid">';
+      shown.forEach(function (x) { h += card('data-pick="species" data-id="' + x.s.id + '"', x.s, S.species === x.s.id, false); });
+      h += '</div></section>';
+      if (sel) { statId = sel.s.id; statName = sel.s.name; statWiki = sel.s.stats_entity; }
+    } else {
+      var list = m === 'bg' ? D.backgrounds : (m === 'cls' ? D.classes : (c ? c.subclasses : []));
+      var title = m === 'bg' ? 'Background' : (m === 'cls' ? 'Class' : 'Subclass');
+      var cur = m === 'bg' ? bg() : (m === 'cls' ? c : sub());
+      h += '<section style="display:flex;flex-direction:column;gap:16px" aria-labelledby="h-menu"><div class="head"><h2 id="h-menu">' + title + (m === 'sub' && c ? ' for ' + esc(c.name) : '') + '</h2><i></i></div>';
+      var subAt = c ? RS.resolve(S, D, R).subLevel : 3;
+      if (m === 'sub' && c && RS.levelOf(S) < subAt) h += '<p class="hint">' + esc(c.name) + ' subclasses start at level ' + subAt + '. At level ' + RS.levelOf(S) + ' you can skip this, or pick one now for later.</p>';
+      if (m === 'sub' && !c) h += '<p class="hint">Choose a class first.</p>';
+      else if (m === 'sub' && !list.length) h += '<p class="hint">Subclasses for ' + esc(c.name) + ' haven’t been added to the wiki yet. You can continue without one.</p>';
+      else {
+        h += '<div class="grid">';
+        list.forEach(function (x) { h += card('data-pick="' + m + '" data-id="' + x.id + '"', x, cur && cur.id === x.id, !x.ready); });
+        h += '</div>';
+        if (list.some(function (x) { return !x.ready; })) h += '<p class="hint">Greyed-out choices are still being written up in the wiki.</p>';
+      }
+      h += '</section>';
+      if (cur) { statId = cur.id; statName = cur.name; statWiki = cur.id; }
     }
-    h += '</select></div>';
-    h += '<div class="f"><label for="bg">Background</label><select id="bg" class="sel"><option value="">Choose a background…</option>';
-    D.backgrounds.forEach(function (k) { h += '<option value="' + k.id + '"' + (S.bg === k.id ? ' selected' : '') + '>' + esc(k.name) + '</option>'; });
-    h += '</select></div></div>';
-    if (c && !subs.length) h += '<p class="hint">Subclasses for ' + esc(c.name) + ' haven’t been added to the wiki yet. You can still continue.</p>';
-    h += '</section></main>';
+    h += '</main>';
 
     // statblock
     var SHEETS = window.REALMS_SHEETS || {};
-    var sheet = sel ? SHEETS[sel.s.id] : null;
-    h += '<section class="sheetcol" aria-labelledby="h-sheet"><div class="bar2"><div class="head" style="flex:1"><h2 id="h-sheet">' + (sel ? esc(sel.s.name) + ' statblock' : 'Statblock') + '</h2><i></i></div>';
-    if (sel && sel.s.stats_entity) h += '<a href="' + wiki(sel.s.stats_entity) + '" target="_blank" rel="noopener">Open in wiki</a>';
+    var sheet = statId ? SHEETS[statId] : null;
+    h += '<section class="sheetcol" aria-labelledby="h-sheet"><div class="bar2"><div class="head" style="flex:1"><h2 id="h-sheet">' + (statId ? esc(statName) + ' statblock' : 'Statblock') + '</h2><i></i></div>';
+    if (statWiki) h += '<a href="' + wiki(statWiki) + '" target="_blank" rel="noopener">Open in wiki</a>';
     h += '</div><div class="sheet" id="sheet" tabindex="0" aria-label="Statblock">';
-    if (!sel) h += '<div class="none">Pick a species to see its traits here.</div>';
-    else if (!sheet) h += '<div class="none">' + esc(sel.s.name) + ' doesn’t have a statblock in the wiki yet.</div>';
+    if (!statId) h += '<div class="none">Pick one to see what it gives you here.</div>';
+    else if (!sheet) h += '<div class="none">' + esc(statName) + ' doesn’t have a statblock in the wiki yet.</div>';
     h += '</div></section>';
 
     // summary
@@ -337,11 +417,19 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
       h += '<div class="who"><span class="ph" aria-hidden="true"></span><div><b>No species yet</b><span>Pick one from the grid</span></div></div>';
     }
     h += '<div class="hr"></div>';
+    var b = bg(); h += picked(b && b.img, b && b.name, 'Background');
     h += picked(c && c.img, c && c.name, 'Class');
     var s2 = sub(); h += picked(s2 && s2.img, s2 && s2.name, 'Subclass');
-    var b = bg(); h += picked(b && b.img, b && b.name, 'Background');
-    h += '<button type="button" class="btn gold" id="next0"' + (sel && c ? '' : ' disabled') + '>Continue to writing</button>';
-    if (!(sel && c)) h += '<p class="hint" style="margin-top:-6px">Choose a species and a class to continue.</p>';
+    h += '<div class="f"><label for="level">Level</label><select id="level" class="sel">';
+    for (var lv = 1; lv <= 20; lv++) h += '<option value="' + lv + '"' + (RS.levelOf(S) === lv ? ' selected' : '') + '>Level ' + lv + '</option>';
+    h += '</select><p class="hint">Your sheet includes every feature up to this level.</p></div>';
+    var idx = MENUS.map(function (x) { return x[0]; }).indexOf(m);
+    var last = idx === MENUS.length - 1 || (m === 'cls' && c && !readySubs(c).length);
+    if (!last) h += '<button type="button" class="btn gold" id="nextmenu">Next: ' + MENUS[idx + 1][1] + '</button>';
+    else {
+      h += '<button type="button" class="btn gold" id="next0"' + (ready() ? '' : ' disabled') + '>Continue to abilities &amp; skills</button>';
+      if (!ready()) h += '<p class="hint" style="margin-top:-6px">Still to choose: ' + esc(missing().join(', ')) + '.</p>';
+    }
     h += '</div></aside></div>';
     app.innerHTML = h;
     if (sheet) {
@@ -351,17 +439,177 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
       box.querySelectorAll('a').forEach(function (a) { a.target = '_blank'; a.rel = 'noopener'; });
     }
 
-    app.querySelectorAll('[data-fam]').forEach(function (el) { el.onclick = function () { S.family = el.getAttribute('data-fam'); save(); renderChoose(); }; });
-    app.querySelectorAll('[data-sp]').forEach(function (el) {
-      el.onclick = function () { S.species = +el.getAttribute('data-sp'); save(); var y = window.scrollY; renderChoose(); window.scrollTo(0, y); var again = app.querySelector('[data-sp="' + S.species + '"]'); if (again) again.focus({ preventScroll: true }); };
+    function keep(sel2) { var y = window.scrollY; renderChoose(); window.scrollTo(0, y); var again = app.querySelector(sel2); if (again) again.focus({ preventScroll: true }); }
+    app.querySelectorAll('[data-menu]').forEach(function (el) { el.onclick = function () { S.menu = el.getAttribute('data-menu'); save(); keep('[data-menu="' + S.menu + '"]'); }; });
+    app.querySelectorAll('[data-fam]').forEach(function (el) { el.onclick = function () { S.family = el.getAttribute('data-fam'); save(); keep('[data-fam="' + S.family + '"]'); }; });
+    app.querySelectorAll('[data-pick]').forEach(function (el) {
+      el.onclick = function () {
+        if (el.classList.contains('soon')) return;
+        var kind = el.getAttribute('data-pick'), id = +el.getAttribute('data-id');
+        if (kind === 'species' && S.species !== id) { S.species = id; delete S.skills.sp; S.size = ''; }
+        if (kind === 'bg' && S.bg !== id) { S.bg = id; S.bgPlus2 = ''; S.bgPlus1 = ''; }
+        if (kind === 'cls' && S.cls !== id) { S.cls = id; S.sub = null; delete S.skills.cls; delete S.skills.sub; }
+        if (kind === 'sub' && S.sub !== id) { S.sub = id; delete S.skills.sub; }
+        save(); keep('[data-pick="' + kind + '"][data-id="' + id + '"]');
+      };
     });
-    document.getElementById('cls').onchange = function (e) { S.cls = e.target.value ? +e.target.value : null; S.sub = null; save(); renderChoose(); document.getElementById('cls').focus(); };
-    document.getElementById('sub').onchange = function (e) { S.sub = e.target.value ? +e.target.value : null; save(); renderChoose(); document.getElementById('sub').focus(); };
-    document.getElementById('bg').onchange = function (e) { S.bg = e.target.value ? +e.target.value : null; save(); renderChoose(); document.getElementById('bg').focus(); };
-    document.getElementById('next0').onclick = function () { S.section = 0; go(1); };
+    document.getElementById('level').onchange = function (e) { S.level = +e.target.value; save(); keep('#level'); };
+    var nm = document.getElementById('nextmenu');
+    if (nm) nm.onclick = function () { S.menu = MENUS[idx + 1][0]; save(); renderChoose(); window.scrollTo(0, 0); };
+    var n0 = document.getElementById('next0');
+    if (n0) n0.onclick = function () { go(1); };
   }
 
-  // ---------- screen 2: write ----------
+  // ---------- screen 2: abilities & skills ----------
+  function abilityReady() {
+    var X = RS.resolve(S, D, R), base = RS.baseScores(S);
+    if (RS.AB.some(function (a) { return base[a] == null; })) return false;
+    if (S.method === 'buy' && RS.pointsSpent(S) > RS.BUY_POINTS) return false;
+    if ((X.bgR.abilities || []).length && S.bgMode !== '111' && !(S.bgPlus2 && S.bgPlus1 && S.bgPlus2 !== S.bgPlus1)) return false;
+    return true;
+  }
+  function groupPicks(g) { return (S.skills[g.key] || (g.suggested || [])).filter(function (s) { return g.from.indexOf(s) >= 0; }).slice(0, g.n); }
+  function skillsLeft() {
+    return RS.skillGroups(S, D, R).filter(function (g) { return g.n && !g.editable && groupPicks(g).length < g.n; });
+  }
+  function renderStats() {
+    var X = RS.resolve(S, D, R), C = RS.compute(S, D, R), base = RS.baseScores(S), bonus = RS.bgBonus(S, D, R);
+    var bgAb = X.bgR.abilities || [];
+    var h = '<div class="wrap"><main class="main">';
+    h += '<div style="display:flex;flex-direction:column;gap:8px"><h1 class="q">What are you made of?</h1>';
+    h += '<p class="lead">Set your ability scores and skills. Your sheet is built at level ' + X.level + ' with every ' + esc(X.cls ? X.cls.name : 'class') + ' feature up to that level.</p></div>';
+
+    // ability scores
+    h += '<section class="card" aria-labelledby="h-ab"><div class="head"><h2 id="h-ab">Ability scores</h2><i></i></div>';
+    h += '<div class="seg" role="group" aria-label="How to set scores"><button type="button" data-method="array" aria-pressed="' + (S.method !== 'buy') + '">Standard array</button><button type="button" data-method="buy" aria-pressed="' + (S.method === 'buy') + '">Point buy</button></div>';
+    if (S.method === 'buy') {
+      var left = RS.BUY_POINTS - RS.pointsSpent(S);
+      h += '<p class="hint">Every score starts at 8. Spend ' + RS.BUY_POINTS + ' points: 9–13 cost 1 point each step, 14 costs 2 more, 15 costs 2 more. <strong style="color:#fff">' + left + ' points left.</strong></p>';
+    } else {
+      h += '<p class="hint">Give each of 15, 14, 13, 12, 10 and 8 to one ability. Picking a number that’s already used swaps the two.</p>';
+    }
+    if (bgAb.length) {
+      h += '<div class="bonusrow"><div class="f"><span class="lbl">' + esc(X.bg.name) + ' bonus</span><div class="seg" role="group" aria-label="Background bonus"><button type="button" data-bgmode="21" aria-pressed="' + (S.bgMode !== '111') + '">+2 and +1</button><button type="button" data-bgmode="111" aria-pressed="' + (S.bgMode === '111') + '">+1 to all three</button></div></div>';
+      if (S.bgMode !== '111') {
+        ['bgPlus2', 'bgPlus1'].forEach(function (k) {
+          h += '<div class="f"><label for="' + k + '">' + (k === 'bgPlus2' ? '+2 to' : '+1 to') + '</label><select id="' + k + '" class="sel" data-bonus="' + k + '"><option value="">Choose…</option>';
+          bgAb.forEach(function (a) { h += '<option value="' + a + '"' + (S[k] === a ? ' selected' : '') + '>' + RS.AB_NAME[a] + '</option>'; });
+          h += '</select></div>';
+        });
+      }
+      h += '</div>';
+    }
+    h += '<table class="abil"><thead><tr><th scope="col">Ability</th><th scope="col">Base</th><th scope="col">Background</th>' + (C.increase ? '<th scope="col">Level ' + (C.increase.lv || 20) + '</th>' : '') + '<th scope="col">Score</th><th scope="col">Mod</th></tr></thead><tbody>';
+    RS.AB.forEach(function (a) {
+      h += '<tr><td>' + RS.AB_NAME[a] + '</td><td>';
+      if (S.method === 'buy') {
+        var v = base[a];
+        var canUp = v < 15 && RS.pointsSpent(S) + (RS.BUY_COST[v + 1] - RS.BUY_COST[v]) <= RS.BUY_POINTS;
+        h += '<span class="step3"><button type="button" data-buy="' + a + '" data-d="-1" aria-label="Lower ' + RS.AB_NAME[a] + '"' + (v <= 8 ? ' disabled' : '') + '>−</button><b>' + v + '</b><button type="button" data-buy="' + a + '" data-d="1" aria-label="Raise ' + RS.AB_NAME[a] + '"' + (canUp ? '' : ' disabled') + '>+</button></span>';
+      } else {
+        h += '<select class="sel" data-arr="' + a + '" aria-label="' + RS.AB_NAME[a] + ' score"><option value="">—</option>';
+        RS.ARRAY.forEach(function (n) { h += '<option value="' + n + '"' + (base[a] === n ? ' selected' : '') + '>' + n + '</option>'; });
+        h += '</select>';
+      }
+      h += '</td><td>' + (bonus[a] ? '+' + bonus[a] : '') + '</td>';
+      if (C.increase) h += '<td>' + (C.increase[a] ? '+' + C.increase[a] : '') + '</td>';
+      var sc = C.scores[a];
+      h += '<td class="final">' + (sc == null ? '—' : sc) + '</td><td class="md">' + (sc == null ? '' : RS.signed(RS.mod(sc))) + '</td></tr>';
+    });
+    h += '</tbody></table>';
+    if (C.increase && C.increase.from) h += '<p class="hint">' + esc(C.increase.from) + ' (a level ' + (C.increase.lv || 20) + ' feature) is included, up to a maximum of ' + (C.increase.max || 20) + '.</p>';
+    h += '</section>';
+
+    // skills
+    var groups = RS.skillGroups(S, D, R), got = {};
+    groups.forEach(function (g) { g.fixed.concat(groupPicks(g)).forEach(function (s) { got[s] = got[s] || g.label; }); });
+    h += '<section class="card" aria-labelledby="h-sk"><div class="head"><h2 id="h-sk">Skills</h2><i></i></div>';
+    if (!groups.length) h += '<p class="hint">None of your choices list skill proficiencies yet.</p>';
+    groups.forEach(function (g) {
+      var picks = groupPicks(g);
+      h += '<div class="sk"><h3>' + esc(g.label) + '<span>' + (g.n ? 'Choose ' + g.n + (picks.length < g.n ? ' · ' + (g.n - picks.length) + ' left' : ' · done') : 'Included') + '</span></h3>';
+      if (g.editable) h += '<p class="hint">The ' + esc(g.label) + ' statblock seems to give: <strong style="color:#fff">' + esc(g.hint) + '</strong>. Pick whatever the statblock actually says.</p>';
+      h += '<div class="chips" role="group" aria-label="' + esc(g.label) + ' skills">';
+      g.fixed.forEach(function (s) { h += '<button type="button" class="chip locked" aria-pressed="true" aria-disabled="true">✓ ' + esc(s) + '</button>'; });
+      if (g.n) g.from.forEach(function (s) {
+        var on = picks.indexOf(s) >= 0, other = !on && got[s] && got[s] !== g.label;
+        var full = !on && picks.length >= g.n;
+        h += '<button type="button" class="chip" data-skill="' + esc(s) + '" data-g="' + g.key + '" aria-pressed="' + on + '"' + (other || full ? ' disabled' : '') + (other ? ' title="Already from ' + esc(got[s]) + '"' : '') + '>' + esc(s) + '</button>';
+      });
+      h += '</div></div>';
+    });
+    h += '</section>';
+
+    // size & languages
+    var sizes = X.spR.size || [];
+    h += '<section class="card" aria-labelledby="h-more"><div class="head"><h2 id="h-more">Size and languages</h2><i></i></div><div class="fields">';
+    if (sizes.length > 1) {
+      h += '<div class="f"><span class="lbl">Size</span><div class="seg" role="group" aria-label="Size">';
+      sizes.forEach(function (z) { h += '<button type="button" data-size="' + z + '" aria-pressed="' + (C.size === z) + '">' + z + '</button>'; });
+      h += '</div></div>';
+    }
+    [0, 1].forEach(function (i) {
+      h += '<div class="f"><label for="lang' + i + '">' + (i ? 'Second language' : 'Language (besides Common)') + '</label><select id="lang' + i + '" class="sel" data-lang="' + i + '"><option value="">Choose…</option>';
+      LANGUAGES.forEach(function (l) { h += '<option' + (S.langs[i] === l ? ' selected' : '') + '>' + esc(l) + '</option>'; });
+      h += '</select></div>';
+    });
+    h += '</div></section>';
+    h += '<div class="row"><button type="button" class="btn" id="back1">Back</button></div></main>';
+
+    // summary
+    var need = [];
+    if (!abilityReady()) need.push(S.method === 'buy' ? 'finish your ability scores' : 'give every ability a score' + (bgAb.length && S.bgMode !== '111' ? ' and choose your +2 and +1' : ''));
+    skillsLeft().forEach(function (g) { need.push('choose ' + (g.n - groupPicks(g).length) + ' more ' + g.label + ' skill' + (g.n - groupPicks(g).length > 1 ? 's' : '')); });
+    h += '<aside class="side" aria-label="Level ' + X.level + ' summary"><div class="panel"><div class="eyebrow">At level ' + X.level + '</div><div class="stats">';
+    var allSet = RS.AB.every(function (a) { return C.scores[a] != null; });
+    [['Hit points', allSet ? C.hp : '—'], ['Armor class', allSet ? C.ac : '—'], ['Initiative', allSet ? RS.signed(C.init) : '—'], ['Proficiency', '+' + C.pb],
+     ['Passive Perception', allSet ? C.passive : '—'], ['Speed', C.speed + ' ft']].forEach(function (p) { h += '<div class="stat"><small>' + p[0] + '</small><b>' + p[1] + '</b></div>'; });
+    h += '</div>';
+    if (C.saves.length) h += '<p class="blurb">Saving throws: ' + esc(C.saves.map(function (a) { return RS.AB_NAME[a]; }).join(', ')) + '</p>';
+    h += '<button type="button" class="btn gold" id="next1"' + (need.length ? ' disabled' : '') + '>Continue to writing</button>';
+    if (need.length) h += '<ul class="need">' + need.map(function (n) { return '<li>' + esc(n.charAt(0).toUpperCase() + n.slice(1)) + '</li>'; }).join('') + '</ul>';
+    h += '</div></aside></div>';
+    app.innerHTML = h;
+
+    function again(sel2) { var y = window.scrollY; renderStats(); window.scrollTo(0, y); var el = sel2 && app.querySelector(sel2); if (el) el.focus({ preventScroll: true }); }
+    app.querySelectorAll('[data-method]').forEach(function (el) { el.onclick = function () { S.method = el.getAttribute('data-method'); save(); again('[data-method="' + S.method + '"]'); }; });
+    app.querySelectorAll('[data-bgmode]').forEach(function (el) { el.onclick = function () { S.bgMode = el.getAttribute('data-bgmode'); save(); again('[data-bgmode="' + S.bgMode + '"]'); }; });
+    app.querySelectorAll('[data-bonus]').forEach(function (el) {
+      el.onchange = function () {
+        var k = el.getAttribute('data-bonus'), o = k === 'bgPlus2' ? 'bgPlus1' : 'bgPlus2';
+        if (el.value && S[o] === el.value) S[o] = S[k] || '';
+        S[k] = el.value; save(); again('#' + k);
+      };
+    });
+    app.querySelectorAll('[data-arr]').forEach(function (el) {
+      el.onchange = function () {
+        var a = el.getAttribute('data-arr'), v = el.value ? +el.value : null, prev = S.arr[a] != null ? S.arr[a] : null;
+        RS.AB.forEach(function (b) { if (b !== a && v != null && S.arr[b] === v) S.arr[b] = prev; });
+        S.arr[a] = v; save(); again('[data-arr="' + a + '"]');
+      };
+    });
+    app.querySelectorAll('[data-buy]').forEach(function (el) {
+      el.onclick = function () {
+        var a = el.getAttribute('data-buy'), d = +el.getAttribute('data-d');
+        S.buy[a] = Math.max(8, Math.min(15, (S.buy[a] || 8) + d)); save(); again('[data-buy="' + a + '"][data-d="' + d + '"]');
+      };
+    });
+    app.querySelectorAll('[data-skill]').forEach(function (el) {
+      el.onclick = function () {
+        var k = el.getAttribute('data-g'), s = el.getAttribute('data-skill');
+        var g = RS.skillGroups(S, D, R).filter(function (x) { return x.key === k; })[0];
+        var cur = groupPicks(g), i = cur.indexOf(s);
+        if (i >= 0) cur.splice(i, 1); else if (cur.length < g.n) cur.push(s);
+        S.skills[k] = cur; save(); again('[data-g="' + k + '"][data-skill="' + s + '"]');
+      };
+    });
+    app.querySelectorAll('[data-size]').forEach(function (el) { el.onclick = function () { S.size = el.getAttribute('data-size'); save(); again('[data-size="' + S.size + '"]'); }; });
+    app.querySelectorAll('[data-lang]').forEach(function (el) { el.onchange = function () { S.langs[+el.getAttribute('data-lang')] = el.value; save(); }; });
+    document.getElementById('back1').onclick = function () { go(0); };
+    document.getElementById('next1').onclick = function () { S.section = 0; go(2); };
+  }
+
+  // ---------- screen 3: write ----------
   var SECTIONS = ['Who are you?', 'What do you believe?', 'What people see', 'Bonds', 'Backstory'];
   function input(id, label, ph, area) {
     var v = esc(S[id]);
@@ -384,13 +632,15 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     SECTIONS.forEach(function (l, k) {
       h += '<button type="button" class="step' + (k < i ? ' done' : '') + '" data-sec="' + k + '"' + (k === i ? ' aria-current="step"' : '') + '><span class="dot" aria-hidden="true">' + (k < i ? '✓' : (k + 1)) + '</span><span>' + l + '</span></button>';
     });
-    h += '<button type="button" class="linkbtn" id="back0" style="padding-left:12px;margin-top:8px">Change species or class</button>';
+    h += '<button type="button" class="linkbtn" id="back0" style="padding-left:12px;margin-top:8px">Change species, background or class</button>';
+    h += '<button type="button" class="linkbtn" id="back1" style="padding-left:12px">Change ability scores or skills</button>';
     h += '</nav><main class="main" style="gap:22px">';
     h += '<div style="display:flex;flex-direction:column;gap:10px"><span class="hint">Section ' + (i + 1) + ' of 5</span><div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="1" aria-valuemax="5" aria-valuenow="' + (i + 1) + '"><i style="width:' + ((i + 1) * 20) + '%"></i></div></div>';
     h += '<section class="card">';
     if (i === 0) {
       h += '<h1 class="q">Who are you?</h1>';
       h += input('name', 'Your character\'s name, nickname, or pseudonym. Include any additional titles.', '"Nott the Brave"');
+      h += input('player', 'Your name (the player), for the sheet', 'Johnny');
     } else if (i === 1) {
       h += '<h1 class="q">What do you believe?</h1><div class="f"><label for="deity">I worship</label>';
       h += '<select id="deity" class="sel"' + (S.faithless ? ' disabled' : '') + '><option value="">Choose a deity…</option>';
@@ -424,9 +674,10 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     app.querySelectorAll('[data-k]').forEach(function (el) { el.oninput = function () { S[el.getAttribute('data-k')] = el.value; save(); }; });
     app.querySelectorAll('[data-sec]').forEach(function (el) { el.onclick = function () { S.section = +el.getAttribute('data-sec'); save(); renderWrite(); app.querySelector('h1').focus && window.scrollTo(0, 0); }; });
     document.getElementById('back0').onclick = function () { go(0); };
-    document.getElementById('prev').onclick = function () { if (S.section === 0) go(0); else { S.section--; save(); renderWrite(); window.scrollTo(0, 0); } };
+    document.getElementById('back1').onclick = function () { go(1); };
+    document.getElementById('prev').onclick = function () { if (S.section === 0) go(1); else { S.section--; save(); renderWrite(); window.scrollTo(0, 0); } };
     var nx = document.getElementById('next'); if (nx) nx.onclick = function () { S.section++; save(); renderWrite(); window.scrollTo(0, 0); };
-    var fin = document.getElementById('finish'); if (fin) fin.onclick = function () { go(2); };
+    var fin = document.getElementById('finish'); if (fin) fin.onclick = function () { go(3); };
     var ds = document.getElementById('deity');
     if (ds) {
       ds.onchange = function () { S.deity = ds.value; save(); document.getElementById('deitybox').innerHTML = deityBox(); };
@@ -436,7 +687,7 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     }
   }
 
-  // ---------- screen 3: finish ----------
+  // ---------- screen 4: finish ----------
   function val(t) { return t && String(t).trim() ? esc(t.trim()) : '<span class="empty">Not written yet</span>'; }
   function paras(t) {
     if (!t || !t.trim()) return '<p class="empty">Not written yet</p>';
@@ -470,9 +721,13 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     h += '<section class="p-sec"><h2>Backstory</h2>' + paras(S.story) + '</section>';
     h += '</article>';
 
-    h += '<aside class="side" aria-label="Bring it into Kanka"><div class="panel"><h2 style="margin:0;font-family:Cinzel,serif;font-size:20px;color:#fff">Bring ' + esc(name) + ' into the wiki</h2>';
+    var lvl = RS.levelOf(S);
+    h += '<aside class="side" aria-label="Your sheet and the wiki"><div class="panel"><h2 style="margin:0;font-family:Cinzel,serif;font-size:20px;color:#fff">Your level ' + lvl + ' sheet</h2>';
+    h += '<p class="blurb">A filled-in, editable PDF with every feature up to level ' + lvl + ', full feature text on the notes pages. It’s made in your browser and goes straight to your downloads. Nothing is kept on the site.</p>';
+    h += '<button type="button" class="btn gold" id="pdf">Download character sheet</button><p class="toast" id="pdftoast" role="status" aria-live="polite"></p></div>';
+    h += '<div class="panel"><h2 style="margin:0;font-family:Cinzel,serif;font-size:20px;color:#fff">Bring ' + esc(name) + ' into the wiki</h2>';
     h += '<p class="blurb">Copy the profile, then paste it into a new article on your Kanka character using the editor’s code view (the &lt;/&gt; button).</p>';
-    h += '<button type="button" class="btn gold" id="copy">Copy for Kanka</button>';
+    h += '<button type="button" class="btn" id="copy">Copy for Kanka</button>';
     h += '<button type="button" class="btn" id="copytext">Copy as plain text</button><p class="toast" id="toast" role="status" aria-live="polite"></p></div>';
     h += '<div class="panel todo"><div class="eyebrow">Then, in Kanka</div>';
     if (sp) h += '<label><input type="checkbox"><span>Set <strong>Playable Species</strong> to ' + esc(sp.s.name) + '</span></label>';
@@ -482,7 +737,8 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     h += '<div style="display:flex;flex-wrap:wrap;gap:16px"><button type="button" class="linkbtn" id="edit">Keep editing</button><button type="button" class="linkbtn" id="reset">Start a new character</button></div></aside></div>';
     app.innerHTML = h;
 
-    document.getElementById('edit').onclick = function () { S.section = 0; go(1); };
+    document.getElementById('edit').onclick = function () { S.section = 0; go(2); };
+    document.getElementById('pdf').onclick = downloadSheet;
     document.getElementById('reset').onclick = function () {
       if (window.confirm('Start over? This clears the character saved in this browser.')) { S = JSON.parse(JSON.stringify(blank)); save(); render(); window.scrollTo(0, 0); }
     };
@@ -547,13 +803,45 @@ textarea.fld{min-height:150px;padding:14px;line-height:1.6;resize:vertical}
     if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
   }
 
+  // ---------- the PDF ----------
+  var pdfLibLoading = null;
+  function loadPdfLib() {
+    if (window.PDFLib) return Promise.resolve(window.PDFLib);
+    if (!pdfLibLoading) pdfLibLoading = new Promise(function (ok, fail) {
+      var sc = document.createElement('script');
+      sc.src = 'vendor/pdf-lib.min.js';
+      sc.onload = function () { ok(window.PDFLib); };
+      sc.onerror = function () { pdfLibLoading = null; fail(new Error('Couldn’t load the PDF tools.')); };
+      document.head.appendChild(sc);
+    });
+    return pdfLibLoading;
+  }
+  function downloadSheet() {
+    var btn = document.getElementById('pdf'), toast = document.getElementById('pdftoast');
+    btn.disabled = true; toast.textContent = 'Building your sheet… this takes a few seconds.';
+    Promise.all([loadPdfLib(), fetch('character-sheet-template.pdf').then(function (r) {
+      if (!r.ok) throw new Error('Couldn’t load the blank sheet (' + r.status + ').');
+      return r.arrayBuffer();
+    })]).then(function (got) {
+      return RS.build(got[0], got[1], S, D, R);
+    }).then(function (out) {
+      var file = (S.name.trim() || 'Character').replace(/[\\/:*?"<>|]+/g, '').slice(0, 60) + ' - Level ' + RS.levelOf(S) + '.pdf';
+      var url = URL.createObjectURL(new Blob([out.bytes], { type: 'application/pdf' }));
+      var a = document.createElement('a'); a.href = url; a.download = file; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+      toast.textContent = 'Done. “' + file + '” is in your downloads.' + (out.overflow ? ' Some backstory didn’t fit on the sheet.' : '');
+    }).catch(function (e) {
+      toast.textContent = 'Something went wrong: ' + e.message;
+    }).then(function () { btn.disabled = false; });
+  }
+
   // ---------- router ----------
   function render() {
-    if (S.screen > 0 && !(S.species && S.cls)) S.screen = 0;
+    if (S.screen > 0 && !ready()) S.screen = 0;
     setSteps();
-    if (S.screen === 0) renderChoose(); else if (S.screen === 1) renderWrite(); else renderFinish();
+    if (S.screen === 0) renderChoose(); else if (S.screen === 1) renderStats(); else if (S.screen === 2) renderWrite(); else renderFinish();
   }
-  window.__realms = { state: function () { return S; }, kankaHTML: kankaHTML, plainText: plainText };
+  window.__realms = { state: function () { return S; }, kankaHTML: kankaHTML, plainText: plainText, build: function () { return loadPdfLib().then(function (L) { return fetch('character-sheet-template.pdf').then(function (r) { return r.arrayBuffer(); }).then(function (b) { return RS.build(L, b, S, D, R); }); }); } };
   render();
 })();
 </script>

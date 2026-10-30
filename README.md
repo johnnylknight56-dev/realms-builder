@@ -2,17 +2,24 @@
 
 A lore-and-identity character builder for The Remembered Realms campaign on Kanka.
 
-Players choose a species, class, subclass and background, answer five sections of prompts, and get a finished profile card. "Copy for Kanka" produces HTML to paste into a new article on their Kanka character (the matching styles live in the campaign CSS as "Character profile cards").
+Players pick a level (1–20, default 20), choose a species, background, class and subclass (each with its statblock), set ability scores (standard array or point buy) and skills, answer five sections of prompts, and finish with:
+
+- a **character sheet** (PDF) at that level, built in their browser from `character-sheet-template.pdf` and downloaded straight to their device. Nothing is stored on the site. Every class and subclass feature up to that level is listed, with the full feature text on the notes pages (extra copies of the notes page are added as needed). No general feats, ASIs, epic boons or spells are added.
+- a profile card. "Copy for Kanka" produces HTML to paste into a new article on their Kanka character (the matching styles live in the campaign CSS as "Character profile cards").
 
 ## Files
 
-- `index.html`: the whole builder.
+- `index.html`: the builder's screens.
+- `sheet.js`: the sheet math for any level (scores, HP, AC, skills, scaling class values…) and the PDF filling.
+- `character-sheet-template.pdf`: MPMB's 2024 printer-friendly sheet with its scripts and control buttons removed (`tools/clean_sheet.py`).
+- `vendor/pdf-lib.min.js`: the library that fills the PDF in the browser (MIT licence alongside it).
+- `rules.js`: mechanics read from the wiki: hit die, saves, skills, feature blurbs and full text, uses, and each class's level 1–20 table. **Built automatically.**
 - `data.js`: the campaign's species, classes, subclasses, backgrounds and deities, with blurbs and wiki links. **Built automatically; don't edit by hand.**
-- `sheets.js`: each species' statblock, cleaned up to plain formatting. **Built automatically.**
+- `sheets.js`: each species' statblock and each class, subclass and background's In-Game Stats post, cleaned up to plain formatting. **Built automatically.**
 - `img/`: square copies of the species, class, subclass and background art. **Built automatically.**
 - `blurbs.json`: the short blurbs for species, backgrounds and deities. **Edit these freely.**
 - `builder-config.json`: which Kanka families appear and in what order, and a few special cases.
-- `tools/snapshot.py` and `.github/workflows/kanka-sync.yml`: the automation.
+- `tools/snapshot.py`, `tools/rules.py` and `.github/workflows/kanka-sync.yml`: the automation.
 
 ## How updating works
 
@@ -26,7 +33,8 @@ Each run's summary lists new entries that got starter blurbs and species still m
 
 - **Species**: races directly under one of the families in `builder-config.json`. Races under Homo and Goblinkin count as part of the family above them. A race is left out if it has the **Not Playable** tag or is listed under `skip_species`.
 - **Statblocks**: the Species Stats ability attached to the species under In-Game Features. If there isn't one, the species' "In-Game Stats" post is used instead.
-- **Classes, subclasses, backgrounds**: abilities tagged **Class**, **Subclass** or **Background**. A subclass goes under the class that's its parent.
+- **Classes, subclasses, backgrounds**: abilities tagged **Class**, **Subclass** or **Background**. A subclass goes under the class that's its parent. Each needs a post named **In-Game Stats** written in the format in the project doc "Kanka format for the character builder"; until it has one it shows as greyed-out "Coming soon". Full feature text and the class table (a table whose first column runs 1–20) are read from any public post on the entry, matched to the blurbs by level and name.
+- **Species mechanics** (size, speed, darkvision, trait names, skills) are read from the species statblock as well as possible. Players can adjust species skills in the builder because statblock wording varies.
 - **Deities**: characters whose type is "Primordial", "Deity", or starts with "Deity, ".
 - **Art**: each entry's main image, cropped square.
 - Private entries are always left out.
