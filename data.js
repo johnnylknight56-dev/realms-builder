@@ -829,7 +829,38 @@ window.REALMS = {
    "id": 9827337,
    "img": "img/cls-artificer.jpg",
    "ready": true,
-   "subclasses": []
+   "subclasses": [
+    {
+     "name": "Alchemist",
+     "id": 10110032,
+     "img": "img/sub-alchemist.jpg",
+     "ready": true
+    },
+    {
+     "name": "Armorer",
+     "id": 10110048,
+     "img": "img/sub-armorer.jpg",
+     "ready": true
+    },
+    {
+     "name": "Artillerist",
+     "id": 10110063,
+     "img": "img/sub-artillerist.jpg",
+     "ready": true
+    },
+    {
+     "name": "Battle Smith",
+     "id": 10110087,
+     "img": "img/sub-battle-smith.jpg",
+     "ready": true
+    },
+    {
+     "name": "Cartographer",
+     "id": 10110116,
+     "img": "img/sub-cartographer.jpg",
+     "ready": true
+    }
+   ]
   },
   {
    "name": "Barbarian",
@@ -868,22 +899,60 @@ window.REALMS = {
      "id": 10109482,
      "img": "img/sub-college-of-glamour.jpg",
      "ready": true
+    },
+    {
+     "name": "College of Lore",
+     "id": 10109502,
+     "img": "img/sub-college-of-lore.jpg",
+     "ready": true
+    },
+    {
+     "name": "College of Spirits",
+     "id": 10109511,
+     "img": "img/sub-college-of-spirits.jpg",
+     "ready": true
     }
    ]
   },
   {
    "name": "Cleric",
    "id": 9827724,
-   "img": null,
-   "ready": false,
-   "subclasses": []
+   "img": "img/cls-cleric.jpg",
+   "ready": true,
+   "subclasses": [
+    {
+     "name": "Arcana Domain",
+     "id": 10109669,
+     "img": "img/sub-arcana-domain.jpg",
+     "ready": true
+    }
+   ]
   },
   {
    "name": "Druid",
    "id": 9908128,
-   "img": null,
-   "ready": false,
-   "subclasses": []
+   "img": "img/cls-druid.jpg",
+   "ready": true,
+   "subclasses": [
+    {
+     "name": "Circle of the Land",
+     "id": 10110270,
+     "img": "img/sub-circle-of-the-land.jpg",
+     "ready": true
+    },
+    {
+     "name": "Circle of the Moon",
+     "id": 10110289,
+     "img": "img/sub-circle-of-the-moon.jpg",
+     "ready": true
+    },
+    {
+     "name": "Circle of the Sea",
+     "id": 10110305,
+     "img": "img/sub-circle-of-the-sea.jpg",
+     "ready": true
+    }
+   ]
   },
   {
    "name": "Fighter",
