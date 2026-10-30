@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>DM import · The Remembered Realms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ground:#15112a;--panel:#221a3d;--field:#1a1433;--line:#3b3166;--hover:#2a2150;--top:#1e0033;--top-line:#3a1163;--top-muted:#c9b0e8;
+  --gold:#dec54a;--gold-ink:#1a1300;--rule:#c9a227;--blue:#8aadf4;--text:#f0ecea;--soft:#dcd5f0;--muted:#b7b0d6;--label:#e4def6;
+  --bad-bg:#3a1420;--bad-line:#e0697a;--bad-text:#ffd9de;--ok:#9fe0b0}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--text);font-family:Roboto,Arial,sans-serif}
+a{color:var(--gold)}
+button,input,select{font:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.top{padding:18px clamp(16px,4vw,48px);background:var(--top);border-bottom:1px solid var(--top-line)}
+.top small{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--top-muted)}
+.top b{font-family:Cinzel,serif;font-size:22px;color:#fff}
+main{max-width:860px;margin:0 auto;padding:32px clamp(16px,4vw,32px) 64px;display:flex;flex-direction:column;gap:22px}
+h1{margin:0;font-family:Cinzel,serif;font-size:clamp(24px,3vw,32px);color:#fff}
+.lead{margin:0;color:#cfc8e8;line-height:1.55}
+.card{padding:24px;border-radius:12px;background:var(--panel);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
+.card h2{margin:0;font-family:Cinzel,serif;font-size:19px;color:#fff;display:flex;gap:10px;align-items:center}
+.card h2 .n{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font:700 13px Roboto,sans-serif;background:var(--gold);color:var(--gold-ink)}
+.hint{margin:0;font-size:14px;color:var(--muted);line-height:1.5}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.fld,.sel{min-height:46px;padding:0 14px;border-radius:8px;border:1px solid var(--line);background:var(--field);color:#fff;font-size:16px}
+.fld{flex:1 1 320px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 20px;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;border:1px solid var(--line);background:transparent;color:#fff}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--label);cursor:pointer;line-height:1.45}
+.check input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--gold);flex:none}
+.drop{border:2px dashed var(--line);border-radius:12px;padding:28px;text-align:center;color:var(--muted);cursor:pointer}
+.drop.over{border-color:var(--gold);color:#fff;background:var(--hover)}
+.drop strong{color:#fff}
+.who{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-radius:8px;background:var(--field);border:1px solid var(--line)}
+.who b{font-family:Cinzel,serif;font-size:20px;color:#fff}
+.who span{color:var(--muted);font-size:14px}
+details{font-size:14px;color:var(--soft)}
+details summary{cursor:pointer;color:var(--gold);min-height:32px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+td{padding:4px 6px;border-top:1px solid var(--line);vertical-align:top;white-space:pre-wrap;overflow-wrap:anywhere}
+td:first-child{color:var(--muted);width:200px}
+.status{margin:0;font-size:15px;line-height:1.5}
+.status.ok{color:var(--ok)}
+.status.bad{padding:12px 14px;border-radius:8px;background:var(--bad-bg);border:1px solid var(--bad-line);color:var(--bad-text)}
+.bar{height:8px;border-radius:4px;background:var(--hover);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .2s}
+.log{margin:0;padding:0 0 0 34px;max-height:180px;overflow:auto;font-size:13px;color:var(--muted);line-height:1.6}
+.radios{display:flex;flex-direction:column;gap:10px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header class="top"><small>The Remembered Realms</small><b>DM import</b></header>
+<main>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <h1>Bring a player's sheet into Kanka</h1>
+    <p class="lead">Drop in the PDF a player made with the character builder. This page creates their character in Kanka with the D&amp;D 5e sheet filled in, using your Kanka account. It runs entirely in this browser.</p>
+  </div>
+
+  <section class="card" aria-labelledby="h1s">
+    <h2 id="h1s"><span class="n">1</span>Your Kanka token</h2>
+    <p class="hint">Make one in Kanka under <a href="https://app.kanka.io/settings/api" target="_blank" rel="noopener">Settings → API</a> (“Personal Access Token”). It’s kept only in this browser, never on the website.</p>
+    <div class="row">
+      <input id="token" class="fld" type="password" autocomplete="off" placeholder="Paste your personal access token" aria-label="Kanka personal access token">
+      <button type="button" class="btn" id="check">Connect</button>
+    </div>
+    <label class="check"><input type="checkbox" id="remember">Remember it on this device</label>
+    <p class="status" id="tokstatus" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="card" aria-labelledby="h2s">
+    <h2 id="h2s"><span class="n">2</span>The player's sheet</h2>
+    <label class="drop" id="drop" for="file"><strong>Drop the PDF here</strong> or click to choose it<input type="file" id="file" accept="application/pdf,.pdf" hidden></label>
+    <p class="status" id="filestatus" role="status" aria-live="polite"></p>
+    <div id="preview" hidden></div>
+  </section>
+
+  <section class="card" aria-labelledby="h3s">
+    <h2 id="h3s"><span class="n">3</span>Where it goes</h2>
+    <div class="radios" role="radiogroup" aria-label="Where it goes">
+      <label class="check"><input type="radio" name="mode" value="new" checked><span><strong style="color:#fff">Create a new character</strong>, set up like the template below (same families, type and sheet fields; the template’s own values aren’t copied).</span></label>
+      <div class="row" id="tplrow" style="padding-left:30px"><label for="tpl" class="hint" style="color:var(--label)">Template</label><select id="tpl" class="sel"><option value="">Connect first…</option></select></div>
+      <label class="check"><input type="radio" name="mode" value="update"><span><strong style="color:#fff">Fill in a character that already exists</strong>, e.g. one you made from your PC Template. Fields it already has are overwritten.</span></label>
+      <div class="row" id="exrow" style="padding-left:30px" hidden><input id="existing" class="fld" type="text" placeholder="Paste the character’s Kanka link" aria-label="Existing character's Kanka link"></div>
+    </div>
+    <label class="check"><input type="checkbox" id="entry" checked>Use the player’s profile (beliefs, appearance, bonds, backstory) as the character’s main text</label>
+    <label class="check"><input type="checkbox" id="species" checked>Set their Playable Species</label>
+    <label class="check"><input type="checkbox" id="private">Keep the character private until I’ve checked it (new characters only)</label>
+    <button type="button" class="btn gold" id="go" disabled>Send to Kanka</button>
+    <div id="progress" hidden style="display:flex;flex-direction:column;gap:10px">
+      <div class="bar" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100"><i id="barfill"></i></div>
+      <p class="status" id="runstatus" role="status" aria-live="polite"></p>
+      <ol class="log" id="log"></ol>
+    </div>
+  </section>
+</main>
+
+<script src="data.js"></script>
+<script src="vendor/pdf-lib.min.js"></script>
+<script src="sheet.js"></script>
+<script>
+(function () {
+  'use strict';
+  var D = window.REALMS, RS = window.RealmsSheet;
+  var TOKEN_KEY = 'realms-dm-kanka-token';
+  // The API address can only be swapped (for testing) when this page runs on the local machine.
+  var params = new URLSearchParams(location.search);
+  var local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  var API = (local && params.get('api')) || ('https://api.kanka.io/1.0/campaigns/' + D.campaign_id + '/');
+  var WIKI = D.wiki;
+  // Only these attribute names can come from a PDF: the sheet plugin's fields plus a few plain ones.
+  var ALLOWED = ['Race', 'Background', 'Alignment', 'Xp', 'Subclass', 'class_1', 'class_1_level', 'str', 'dex', 'con', 'int', 'wis', 'cha',
+    'ac', 'initiative_bonus', 'speed', 'hp_max', 'hp_current', 'class_resource_name', 'class_resource_current', 'class_resource_max',
+    'class_resource_2_name', 'class_resource_2_current', 'class_resource_2_max', 'features', 'inventory', 'notes']
+    .concat(['str', 'dex', 'con', 'int', 'wis', 'cha'].map(function (a) { return 'save_' + a; }))
+    .concat(RS.SKILLS.map(function (s) { return 'skill_' + s[0].toLowerCase().replace(/ /g, '_'); }));
+
+  var $ = function (id) { return document.getElementById(id); };
+  var token = '', payload = null, connected = false;
+  try { token = localStorage.getItem(TOKEN_KEY) || ''; } catch (e) {}
+  if (token) { $('token').value = token; $('remember').checked = true; }
+
+  function esc(t) { return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function setStatus(id, text, kind) { var el = $(id); el.textContent = text; el.className = 'status' + (kind ? ' ' + kind : ''); }
+  function refresh() {
+    var mode = document.querySelector('input[name="mode"]:checked').value;
+    $('tplrow').hidden = mode !== 'new'; $('exrow').hidden = mode !== 'update';
+    $('go').disabled = !(connected && payload && (mode === 'new' || entityFromLink($('existing').value)));
+  }
+  document.querySelectorAll('input[name="mode"]').forEach(function (r) { r.onchange = function () { $('entry').checked = r.value === 'new'; refresh(); }; });
+  $('existing').oninput = refresh;
+  function entityFromLink(t) { var m = String(t || '').match(/entities\/(\d+)/) || String(t || '').trim().match(/^(\d+)$/); return m ? +m[1] : null; }
+
+  // ---------- Kanka requests, paced to stay under the rate limit ----------
+  var last = 0, GAP = 700;
+  function sleep(ms) { return new Promise(function (ok) { setTimeout(ok, ms); }); }
+  async function api(method, path, body, onWait) {
+    for (var attempt = 0; attempt < 6; attempt++) {
+      var wait = last + GAP - Date.now(); if (wait > 0) await sleep(wait);
+      last = Date.now();
+      var res = await fetch(API + path, {
+        method: method,
+        headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: body ? JSON.stringify(body) : undefined
+      });
+      if (res.status === 429) {
+        var secs = parseInt(res.headers.get('Retry-After'), 10) || 30;
+        if (onWait) onWait(secs);
+        await sleep(secs * 1000); continue;
+      }
+      var data = null; try { data = await res.json(); } catch (e) {}
+      if (!res.ok) {
+        var msg = res.status === 401 ? 'Kanka didn’t accept the token. Make a new one and paste it in again.'
+          : res.status === 403 ? 'Your Kanka account isn’t allowed to do this in this campaign.'
+          : res.status === 404 ? 'Kanka couldn’t find that (' + path + ').'
+          : 'Kanka said: ' + ((data && (data.message || JSON.stringify(data.errors || data))) || res.status);
+        var err = new Error(msg); err.status = res.status; throw err;
+      }
+      return data;
+    }
+    throw new Error('Kanka kept asking us to slow down. Try again in a few minutes.');
+  }
+  async function all(path) {
+    var rows = [], page = 1;
+    while (true) {
+      var d = await api('GET', path + (path.indexOf('?') < 0 ? '?' : '&') + 'page=' + page);
+      rows = rows.concat(d.data || []);
+      if (!d.meta || page >= d.meta.last_page) return rows;
+      page++;
+    }
+  }
+
+  // ---------- step 1: connect ----------
+  $('check').onclick = async function () {
+    token = $('token').value.trim();
+    if (!token) { setStatus('tokstatus', 'Paste your token first.', 'bad'); return; }
+    try { if ($('remember').checked) localStorage.setItem(TOKEN_KEY, token); else localStorage.removeItem(TOKEN_KEY); } catch (e) {}
+    setStatus('tokstatus', 'Connecting…');
+    try {
+      var chars = await all('characters');
+      var tpls = chars.filter(function (c) { return c.is_template; });
+      var sel = $('tpl'); sel.innerHTML = '<option value="">No template (sheet fields only)</option>';
+      tpls.forEach(function (c) { var o = document.createElement('option'); o.value = c.entity_id; o.textContent = c.name; if (/pc template/i.test(c.name)) o.selected = true; sel.appendChild(o); });
+      connected = true;
+      setStatus('tokstatus', 'Connected. ' + chars.length + ' characters in the campaign, ' + tpls.length + ' template' + (tpls.length === 1 ? '' : 's') + '.', 'ok');
+    } catch (e) { connected = false; setStatus('tokstatus', e.message, 'bad'); }
+    refresh();
+  };
+  $('remember').onchange = function () { if (!this.checked) try { localStorage.removeItem(TOKEN_KEY); } catch (e) {} };
+
+  // ---------- step 2: read the PDF ----------
+  var drop = $('drop');
+  ['dragenter', 'dragover'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+  ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
+  drop.addEventListener('drop', function (e) { if (e.dataTransfer.files[0]) readFile(e.dataTransfer.files[0]); });
+  $('file').onchange = function () { if (this.files[0]) readFile(this.files[0]); };
+
+  function clean(p) {
+    // treat everything in the PDF as untrusted: known fields only, plain strings, sensible lengths
+    var out = { character: {}, attributes: {} }, c = p.character || {}, a = p.attributes || {};
+    out.character.name = String(c.name || 'Unnamed adventurer').slice(0, 190);
+    out.character.type = String(c.type || 'Player Character').slice(0, 45);
+    out.character.age = String(c.age || '').slice(0, 25);
+    out.character.entry = String(c.entry || '').slice(0, 60000);
+    out.character.race_ids = (Array.isArray(c.race_ids) ? c.race_ids : []).filter(function (n) { return Number.isInteger(n) && n > 0; }).slice(0, 3);
+    ALLOWED.forEach(function (k) { if (a[k] != null) out.attributes[k] = String(a[k]).slice(0, 8000); });
+    out.summary = String(p.summary || ''); out.player = String(p.player || ''); out.made = String(p.made || ''); out.level = p.level;
+    return out;
+  }
+  async function readFile(f) {
+    payload = null; $('preview').hidden = true; refresh();
+    setStatus('filestatus', 'Reading ' + f.name + '…');
+    try {
+      var p = await RS.readPayload(window.PDFLib, await f.arrayBuffer());
+      if (!p) { setStatus('filestatus', 'That PDF wasn’t made by the character builder (or was made before Kanka import existed). Ask the player to download it again.', 'bad'); return; }
+      payload = clean(p);
+      setStatus('filestatus', '');
+      var h = '<div class="who"><b>' + esc(payload.character.name) + '</b><span>' + esc(payload.summary) + '</span>';
+      h += '<span>' + (payload.player ? 'Player: ' + esc(payload.player) + ' · ' : '') + (payload.made ? 'Made ' + esc(payload.made) : '') + '</span></div>';
+      h += '<details><summary>Sheet fields that will be sent (' + Object.keys(payload.attributes).length + ')</summary><table>';
+      Object.keys(payload.attributes).forEach(function (k) { if (payload.attributes[k] !== '') h += '<tr><td>' + esc(k) + '</td><td>' + esc(payload.attributes[k]) + '</td></tr>'; });
+      h += '</table></details>';
+      if (payload.character.entry) h += '<details><summary>Profile text</summary><p class="hint" style="white-space:pre-wrap">' + esc(payload.character.entry.replace(/<[^>]+>/g, ' ').replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n')) + '</p></details>';
+      $('preview').innerHTML = h; $('preview').hidden = false;
+    } catch (e) { setStatus('filestatus', 'Couldn’t read that file: ' + e.message, 'bad'); }
+    refresh();
+  }
+
+  // ---------- step 3: send ----------
+  var total = 1, doneN = 0;
+  function step(text) { doneN++; $('barfill').style.width = Math.min(100, Math.round(doneN / total * 100)) + '%'; if (text) { var li = document.createElement('li'); li.textContent = text; $('log').appendChild(li); $('log').scrollTop = 1e9; } }
+  function waiting(secs) { setStatus('runstatus', 'Kanka asked us to slow down. Waiting ' + secs + ' seconds…'); }
+
+  $('go').onclick = async function () {
+    var mode = document.querySelector('input[name="mode"]:checked').value;
+    $('go').disabled = true; $('progress').hidden = false; $('log').innerHTML = ''; doneN = 0; $('barfill').style.width = '0';
+    var P = payload, attrs = P.attributes;
+    try {
+      var entityId, childId;
+      if (mode === 'new') {
+        var tplId = +$('tpl').value || null, tplChar = null, tplAttrs = [];
+        if (tplId) {
+          setStatus('runstatus', 'Reading the template…');
+          var te = await api('GET', 'entities/' + tplId);
+          tplChar = (await api('GET', 'characters/' + te.data.child_id)).data;
+          tplAttrs = await all('entities/' + tplId + '/attributes');
+        }
+        var names = tplAttrs.map(function (a) { return a.name; });
+        var extra = Object.keys(attrs).filter(function (k) { return attrs[k] !== '' && names.indexOf(k) < 0; });
+        total = 1 + tplAttrs.length + extra.length;
+        setStatus('runstatus', 'Creating ' + P.character.name + '…');
+        var body = { name: P.character.name, type: (tplChar && tplChar.type) || P.character.type, is_private: $('private').checked };
+        if (P.character.age) body.age = P.character.age;
+        if ($('entry').checked && P.character.entry) body.entry = P.character.entry;
+        if ($('species').checked && P.character.race_ids.length) body.races = P.character.race_ids;
+        if (tplChar && tplChar.families && tplChar.families.length) body.families = tplChar.families;
+        var made = (await api('POST', 'characters', body, waiting)).data;
+        entityId = made.entity_id; childId = made.id;
+        step('Created the character');
+        setStatus('runstatus', 'Filling in the sheet…');
+        for (var i = 0; i < tplAttrs.length; i++) {
+          // the template supplies the layout (names, order, types); values come only from the player's sheet
+          var t = tplAttrs[i], v = Object.prototype.hasOwnProperty.call(attrs, t.name) ? attrs[t.name] : '';
+          await api('POST', 'entities/' + entityId + '/attributes', { name: t.name, value: v == null ? '' : v, type_id: t.type_id || 1,
+            default_order: t.default_order, is_private: !!t.is_private, is_pinned: !!t.is_pinned }, waiting);
+          step(v != null && v !== '' ? t.name + ': ' + String(v).split('\n')[0].slice(0, 60) : '');
+        }
+        for (var j = 0; j < extra.length; j++) {
+          await api('POST', 'entities/' + entityId + '/attributes', { name: extra[j], value: attrs[extra[j]], type_id: 1, default_order: 900 + j }, waiting);
+          step(extra[j] + ': ' + attrs[extra[j]].split('\n')[0].slice(0, 60));
+        }
+      } else {
+        entityId = entityFromLink($('existing').value);
+        setStatus('runstatus', 'Reading the character…');
+        var ent = (await api('GET', 'entities/' + entityId)).data;
+        if (ent.type !== 'character') throw new Error('That link is a ' + ent.type + ', not a character.');
+        childId = ent.child_id;
+        var have = {}; (await all('entities/' + entityId + '/attributes')).forEach(function (a) { have[a.name] = a; });
+        var keys = Object.keys(attrs).filter(function (k) { return have[k] ? String(have[k].value == null ? '' : have[k].value) !== attrs[k] : attrs[k] !== ''; });
+        var patch = {};
+        if ($('entry').checked && P.character.entry) patch.entry = P.character.entry;
+        if ($('species').checked && P.character.race_ids.length) patch.races = P.character.race_ids;
+        if (P.character.age) patch.age = P.character.age;
+        total = keys.length + (Object.keys(patch).length ? 1 : 0) || 1;
+        setStatus('runstatus', 'Updating ' + ent.name + '…');
+        if (Object.keys(patch).length) { patch.name = ent.name; await api('PATCH', 'characters/' + childId, patch, waiting); step('Updated the character'); }
+        for (var k = 0; k < keys.length; k++) {
+          var name = keys[k], cur = have[name];
+          if (cur) await api('PATCH', 'entities/' + entityId + '/attributes/' + cur.id, { name: name, value: attrs[name], type_id: cur.type_id || 1 }, waiting);
+          else await api('POST', 'entities/' + entityId + '/attributes', { name: name, value: attrs[name], type_id: 1 }, waiting);
+          step(name + ': ' + (attrs[name] || '(cleared)').split('\n')[0].slice(0, 60));
+        }
+        if (!keys.length) step('The sheet fields already matched');
+      }
+      $('barfill').style.width = '100%';
+      var link = WIKI + entityId;
+      $('runstatus').className = 'status ok';
+      $('runstatus').innerHTML = 'Done. <a href="' + esc(link) + '" target="_blank" rel="noopener">Open ' + esc(P.character.name) + ' in Kanka</a> · <a href="' + esc(link) + '/attributes" target="_blank" rel="noopener">their sheet</a>';
+    } catch (e) {
+      setStatus('runstatus', e.message + (entityId ? ' The character was partly filled in; you can run this again with “Fill in a character that already exists”.' : ''), 'bad');
+    }
+    $('go').disabled = false;
+  };
+  refresh();
+})();
+</script>
+</body>
+</html>

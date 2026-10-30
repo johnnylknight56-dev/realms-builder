@@ -10,6 +10,7 @@ Players pick a level (1–20, default 20), choose a species, background, class a
 ## Files
 
 - `index.html`: the builder's screens.
+- `dm.html`: the DM-only page that imports a player's PDF into Kanka.
 - `sheet.js`: the sheet math for any level (scores, HP, AC, skills, scaling class values…) and the PDF filling.
 - `character-sheet-template.pdf`: MPMB's 2024 printer-friendly sheet with its scripts and control buttons removed (`tools/clean_sheet.py`).
 - `vendor/pdf-lib.min.js`: the library that fills the PDF in the browser (MIT licence alongside it).
@@ -50,6 +51,18 @@ The automation never changes a blurb once it's in `blurbs.json`. When a new spec
 - **Show a species under a different family**: add it to `move_species`.
 
 The entity id is the number at the end of an entry's Kanka address: `.../entities/9465423`.
+
+## Importing a player's sheet into Kanka (DM only)
+
+Every sheet the builder makes carries the character's data inside the PDF. To turn it into a Kanka character:
+
+1. Open `dm.html` on the site (e.g. `https://johnnylknight56-dev.github.io/realms-builder/dm.html`). It isn't linked from the builder.
+2. Paste your Kanka personal access token (Kanka → Settings → API) and press **Connect**. Tick "Remember it on this device" to skip this next time. The token stays in that browser only; it's never part of the website.
+3. Drop in the player's PDF and check the preview.
+4. Choose **Create a new character** (set up like your PC Template: same families, type and sheet fields, with blank values except what the player's sheet fills in) or **Fill in a character that already exists** (paste its Kanka link).
+5. Press **Send to Kanka**. Each sheet field is a separate request and Kanka limits how fast those can go, so a new character takes a minute or two.
+
+What gets filled in: the D&D 5e Character Sheet Reborn fields (class and level, ability scores, save and skill proficiencies, AC, speed, HP, the first two limited-use features as class resources, features, inventory, notes), plus a Subclass field, the character's age, Playable Species, and the player's profile as the main text.
 
 ## Kanka token
 

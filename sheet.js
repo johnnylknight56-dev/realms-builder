@@ -235,6 +235,69 @@
     };
   }
 
+  // ---------------------------------------------------------------- Kanka (D&D 5e Character Sheet Reborn plugin)
+
+  var PAYLOAD_KEY = 'RealmsCharacter';
+  var SKILL_ATTR = function (name) { return 'skill_' + name.toLowerCase().replace(/ /g, '_'); };
+
+  /** What the DM import page writes to Kanka: character fields plus the sheet plugin's attributes. */
+  function kankaPayload(S, D, R, extra) {
+    var C = compute(S, D, R), X = C.X, a = {};
+    a.Race = X.sp ? X.sp.name : '';
+    a.Background = X.bg ? X.bg.name : '';
+    a.Alignment = S.align || '';
+    a.Xp = String(C.xp);
+    a.class_1 = X.cls ? X.cls.name : '';
+    a.class_1_level = String(C.level);
+    if (X.subActive && X.sub) a.Subclass = X.sub.name;
+    AB.forEach(function (k) { if (C.scores[k] != null) a[k] = String(C.scores[k]); });
+    AB.forEach(function (k) { a['save_' + k] = C.saves.indexOf(k) >= 0 ? '1' : ''; });
+    SKILLS.forEach(function (sk) { a[SKILL_ATTR(sk[0])] = C.profs[sk[0]] ? '1' : ''; });
+    a.ac = String(C.ac);
+    if (C.init !== C.mods.dex) a.initiative_bonus = signed(C.init - C.mods.dex);
+    a.speed = String(C.speed);
+    a.hp_max = String(C.hp);
+    a.hp_current = String(C.hp);
+    var lim = C.features.filter(function (f) { return f.uses && f.usesN != null; });
+    if (lim[0]) { a.class_resource_name = lim[0].name; a.class_resource_max = String(lim[0].usesN); a.class_resource_current = String(lim[0].usesN); }
+    if (lim[1]) { a.class_resource_2_name = lim[1].name; a.class_resource_2_max = String(lim[1].usesN); a.class_resource_2_current = String(lim[1].usesN); }
+    var feats = C.features.filter(function (f) { return f.summary; }).map(function (f) { return f.name + ' (' + (X.sub && f.from === X.sub.name ? X.sub.name : f.from) + ' ' + f.lv + '): ' + f.summary; });
+    (X.spR.traits || []).forEach(function (t) { feats.push(t.name + ' (' + (X.sp ? X.sp.name : 'species') + ')' + (t.summary ? ': ' + t.summary : '')); });
+    if (C.feat) feats.push(C.feat + ' (origin feat)' + (C.featText ? ': ' + C.featText : ''));
+    a.features = feats.join('\n');
+    if (X.bgR.equipment) a.inventory = X.bgR.equipment;
+    var armor = (X.clsR.armor || []).concat(X.subActive ? X.subR.armor || [] : []);
+    var weapons = (X.clsR.weapons || []).concat(X.subActive ? X.subR.weapons || [] : []);
+    var tools = [X.bgR.tools, X.clsR.tools, X.subActive ? X.subR.tools : ''].filter(function (t) { return t && !/^none$/i.test(t); });
+    a.notes = [
+      'Languages: ' + uniq(['Common'].concat(S.langs || [])).join(', '),
+      armor.length ? 'Armor: ' + armor.join(', ') : '',
+      weapons.length ? 'Weapons: ' + weapons.join(', ') : '',
+      tools.length ? 'Tools: ' + tools.join('; ') : '',
+      C.darkvision ? 'Darkvision ' + C.darkvision + ' ft' : '',
+      'Size: ' + C.size
+    ].filter(Boolean).join('\n');
+    return {
+      v: 1, made: new Date().toISOString().slice(0, 10), level: C.level,
+      character: {
+        name: (S.name || '').trim() || 'Unnamed adventurer', type: 'Player Character', age: S.age || '',
+        race_ids: X.sp && X.sp.race_id ? [X.sp.race_id] : [], entry: (extra && extra.profile) || ''
+      },
+      summary: [X.sp && X.sp.name, X.cls && (X.cls.name + ' ' + C.level), X.subActive && X.sub && X.sub.name, X.bg && X.bg.name].filter(Boolean).join(' · '),
+      player: S.player || '',
+      attributes: a,
+      state: S
+    };
+  }
+
+  /** Read the payload back out of a sheet made by the builder. Returns null if there isn't one. */
+  async function readPayload(PDFLib, bytes) {
+    var doc = await PDFLib.PDFDocument.load(bytes, { updateMetadata: false });
+    var info = doc.getInfoDict(), v = info.lookup(PDFLib.PDFName.of(PAYLOAD_KEY));
+    if (!v || !v.decodeText) return null;
+    try { return JSON.parse(v.decodeText()); } catch (e) { return null; }
+  }
+
   // ---------------------------------------------------------------- PDF
 
   // Characters the built-in Helvetica can't draw are swapped for close equivalents.
@@ -289,7 +352,7 @@
     return { lines: g.rules - skipTop, width: r.width - 6, rect: r, g: g, skipTop: skipTop };
   }
 
-  async function build(PDFLib, templateBytes, S, D, R) {
+  async function build(PDFLib, templateBytes, S, D, R, extra) {
     var C = compute(S, D, R), X = C.X;
     var doc = await PDFLib.PDFDocument.load(templateBytes);
     var form = doc.getForm();
@@ -540,6 +603,9 @@
       if (d[1]) f.updateAppearances(font, ruledProvider(d[1].lines, d[1].info));
       else f.updateAppearances(font);
     });
+    // the character's data rides along inside the PDF so the DM can import it into Kanka
+    doc.getInfoDict().set(PDFLib.PDFName.of(PAYLOAD_KEY), PDFLib.PDFHexString.fromText(JSON.stringify(kankaPayload(S, D, R, extra))));
+    doc.setTitle((S.name || 'Character') + ' – level ' + C.level);
     return { bytes: await doc.save({ updateFieldAppearances: false }), overflow: 0, notesPagesAdded: extraPages, computed: C };
   }
 
@@ -547,7 +613,7 @@
     XP: XP, pbAt: pbAt, levelOf: levelOf, featuresAt: featuresAt, AB: AB, AB_NAME: AB_NAME, SKILLS: SKILLS, ARRAY: ARRAY, BUY_COST: BUY_COST, BUY_POINTS: BUY_POINTS,
     mod: mod, signed: signed, resolve: resolve, skillGroups: skillGroups, proficientSkills: proficientSkills,
     baseScores: baseScores, pointsSpent: pointsSpent, bgBonus: bgBonus, finalScores: finalScores, compute: compute,
-    build: build, winAnsi: winAnsi
+    build: build, winAnsi: winAnsi, kankaPayload: kankaPayload, readPayload: readPayload, PAYLOAD_KEY: PAYLOAD_KEY
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = API; else root.RealmsSheet = API;
 })(typeof window !== 'undefined' ? window : this);
