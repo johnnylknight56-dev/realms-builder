@@ -22,6 +22,8 @@ from html.parser import HTMLParser
 
 from PIL import Image
 
+import rules as R
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 API = "https://api.kanka.io/1.0/campaigns/{}/"
 IMG_SIZE = 360
@@ -71,7 +73,7 @@ def fetch_all(base, kind, token):
 # ---------------------------------------------------------------- HTML cleanup
 
 KEEP = {"h1", "h2", "h3", "h4", "h5", "h6", "div", "p", "b", "strong", "i", "em", "u",
-        "a", "br", "ul", "ol", "li", "table", "thead", "tbody", "tr", "td", "th"}
+        "a", "br", "ul", "ol", "li", "table", "thead", "tbody", "tr", "td", "th", "dl", "dt", "dd"}
 VOID = {"br"}
 DROP_WITH_CONTENT = {"script", "style", "iframe", "img", "svg", "button"}
 
@@ -337,6 +339,7 @@ def main():
         members[fam].append((sort_name.lower(), order, r["name"].lower(), r))
 
     sheets = {}
+    rules = {"species": {}, "classes": {}, "subclasses": {}, "backgrounds": {}}
     families = []
     for f in cfg["families"]:
         out = []
@@ -362,6 +365,7 @@ def main():
                         sheet = re.sub(r"\[[a-z_]+:\d+\]", "", sheet)
             if sheet and clean_html(sheet):
                 sheets[str(r["entity_id"])] = clean_html(sheet)
+                rules["species"][str(r["entity_id"])] = R.parse_species(clean_html(sheet))
             else:
                 report.append("No statblock yet: " + r["name"])
             out.append(sp)
@@ -375,14 +379,55 @@ def main():
     def by_name(rows):
         return sorted(rows, key=lambda a: a["name"].lower())
 
+    def stats_post(entry):
+        """The entry's public "In-Game Stats" post, as cleaned HTML, or None."""
+        for p in entry.get("posts") or []:
+            if p["name"].strip().lower() == "in-game stats" and p.get("visibility_id", 1) == 1:
+                h = p.get("entry_parsed") or p.get("entry") or ""
+                h = re.sub(r"\[[a-z_]+:\d+\|([^\]]+)\]", r"\1", h)
+                h = re.sub(r"\[[a-z_]+:\d+\]", "", h)
+                h = clean_html(h)
+                return h or None
+        return None
+
+    def mechanics(kind, entry, parse):
+        """Read an entry's In-Game Stats post into sheets.js and rules.js. Returns True if it has one."""
+        h = stats_post(entry)
+        if not h:
+            report.append("No In-Game Stats post yet (shows as Coming soon): {} ({})".format(
+                entry["name"], {"classes": "class", "subclasses": "subclass", "backgrounds": "background"}[kind]))
+            return False
+        key = str(entry["entity_id"])
+        sheets[key] = h
+        rules[kind][key] = parse(h)
+        # full feature text and the class table can live in any of the entry's public posts, or the entry itself
+        sources = [clean_html(entry.get("entry_parsed") or "")] + [
+            clean_html(p.get("entry_parsed") or p.get("entry") or "") for p in entry.get("posts") or []
+            if p.get("visibility_id", 1) == 1]
+        feats = rules[kind][key].get("features") or []
+        R.attach_full_text(feats, sources)
+        if kind == "classes":
+            table = R.class_table(sources)
+            if table:
+                rules[kind][key]["table"] = table
+            else:
+                report.append("No class table (Level 1–20) found, so level-scaling values only show at level 20: " + entry["name"])
+            R.link_uses(feats, table)
+        if kind != "backgrounds" and not rules[kind][key].get("features"):
+            report.append("In-Game Stats post has no 'Level N — Feature' lines: " + entry["name"])
+        return True
+
     subs = tagged("subclass")
     classes = []
     for c in by_name(tagged("class")):
         kids = [s for s in subs if (s.get("parents") or [None])[0] == c["entity_id"]]
         classes.append({"name": c["name"], "id": c["entity_id"], "img": images.get("cls", c),
-                        "subclasses": [{"name": s["name"], "id": s["entity_id"], "img": images.get("sub", s)}
+                        "ready": mechanics("classes", c, R.parse_class),
+                        "subclasses": [{"name": s["name"], "id": s["entity_id"], "img": images.get("sub", s),
+                                        "ready": mechanics("subclasses", s, R.parse_subclass)}
                                        for s in by_name(kids)]})
-    backgrounds = [{"name": b["name"], "id": b["entity_id"], "img": images.get("bg", b), "blurb": blurb("backgrounds", b)}
+    backgrounds = [{"name": b["name"], "id": b["entity_id"], "img": images.get("bg", b), "blurb": blurb("backgrounds", b),
+                    "ready": mechanics("backgrounds", b, R.parse_background)}
                    for b in by_name(tagged("background"))]
 
     # ---- deities (characters whose type is one of deity_types, or starts with "Deity, ...")
@@ -400,10 +445,17 @@ def main():
     removed = images.finish()
     if write_data_js(realms):
         changed.append("data.js")
-    sheets_js = ("/* Species statblocks from The Remembered Realms on Kanka (sanitized). Keyed by species entity id. */\n"
+    sheets_js = ("/* Statblocks from The Remembered Realms on Kanka (sanitized): species, plus the In-Game Stats posts of classes,"
+                 " subclasses and backgrounds. Keyed by entity id. */\n"
                  "window.REALMS_SHEETS = " + json.dumps(dict(sorted(sheets.items())), ensure_ascii=False) + ";\n")
     if write_if_changed(path("sheets.js"), sheets_js):
         changed.append("sheets.js")
+    rules_js = ("/* Mechanics read from the Kanka statblocks by tools/rules.py, for the level 20 sheet. Keyed by entity id."
+                " Built automatically; fix the statblock in Kanka rather than editing this file. */\n"
+                "window.REALMS_RULES = " + json.dumps({k: dict(sorted(v.items())) for k, v in rules.items()},
+                                                      ensure_ascii=False, sort_keys=True) + ";\n")
+    if write_if_changed(path("rules.js"), rules_js):
+        changed.append("rules.js")
     if write_if_changed(path("blurbs.json"), json.dumps(blurbs, indent=2, ensure_ascii=False) + "\n"):
         changed.append("blurbs.json")
 

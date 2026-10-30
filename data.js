@@ -753,27 +753,32 @@ window.REALMS = {
    "name": "Artificer",
    "id": 9827337,
    "img": "img/cls-artificer.jpg",
+   "ready": true,
    "subclasses": []
   },
   {
    "name": "Barbarian",
    "id": 9647145,
    "img": "img/cls-barbarian.jpg",
+   "ready": true,
    "subclasses": [
     {
      "name": "Path of the Berserker",
      "id": 10098662,
-     "img": "img/sub-path-of-the-berserker.jpg"
+     "img": "img/sub-path-of-the-berserker.jpg",
+     "ready": true
     },
     {
      "name": "Path of the Felforged",
      "id": 9830007,
-     "img": "img/sub-path-of-the-felforged.jpg"
+     "img": "img/sub-path-of-the-felforged.jpg",
+     "ready": false
     },
     {
      "name": "Path of the Wildheart",
      "id": 10098677,
-     "img": "img/sub-path-of-the-wildheart.jpg"
+     "img": "img/sub-path-of-the-wildheart.jpg",
+     "ready": true
     }
    ]
   },
@@ -781,77 +786,90 @@ window.REALMS = {
    "name": "Bard",
    "id": 9663248,
    "img": null,
+   "ready": false,
    "subclasses": []
   },
   {
    "name": "Cleric",
    "id": 9827724,
    "img": null,
+   "ready": false,
    "subclasses": []
   },
   {
    "name": "Druid",
    "id": 9908128,
    "img": null,
+   "ready": false,
    "subclasses": []
   },
   {
    "name": "Fighter",
    "id": 9856302,
    "img": null,
+   "ready": false,
    "subclasses": []
   },
   {
    "name": "Gunslinger",
    "id": 9856301,
    "img": null,
+   "ready": false,
    "subclasses": []
   },
   {
    "name": "Paladin",
    "id": 9827719,
    "img": null,
+   "ready": false,
    "subclasses": []
   },
   {
    "name": "Psion",
    "id": 9841793,
    "img": "img/cls-psion.jpg",
+   "ready": false,
    "subclasses": []
   },
   {
    "name": "Ranger",
    "id": 9796570,
    "img": null,
+   "ready": false,
    "subclasses": []
   },
   {
    "name": "Rogue",
    "id": 9796569,
    "img": null,
+   "ready": false,
    "subclasses": []
   },
   {
    "name": "True Vampire",
    "id": 9827715,
    "img": null,
+   "ready": false,
    "subclasses": []
   },
   {
    "name": "Warlock",
    "id": 9796571,
    "img": null,
+   "ready": false,
    "subclasses": []
   },
   {
    "name": "Wizard",
    "id": 9645477,
    "img": "img/cls-wizard.jpg",
+   "ready": false,
    "subclasses": [
     {
      "name": "Bladesinger",
      "id": 9498828,
-     "img": null
+     "img": null,
+     "ready": false
     }
    ]
   }
@@ -861,25 +879,29 @@ window.REALMS = {
    "name": "Criminal",
    "id": 10098764,
    "img": "img/bg-criminal.jpg",
-   "blurb": "You eked out a living in dark alleyways, cutting purses or burgling shops."
+   "blurb": "You eked out a living in dark alleyways, cutting purses or burgling shops.",
+   "ready": true
   },
   {
    "name": "Entertainer",
    "id": 10098785,
    "img": "img/bg-entertainer.jpg",
-   "blurb": "You spent much of your youth following roving fairs and carnivals, performing odd jobs for musicians and acrobats in exchange for lessons."
+   "blurb": "You spent much of your youth following roving fairs and carnivals, performing odd jobs for musicians and acrobats in exchange for lessons.",
+   "ready": true
   },
   {
    "name": "Entrepreneur",
    "id": 10107385,
    "img": "img/bg-entrepreneur.jpg",
-   "blurb": "You grew up understanding one thing: money is power, and there's not enough time in the world to make it all."
+   "blurb": "You grew up understanding one thing: money is power, and there's not enough time in the world to make it all.",
+   "ready": true
   },
   {
    "name": "Farmer",
    "id": 10098782,
    "img": "img/bg-farmer.jpg",
-   "blurb": "You grew up close to the land."
+   "blurb": "You grew up close to the land.",
+   "ready": true
   }
  ],
  "deities": [
