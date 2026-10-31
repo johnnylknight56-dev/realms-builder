@@ -46,19 +46,19 @@
       "blurb": "Six-limbed mantisfolk from colonies in Southern Faerun. Adept psions and warriors."
     },
     "9839601": {
-      "name": "Autognome",
+      "name": "Autognomes",
       "blurb": "Constructs near-identical to their Rock Gnome inventors. Tireless and enthusiastically work-driven. Constant tinkerers."
     },
     "9854203": {
-      "name": "Flesh Golem",
+      "name": "Flesh Golems",
       "blurb": "Flesh-stitched frankensteins containing the spirits of elementals."
     },
     "9848481": {
-      "name": "Gargoyle",
+      "name": "Gargoyles",
       "blurb": "Stoney earth elementals who serve evil mortals on Toril or Devils in the outer planes."
     },
     "9821465": {
-      "name": "Nimblewright",
+      "name": "Nimblewrights",
       "blurb": "Arcane-mechanical servants abandoned when Netheril fell over two thousand years ago. Still occasionally uncovered from the sands of Anauroch."
     },
     "9821407": {
@@ -310,6 +310,30 @@
     "10107385": {
       "name": "Entrepreneur",
       "blurb": "You grew up understanding one thing: money is power, and there's not enough time in the world to make it all."
+    },
+    "10112556": {
+      "name": "Acolyte",
+      "blurb": "You devoted yourself to service in a temple, either nestled in a town or secluded in a sacred grove."
+    },
+    "10112558": {
+      "name": "Artisan",
+      "blurb": "You began mopping floors and scrubbing counters in an artisan’s workshop for a few pennies per day as soon as you were strong enough to work a dremel."
+    },
+    "10112559": {
+      "name": "Guard",
+      "blurb": "Your feet ache when you remember the countless hours you spent at your post in the tower."
+    },
+    "10112563": {
+      "name": "Guide",
+      "blurb": "You came of age outdoors, far from settled lands."
+    },
+    "10112565": {
+      "name": "Merchant",
+      "blurb": "You were apprenticed to a tradesman, trucker, or store-owner, learning the fundamentals of commerce."
+    },
+    "10112569": {
+      "name": "Nepotismo",
+      "blurb": "You were raised surrounded by wealth, power, and privilege."
     }
   },
   "deities": {
